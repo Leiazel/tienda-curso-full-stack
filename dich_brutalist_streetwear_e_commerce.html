@@ -3,1209 +3,2247 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DICH® — Embrace What Makes You Dich</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Anton (Brutalist Display), Space Grotesk (Technical Sans), Caveat & Permanent Marker (Hand-drawn street tags) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Anton', 'sans-serif'],
-            sans: ['Space Grotesk', 'sans-serif'],
-            script: ['Caveat', 'cursive'],
-            marker: ['Permanent Marker', 'cursive'],
-          },
-          colors: {
-            dich: {
-              black: '#0A0A0A',
-              espresso: '#1E1412',
-              tealDark: '#4D7983',
-              tealLight: '#7CA3AC',
-              pink: '#FF2E93',
-              pinkHot: '#FF1485',
-              yellow: '#FFE600',
-              acid: '#CCFF00',
-              paper: '#F4F3EF',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <title>DICH™ — Embrace What Makes You Dich</title>
+  <meta name="description" content="DICH™ Streetwear & Footwear — Limited edition brutalist sneaker drops crafted with natural materials and bold design." />
+  <link rel="stylesheet" href="fonts/dich-fonts.css" />
   <style>
-    /* Base & Film Grain Overlay */
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background-color: #F4F3EF;
-      color: #0A0A0A;
-      overflow-x: hidden;
-      transition: background-color 0.35s ease, color 0.35s ease;
+    :root {
+      --bg-page: #ffffff;
+      --bg-hero-top: #628d94;
+      --bg-hero-mid: #7aa1a8;
+      --bg-hero-bot: #8eb2b7;
+      --espresso: #3c1c1b;
+      --ink: #111111;
+      --ink-muted: #2a2a2a;
+      --pink: #f4a8c8;
+      --pink-bright: #ff6ea8;
+      --yellow: #ffe200;
+      --nav-hero: rgba(64, 24, 24, 0.82);
+      --nav-solid: #1c1d21;
+      --tape-bg: #080808;
+      --ribbon-bg: rgba(24, 16, 46, 0.82);
     }
 
     body.urban-mode {
-      background-color: #0A0A0A;
-      color: #F4F3EF;
+      --bg-page: #0d0e11;
+      --ink: #f3f3f1;
+      --ink-muted: #c8c8c8;
+      --nav-solid: #060608;
+      --tape-bg: #17181d;
     }
 
-    body.urban-mode .editorial-bg {
-      background-color: #0A0A0A !important;
-      color: #F4F3EF !important;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    body.urban-mode .surface-card {
-      background-color: #141414 !important;
-      border-color: #2E2E2E !important;
-      color: #F4F3EF !important;
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
     }
 
-    body.urban-mode .brutal-border {
-      border-color: #333333 !important;
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--ink);
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+      -webkit-font-smoothing: antialiased;
     }
 
-    body.urban-mode .text-dich-black {
-      color: #F4F3EF;
+    /* Film Grain & Halftone Texture */
+    .halftone-overlay {
+      background-image:
+        radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      background-size: 4px 4px, 200px 200px;
     }
 
-    body.urban-mode .urban-accent {
-      color: #CCFF00 !important;
+    /* Extended Heavy Brutalist Display Font */
+    .font-wide {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.045em;
+      line-height: 0.88;
+      display: inline-block;
+      transform: scaleX(1.26);
+      transform-origin: center center;
     }
 
-    /* Subtle analog noise texture */
-    .noise-overlay {
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+    .font-wide-left {
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.045em;
+      line-height: 0.88;
+      display: inline-block;
+      transform: scaleX(1.24);
+      transform-origin: left center;
     }
 
-    /* Infinite Marquee Keyframes */
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+    .font-condensed {
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 0.88;
     }
 
-    @keyframes spinSlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .font-tag {
+      font-family: 'Sedgwick Ave', 'Permanent Marker', cursive;
     }
 
-    .animate-spin-slow {
-      animation: spinSlow 16s linear infinite;
+    /* Subtle cracked leather texture fill inside hero/section display letters */
+    .textured-espresso {
+      color: var(--espresso);
+      background:
+        repeating-linear-gradient(125deg, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 2px, transparent 2px, transparent 9px),
+        repeating-linear-gradient(35deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 1px, transparent 1px, transparent 11px),
+        linear-gradient(180deg, #421f1e 0%, #341716 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .animate-marquee {
+    .textured-black {
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 2px, transparent 2px, transparent 10px),
+        linear-gradient(180deg, #1b1b1b 0%, #0b0b0b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body.urban-mode .textured-black {
+      background: linear-gradient(180deg, #ffffff 0%, #d4d4d4 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ========================================
+       1. TOP PROMO MARQUEE + STICKY HEADER
+       ======================================== */
+    .sticky-chrome {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      width: 100%;
+    }
+
+    .promo-bar {
+      background-color: #050505;
+      color: #ffffff;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .marquee-track {
       display: flex;
       width: max-content;
       animation: marqueeScroll 24s linear infinite;
     }
 
-    .animate-marquee-fast {
+    .marquee-track-fast {
       display: flex;
       width: max-content;
       animation: marqueeScroll 14s linear infinite;
     }
 
-    .animate-marquee:hover,
-    .animate-marquee-fast:hover {
+    .promo-bar:hover .marquee-track {
       animation-play-state: paused;
     }
 
-    /* Realistic Floating Sneaker Studio Motion */
-    @keyframes floatSneakerLeft {
-      0%, 100% { transform: rotate(-14deg) translateY(0px); }
-      50% { transform: rotate(-10deg) translateY(-12px); }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
-    @keyframes floatSneakerRight {
-      0%, 100% { transform: rotate(14deg) translateY(-4px); }
-      50% { transform: rotate(10deg) translateY(8px); }
+    .promo-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-right: 14px;
+      white-space: nowrap;
     }
 
-    .sneaker-float-left {
-      animation: floatSneakerLeft 5.8s ease-in-out infinite;
+    .main-nav {
+      height: 52px;
+      padding: 0 clamp(16px, 3vw, 36px);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      background-color: var(--nav-hero);
+      background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 3px 3px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+      transition: background-color 0.35s ease, border-color 0.35s ease;
     }
 
-    .sneaker-float-right {
-      animation: floatSneakerRight 6.2s ease-in-out infinite;
+    .main-nav.scrolled {
+      background-color: var(--nav-solid);
+      background-image: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    /* Photorealistic Studio Sneaker Frame & Rim Light */
-    .sneaker-studio-card {
-      box-shadow:
-        0 32px 60px -12px rgba(0, 0, 0, 0.65),
-        -4px 0 24px rgba(0, 240, 255, 0.32),
-        4px 0 24px rgba(255, 46, 147, 0.35);
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.2vw, 32px);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    /* Hand-drawn SVG stroke animation */
-    .draw-path {
-      stroke-dasharray: 400;
+    .nav-links a, .nav-right button {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-links a:hover, .nav-right button:hover {
+      color: var(--pink);
+    }
+
+    .nav-logo-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 999px;
+      color: #ffffff;
+      text-decoration: none;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 13px;
+      letter-spacing: -0.03em;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-logo-pill:hover {
+      background-color: #ffffff;
+      color: #111111;
+    }
+
+    .nav-logo-pill sup {
+      font-family: 'Inter', sans-serif;
+      font-size: 7px;
+      font-weight: 700;
+      margin-left: 1px;
+      vertical-align: super;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(16px, 2.5vw, 34px);
+    }
+
+    .urban-active-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--yellow);
+      margin-right: 6px;
+      vertical-align: middle;
+      display: none;
+    }
+
+    body.urban-mode .urban-active-dot {
+      display: inline-block;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.45);
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .mobile-drawer {
+      display: none;
+      background: #141518;
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mobile-drawer.open {
+      display: flex;
+    }
+
+    .mobile-drawer a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       2. HERO SECTION
+       ======================================== */
+    .hero-section {
+      position: relative;
+      min-height: calc(100vh - 80px);
+      min-height: 760px;
+      background: linear-gradient(180deg, var(--bg-hero-top) 0%, var(--bg-hero-mid) 46%, var(--bg-hero-bot) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 36px clamp(16px, 3vw, 36px) 22px;
+      overflow: hidden;
+    }
+
+    .hero-center {
+      position: relative;
+      margin: auto 0;
+      width: 100%;
+      max-width: 1280px;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 0;
+      padding-bottom: 48px;
+    }
+
+    .hero-typography {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+      animation: heroTextRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes heroTextRise {
+      from {
+        transform: translateY(14px);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .hero-line-1 {
+      position: relative;
+      font-size: clamp(52px, 9.8vw, 140px);
+      z-index: 10;
+    }
+
+    .hero-line-2 {
+      position: relative;
+      font-size: clamp(42px, 8.4vw, 120px);
+      margin-top: -0.02em;
+      z-index: 10;
+    }
+
+    .hero-line-3-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: -0.04em;
+      z-index: 10;
+    }
+
+    .hero-line-3 {
+      font-size: clamp(92px, 15vw, 210px);
+      color: #ffffff;
+      line-height: 0.85;
+      letter-spacing: -0.01em;
+    }
+
+    /* Hanging Sneakers on Left & Right */
+    .hanging-sneaker {
+      position: absolute;
+      top: -4px;
+      width: clamp(190px, 26.5vw, 365px);
+      z-index: 20;
+      pointer-events: none;
+      transform-origin: top center;
+    }
+
+    .hanging-sneaker-left {
+      left: clamp(-26px, -1vw, 4px);
+      animation: swayLeft 5.6s ease-in-out infinite;
+    }
+
+    .hanging-sneaker-right {
+      right: clamp(-26px, -1vw, 4px);
+      animation: swayRight 6.1s ease-in-out infinite;
+    }
+
+    .hanging-sneaker img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 28px 26px rgba(10, 22, 24, 0.38));
+    }
+
+    .hanging-sneaker-right img {
+      transform: scaleX(-1);
+    }
+
+    @keyframes swayLeft {
+      0%, 100% { transform: rotate(-1.2deg); }
+      50% { transform: rotate(1.2deg); }
+    }
+
+    @keyframes swayRight {
+      0%, 100% { transform: rotate(1.2deg); }
+      50% { transform: rotate(-1.2deg); }
+    }
+
+    /* Parental Advisory Mini Badge inside 'H' */
+    .parental-badge {
+      position: absolute;
+      right: 11%;
+      top: 43%;
+      width: clamp(20px, 2.2vw, 31px);
+      background: #0a0a0a;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      padding: 2px 2px;
+      text-align: center;
+      line-height: 0.92;
+      font-family: 'Anton', sans-serif;
+      text-transform: uppercase;
+      z-index: 14;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    .parental-badge span {
+      display: block;
+      font-size: clamp(4.2px, 0.5vw, 6.2px);
+      letter-spacing: 0.04em;
+    }
+
+    .parental-badge strong {
+      display: block;
+      font-size: clamp(5.5px, 0.65vw, 8px);
+      background: #ffffff;
+      color: #0a0a0a;
+      margin: 1px 0;
+      padding: 0.5px 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* SHOP NOW CTA with yellow marker underline & reveal burst rays */
+    .shop-now-cta {
+      position: relative;
+      z-index: 30;
+      margin-top: clamp(32px, 5vh, 54px);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+      animation: ctaPop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes ctaPop {
+      from { transform: translateY(10px); }
+      to { transform: translateY(0); }
+    }
+
+    .shop-now-row {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .shop-now-text {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(16px, 1.8vw, 23px);
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      transform: scaleX(1.22);
+      transition: transform 0.25s ease;
+    }
+
+    .shop-now-cta:hover .shop-now-text {
+      transform: scaleX(1.28) translateY(-1px);
+    }
+
+    .burst-rays {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-52%);
+      width: 22px;
+      height: 28px;
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .burst-rays.left { left: -42px; }
+    .burst-rays.right { right: -42px; transform: translateY(-52%) scaleX(-1); }
+
+    .shop-now-cta:hover .burst-rays,
+    .shop-now-cta.burst-intro .burst-rays {
+      opacity: 1;
+    }
+
+    .yellow-underline-svg {
+      width: 146%;
+      height: 14px;
+      margin-top: 2px;
+      overflow: visible;
+    }
+
+    .yellow-underline-path {
+      stroke-dasharray: 240;
       stroke-dashoffset: 0;
-      transition: stroke-dashoffset 0.6s ease;
+      transition: stroke-dashoffset 0.45s ease;
     }
 
-    .group:hover .draw-path-hover {
-      animation: dashDraw 0.65s ease forwards;
+    .shop-now-cta:hover .yellow-underline-path {
+      animation: drawYellow 0.5s ease forwards;
     }
 
-    @keyframes dashDraw {
-      0% { stroke-dashoffset: 400; }
+    @keyframes drawYellow {
+      0% { stroke-dashoffset: 240; }
       100% { stroke-dashoffset: 0; }
     }
 
-    /* Brutalist condensed display scaling */
-    .hero-word {
-      font-family: 'Anton', sans-serif;
-      line-height: 0.86;
-      letter-spacing: -0.02em;
+    /* Hero Bottom Footer Strip */
+    .hero-bottom {
+      position: relative;
+      z-index: 30;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      user-select: none;
     }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
+    .hero-mission {
+      max-width: 510px;
+      text-align: center;
+      line-height: 1.45;
+      font-size: 9.5px;
     }
-    ::-webkit-scrollbar-track {
-      background: #0A0A0A;
+
+    .hero-socials {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #FF2E93;
-      border-radius: 4px;
+
+    .hero-socials a {
+      color: rgba(255, 255, 255, 0.92);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .hero-socials a:hover {
+      color: var(--yellow);
+    }
+
+    /* ========================================
+       3. EDITORIAL SECTION ("WE'RE DOPE")
+       ======================================== */
+    .editorial-section {
+      position: relative;
+      background-color: var(--bg-page);
+      color: var(--ink);
+      padding-top: 0;
+      padding-bottom: 56px;
+      overflow: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    .editorial-top-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 0.55fr;
+      align-items: start;
+      gap: 16px;
+    }
+
+    .were-dope-block {
+      padding: clamp(28px, 4.2vw, 52px) 0 0 clamp(16px, 2.5vw, 32px);
+      position: relative;
+      z-index: 10;
+    }
+
+    .were-row {
+      position: relative;
+      display: inline-block;
+    }
+
+    .were-word {
+      font-size: clamp(56px, 10.6vw, 148px);
+      line-height: 0.85;
+    }
+
+    .dope-row {
+      position: relative;
+      display: inline-block;
+      margin-top: -0.02em;
+    }
+
+    .dope-word {
+      font-size: clamp(60px, 11.2vw, 156px);
+      line-height: 0.84;
+    }
+
+    .skate-photo-wrap {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      justify-self: end;
+    }
+
+    .skate-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Lower Editorial 3-Column Composition */
+    .editorial-lower-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr minmax(280px, 430px) 1fr;
+      align-items: start;
+      gap: 24px;
+      margin-top: clamp(-36px, -4vw, -64px);
+      padding-bottom: 48px;
+    }
+
+    .editorial-left-col {
+      padding-left: clamp(16px, 2.5vw, 32px);
+      padding-top: clamp(72px, 10vw, 130px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 520px;
+      position: relative;
+    }
+
+    .editorial-caption {
+      font-size: 10.5px;
+      font-weight: 500;
+      line-height: 1.38;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      max-width: 190px;
+      color: var(--ink);
+    }
+
+    .editorial-caption-right {
+      text-align: right;
+      margin-left: auto;
+      padding-right: clamp(16px, 2.5vw, 32px);
+    }
+
+    .topdown-photo-wrap {
+      width: clamp(150px, 16vw, 225px);
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      margin-left: calc(-1 * clamp(16px, 2.5vw, 32px));
+      margin-top: 48px;
+    }
+
+    .topdown-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Center Lookbook Frame ("LIMITED / ONLY 1500 PIECES FOR THIS DROP") */
+    .lookbook-center-col {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lookbook-photo-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.04;
+      overflow: visible;
+    }
+
+    .lookbook-photo-box {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #1a1a1a;
+      position: relative;
+    }
+
+    .lookbook-photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: opacity 0.35s ease, transform 0.55s ease;
+    }
+
+    .lookbook-photo-box:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Subtle curved grey carousel arrows flanking the center image */
+    .lookbook-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #a3a3a3;
+      cursor: pointer;
+      padding: 8px;
+      transition: color 0.2s ease, transform 0.2s ease;
+      z-index: 25;
+    }
+
+    .lookbook-arrow-btn:hover {
+      color: var(--ink);
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    .lookbook-arrow-btn.prev { left: -34px; }
+    .lookbook-arrow-btn.next { right: -34px; }
+
+    /* "LiMiTED" SVG & "ONLY 1500 PIECES FOR THIS DROP" split across photo edge */
+    .limited-overlay-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -138px;
+      z-index: 26;
+      pointer-events: none;
+      text-align: center;
+    }
+
+    .only-1500-white {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .for-this-drop-black {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--ink);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .editorial-right-col {
+      padding-top: clamp(72px, 10vw, 130px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      min-height: 520px;
+      padding-right: clamp(16px, 2.5vw, 32px);
+    }
+
+    .buy-shoes-cta {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      margin-bottom: 84px;
+      cursor: pointer;
+    }
+
+    .buy-shoes-text {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(16px, 1.7vw, 22px);
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      transform: scaleX(1.24);
+      transition: transform 0.25s ease;
+    }
+
+    .buy-shoes-cta:hover .buy-shoes-text {
+      transform: scaleX(1.3) translateY(-1px);
+    }
+
+    /* Tilted TOP SECRET Caution Tape */
+    .top-secret-tape-wrap {
+      position: relative;
+      width: 112%;
+      left: -6%;
+      background: var(--tape-bg);
+      color: #ffffff;
+      padding: 10px 0;
+      transform: rotate(-2.1deg);
+      overflow: hidden;
+      margin-top: -14px;
+      z-index: 30;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+    }
+
+    .tape-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding-right: 18px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       4. FEATURED SECTION (STICKY SPLIT)
+       ======================================== */
+    .featured-section {
+      position: relative;
+      background-color: var(--bg-page);
+      color: var(--ink);
+      padding: clamp(48px, 6vw, 88px) clamp(16px, 2.5vw, 32px) 96px;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: clamp(28px, 4vw, 64px);
+      align-items: start;
+    }
+
+    .featured-sticky-left {
+      position: sticky;
+      top: 104px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 540px;
+      max-height: calc(100vh - 132px);
+    }
+
+    .featured-heading-row {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .featured-title {
+      font-size: clamp(38px, 5.2vw, 72px);
+      line-height: 0.88;
+    }
+
+    .destroy-me-block {
+      position: relative;
+      margin: 24px 0 24px clamp(24px, 6vw, 108px);
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .destroy-crack-svg {
+      transition: transform 0.2s ease;
+    }
+
+    .destroy-me-block:hover .destroy-crack-svg {
+      transform: scale(1.06) rotate(-1deg);
+    }
+
+    .all-products-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: var(--ink);
+      text-align: left;
+      align-self: flex-start;
+    }
+
+    .all-products-text {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(18px, 2vw, 26px);
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      transform: scaleX(1.24);
+      transform-origin: left center;
+      transition: color 0.2s ease;
+    }
+
+    .all-products-btn:hover .all-products-text {
+      color: var(--pink-bright);
+    }
+
+    /* Right Column Product Cards */
+    .product-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(40px, 5vw, 64px);
+    }
+
+    .product-card {
+      position: relative;
+      width: 100%;
+    }
+
+    .product-card.hidden-extra {
+      display: none;
+    }
+
+    .product-card.hidden-extra.revealed {
+      display: block;
+      animation: heroTextRise 0.45s ease both;
+    }
+
+    .torn-badge {
+      position: relative;
+      display: inline-block;
+      background: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      padding: 4px 14px 5px 10px;
+      margin-bottom: -10px;
+      margin-left: 2px;
+      z-index: 15;
+      clip-path: polygon(
+        0% 8%, 12% 0%, 28% 5%, 45% 0%, 64% 6%, 82% 1%, 100% 7%,
+        98% 35%, 100% 68%, 97% 95%,
+        82% 100%, 66% 94%, 47% 100%, 28% 95%, 12% 100%, 0% 93%,
+        2% 55%
+      );
+      transform: rotate(-0.6deg);
+    }
+
+    body.urban-mode .torn-badge {
+      background: #f3f3f1;
+      color: #0d0e11;
+    }
+
+    .product-media-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.06 / 1;
+      overflow: hidden;
+      background-color: #2f69a2;
+      cursor: pointer;
+    }
+
+    .product-media-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .product-card:hover .product-media-box img {
+      transform: scale(1.04);
+    }
+
+    /* Diagonal Translucent "ADD TO CART" Hover Ribbon (Exact match to reference video) */
+    .add-to-cart-ribbon {
+      position: absolute;
+      left: -14%;
+      right: -14%;
+      top: 50%;
+      transform: translateY(-50%) rotate(-15.5deg) scale(0.96);
+      background: var(--ribbon-bg);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      color: #ffffff;
+      border: none;
+      padding: 10px 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      cursor: pointer;
+      z-index: 20;
+      transition: opacity 0.25s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .product-card:hover .add-to-cart-ribbon,
+    .product-card:focus-within .add-to-cart-ribbon {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(-50%) rotate(-15.5deg) scale(1);
+    }
+
+    .ribbon-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding-right: 16px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 12px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .product-meta-title {
+      cursor: pointer;
+    }
+
+    .product-meta-title:hover {
+      text-decoration: underline;
+    }
+
+    .product-meta-sub {
+      display: block;
+      color: var(--ink-muted);
+      opacity: 0.85;
+    }
+
+    .product-meta-price {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       5. MINIMAL BRUTALIST FOOTER
+       ======================================== */
+    .site-footer {
+      background-color: #0b0b0c;
+      color: #ffffff;
+      padding: 52px clamp(16px, 3vw, 36px) 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 36px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .footer-brand-title {
+      font-size: clamp(26px, 3.6vw, 48px);
+      line-height: 0.92;
+      margin-top: 16px;
+    }
+
+    .footer-newsletter-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .footer-form {
+      display: flex;
+      gap: 8px;
+      max-width: 440px;
+    }
+
+    .footer-form input {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-family: inherit;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .footer-form input:focus {
+      border-color: var(--pink);
+    }
+
+    .footer-form button {
+      background: #ffffff;
+      color: #0b0b0c;
+      border: none;
+      padding: 10px 18px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .footer-form button:hover {
+      background: var(--pink);
+      color: #0b0b0c;
+    }
+
+    .footer-bottom {
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.78);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--yellow);
+    }
+
+    /* ========================================
+       6. QUICK-VIEW MODAL & CART DRAWER
+       ======================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(8, 10, 14, 0.78);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      color: #111111;
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      border: 2px solid #111111;
+      box-shadow: 10px 10px 0 #000000;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      background: #111111;
+      color: #ffffff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .modal-close:hover {
+      background: var(--pink);
+      color: #111111;
+    }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .size-pill {
+      padding: 8px 6px;
+      border: 1.5px solid #d0d0d0;
+      background: #ffffff;
+      color: #111111;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .size-pill.active, .size-pill:hover {
+      border-color: #111111;
+      background: #111111;
+      color: #ffffff;
+    }
+
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 95;
+      background: rgba(0, 0, 0, 0.65);
+      display: none;
+    }
+
+    .cart-overlay.open {
+      display: block;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      height: 100%;
+      width: 100%;
+      max-width: 410px;
+      background: #ffffff;
+      color: #111111;
+      border-left: 2px solid #111111;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .toast-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 16px);
+      z-index: 120;
+      background: #0d0d0d;
+      color: #ffffff;
+      border: 1.5px solid var(--pink);
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* ========================================
+       7. RESPONSIVE BREAKPOINTS
+       ======================================== */
+    @media (max-width: 960px) {
+      .editorial-top-grid {
+        grid-template-columns: 1fr;
+      }
+      .skate-photo-wrap {
+        max-width: 420px;
+      }
+      .editorial-lower-grid {
+        grid-template-columns: 1fr;
+        margin-top: 24px;
+      }
+      .editorial-left-col, .editorial-right-col {
+        min-height: auto;
+        padding: 0 20px;
+        gap: 24px;
+      }
+      .topdown-photo-wrap {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+      .editorial-right-col {
+        align-items: flex-start;
+      }
+      .editorial-caption-right {
+        text-align: left;
+        margin-left: 0;
+        padding-right: 0;
+      }
+      .buy-shoes-cta {
+        margin-bottom: 24px;
+      }
+      .lookbook-center-col {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 90%;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+      .featured-sticky-left {
+        position: static;
+        min-height: auto;
+        gap: 24px;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+      .modal-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: inline-block;
+      }
+      .main-nav {
+        grid-template-columns: auto 1fr auto;
+        gap: 12px;
+      }
+      .nav-logo-pill {
+        justify-self: center;
+      }
+      .hanging-sneaker {
+        top: -54px;
+        width: 44vw;
+      }
+      .hero-bottom {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+      }
+      .hero-socials {
+        justify-content: center;
+      }
     }
   </style>
 </head>
-<body class="antialiased selection:bg-dich-pink selection:text-white">
+<body>
 
-  <!-- 1. TOP PROMO MARQUEE BAR -->
-  <div class="bg-dich-black text-white text-[11px] sm:text-xs font-bold tracking-widest uppercase py-2 overflow-hidden border-b border-white/15 relative z-50">
-    <div class="animate-marquee whitespace-nowrap">
-      <div class="flex items-center space-x-8 px-4">
-        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
-        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — 480GSM ORGANIC COTTON</span>
-        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
-        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — WORLDWIDE EXPRESS</span>
+  <!-- =========================================================
+       1. TOP PROMO MARQUEE + STICKY HEADER
+       ========================================================= -->
+  <div class="sticky-chrome">
+    <div class="promo-bar" aria-label="Promotional banner">
+      <div class="marquee-track">
+        <div class="promo-group">
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200" aria-hidden="true">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200" aria-hidden="true">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200" aria-hidden="true">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200" aria-hidden="true">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+        </div>
+        <div class="promo-group" aria-hidden="true">
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+          <span>SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#FFE200">
+            <path d="M12 1L14.8 8.2L22.5 7.5L16.8 13L21 20L13.5 16.5L10.5 23L9.5 15.5L2 16L7.8 11L4 4.5L11 8L12 1Z"/>
+          </svg>
+        </div>
       </div>
-      <div class="flex items-center space-x-8 px-4" aria-hidden="true">
-        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
-        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — 480GSM ORGANIC COTTON</span>
-        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
-        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — WORLDWIDE EXPRESS</span>
+    </div>
+
+    <header id="mainNav" class="main-nav">
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#featured">SHOP</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#lookbook">LOOKBOOKS</a>
+        <a href="#footer">CONTACT</a>
+      </nav>
+
+      <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" onclick="toggleMobileMenu()">MENU</button>
+
+      <a href="#hero" class="nav-logo-pill" aria-label="DICH Home">
+        DICH<sup>™</sup>
+      </a>
+
+      <div class="nav-right">
+        <button id="urbanModeBtn" type="button" onclick="toggleUrbanMode()">
+          <span class="urban-active-dot" aria-hidden="true"></span><span id="urbanLabel">URBAN MODE</span>
+        </button>
+        <button type="button" onclick="openCart()" id="cartNavBtn">
+          CART:<span id="cartCount">00</span>
+        </button>
       </div>
+    </header>
+
+    <div id="mobileDrawer" class="mobile-drawer">
+      <a href="#featured" onclick="toggleMobileMenu()">SHOP</a>
+      <a href="#about" onclick="toggleMobileMenu()">ABOUT US</a>
+      <a href="#lookbook" onclick="toggleMobileMenu()">LOOKBOOKS</a>
+      <a href="#footer" onclick="toggleMobileMenu()">CONTACT</a>
     </div>
   </div>
 
-  <!-- 2. STICKY / FLOATING HEADER NAVIGATION -->
-  <header id="mainHeader" class="sticky top-0 z-40 transition-all duration-300 bg-[#527C86]/90 backdrop-blur-md border-b border-black/15">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-8 h-14 sm:h-16 flex items-center justify-between text-[11px] sm:text-xs font-bold tracking-wider uppercase text-dich-black">
-      
-      <!-- Left Nav Links -->
-      <nav class="hidden md:flex items-center space-x-6 lg:space-x-8">
-        <a href="#featured" class="hover:text-white transition-colors">ARCHIVE SHOP</a>
-        <a href="#editorial" class="hover:text-white transition-colors">LOOKBOOK 04</a>
-        <a href="#editorial" class="hover:text-white transition-colors">MANIFESTO</a>
-        <a href="#footer" class="hover:text-white transition-colors">CONTACT</a>
-      </nav>
+  <!-- =========================================================
+       2. HERO SECTION ("EMBRACE WHAT MAKES YOU DICH™")
+       ========================================================= -->
+  <section id="hero" class="hero-section halftone-overlay">
 
-      <!-- Mobile Menu Trigger -->
-      <button id="mobileMenuBtn" class="md:hidden px-3 py-1.5 rounded-full border border-dich-black bg-white/20 font-bold text-[10px] hover:bg-dich-black hover:text-white transition">
-        MENU
-      </button>
+    <!-- Hanging Sneakers Left (cords extend upward behind navbar) -->
+    <div class="hanging-sneaker hanging-sneaker-left" aria-hidden="true">
+      <img src="images/dich/hero-sneakers.png" alt="DICH Hanging Trail Sneakers Left" />
+    </div>
 
-      <!-- Center Oval Pill Logo: DICH® with neon pink crown -->
-      <a href="#hero" class="relative group flex items-center justify-center px-5 py-1.5 rounded-full border-2 border-dich-black bg-white/25 hover:bg-dich-black hover:text-white transition-all duration-300">
-        <svg class="w-4 h-4 text-dich-pink absolute -top-2.5 left-3 -rotate-12 pointer-events-none" viewBox="0 0 36 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 19L6 6L14 13L18 4L22 13L30 6L33 19H3Z"/>
+    <!-- Hanging Sneakers Right (mirrored horizontally) -->
+    <div class="hanging-sneaker hanging-sneaker-right" aria-hidden="true">
+      <img src="images/dich/hero-sneakers.png" alt="DICH Hanging Trail Sneakers Right" />
+    </div>
+
+    <!-- Centerpiece Typography & Overlays -->
+    <div class="hero-center">
+      <div class="hero-typography">
+
+        <!-- LINE 1: EMBRACE + "FREEDOM" + "SPIRIT" hand-drawn white marker tags -->
+        <div class="hero-line-1">
+          <span class="font-wide textured-espresso">EMBRACE</span>
+
+          <!-- Hand-drawn white "FREEDOM" tilted inside M/B -->
+          <span class="font-tag" style="position:absolute; left:19%; top:14%; transform:rotate(-52deg); color:#ffffff; font-size:clamp(14px, 2vw, 28px); pointer-events:none; text-shadow:0 1px 4px rgba(0,0,0,0.3); letter-spacing:0.02em;">
+            FREEDOM
+          </span>
+
+          <!-- Hand-drawn white "SPIRIT" tilted inside C -->
+          <span class="font-tag" style="position:absolute; right:26%; bottom:-4%; transform:rotate(-16deg); color:#ffffff; font-size:clamp(13px, 1.7vw, 24px); pointer-events:none; text-shadow:0 1px 4px rgba(0,0,0,0.3); letter-spacing:0.02em;">
+            SPIRIT
+          </span>
+        </div>
+
+        <!-- LINE 2: WHAT MAKES YOU + white highlight ticks around hanging laces -->
+        <div class="hero-line-2">
+          <span class="font-condensed textured-espresso">WHAT MAKES YOU</span>
+
+          <!-- White hand-drawn radial ticks on left & right lace intersections -->
+          <svg style="position:absolute; left:8%; top:24%; width:clamp(14px,1.5vw,22px); pointer-events:none;" viewBox="0 0 28 36" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round">
+            <path d="M6 6L12 12M4 18H12M6 30L12 24"/>
+          </svg>
+          <svg style="position:absolute; right:9%; top:24%; width:clamp(14px,1.5vw,22px); pointer-events:none;" viewBox="0 0 28 36" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round">
+            <path d="M22 6L16 12M24 18H16M22 30L16 24"/>
+          </svg>
+        </div>
+
+        <!-- LINE 3: DICH + pink crown + Parental Advisory + TM -->
+        <div class="hero-line-3-wrap">
+          <!-- Pastel Pink Hand-Drawn Crown perched over I/C -->
+          <svg style="position:absolute; top:-13%; left:44%; width:clamp(34px, 4.4vw, 62px); color:var(--pink); transform:rotate(-5deg); z-index:15; pointer-events:none;" viewBox="0 0 64 42" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 34L6 12L22 24L32 7L42 24L58 12L54 34H8Z"/>
+            <path d="M7 36H55" stroke-width="3.2"/>
+          </svg>
+
+          <h1 class="font-condensed hero-line-3">DICH</h1>
+
+          <!-- Parental Advisory Explicit Content mini label inside right leg of H -->
+          <div class="parental-badge" aria-hidden="true">
+            <span>PARENTAL</span>
+            <strong>ADVISORY</strong>
+            <span>EXPLICIT CONTENT</span>
+          </div>
+
+          <!-- Hand-drawn white TM -->
+          <span class="font-tag" style="position:absolute; right:-13%; top:6%; color:#ffffff; font-size:clamp(13px, 1.5vw, 22px); transform:rotate(-6deg); pointer-events:none;">
+            TM
+          </span>
+
+          <!-- Subtle black wall crack under H -->
+          <svg style="position:absolute; right:14%; bottom:-34%; width:clamp(30px, 3.6vw, 52px); pointer-events:none;" viewBox="0 0 60 80" fill="none" stroke="#141414" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M40 2L32 16L36 26L22 44L25 56L12 72"/>
+            <path d="M36 26L48 34M22 44L10 40M25 56L38 64"/>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- Center Hero CTA: SHOP NOW + burst rays + yellow marker underline -->
+      <a href="#featured" id="shopNowCta" class="shop-now-cta burst-intro">
+        <div class="shop-now-row">
+          <svg class="burst-rays left" viewBox="0 0 26 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <path d="M20 6L6 2M18 16H3M20 26L7 30"/>
+          </svg>
+          <span class="shop-now-text">SHOP NOW</span>
+          <svg class="burst-rays right" viewBox="0 0 26 32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+            <path d="M20 6L6 2M18 16H3M20 26L7 30"/>
+          </svg>
+        </div>
+        <svg class="yellow-underline-svg" viewBox="0 0 210 18" fill="none">
+          <path class="yellow-underline-path" d="M6 12C68 8 134 6 196 5" stroke="#FFE200" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="204" cy="11" r="2.6" fill="#FFE200"/>
         </svg>
-        <span class="font-display text-base sm:text-lg tracking-wider leading-none">DICH<sup class="text-[9px] font-sans ml-0.5">®</sup></span>
       </a>
+    </div>
 
-      <!-- Right Nav Controls -->
-      <div class="flex items-center space-x-3 sm:space-x-5">
-        <button id="urbanModeBtn" onclick="toggleUrbanMode()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-dich-black/40 bg-white/15 hover:bg-dich-black hover:text-white transition cursor-pointer" title="Toggle Urban Night Mode">
-          <span id="urbanDot" class="w-2 h-2 rounded-full bg-dich-black transition-colors"></span>
-          <span id="urbanLabel">URBAN MODE</span>
-        </button>
+    <!-- Bottom-left subtle wall crack -->
+    <svg style="position:absolute; left:6%; bottom:3%; width:clamp(54px, 6vw, 84px); pointer-events:none; opacity:0.85;" viewBox="0 0 110 70" fill="none" stroke="#111111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 28L24 22L36 30L56 18L76 26L86 48L98 62"/>
+      <path d="M36 30L30 44M56 18L60 4M76 26L94 18"/>
+    </svg>
 
-        <button onclick="openCart()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-dich-black text-white hover:bg-dich-pink hover:text-white transition-all duration-200 cursor-pointer shadow-md">
-          <span>CART</span>
-          <span id="cartCountBadge" class="font-mono">(0)</span>
-        </button>
+    <!-- Bottom Hero Footer Strip -->
+    <div class="hero-bottom">
+      <span>©2025</span>
+      <p class="hero-mission">
+        WE CRAFT UNIQUE SNEAKERS THAT MERGE NATURAL MATERIALS WITH BOLD DESIGN, EMPHASIZING LOCAL PRODUCTION TO REDUCE ENVIRONMENTAL IMPACT.
+      </p>
+      <div class="hero-socials">
+        <a href="#footer">FB</a>
+        <a href="#footer">X</a>
+        <a href="#footer">IG</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       3. EDITORIAL SECTION ("WE'RE DOPE" + "ONLY 1500 PIECES")
+       ========================================================= -->
+  <section id="about" class="editorial-section">
+
+    <!-- Upper Row: Giant "WE'RE DOPE" + Top-Right Skatepark Photo -->
+    <div class="editorial-top-grid">
+      <div class="were-dope-block">
+        <div class="were-row">
+          <!-- Light pink hand-drawn crown on W -->
+          <svg style="position:absolute; top:-26%; left:7%; width:clamp(38px, 5vw, 72px); color:var(--pink); transform:rotate(-8deg); z-index:12; pointer-events:none;" viewBox="0 0 64 42" fill="none" stroke="currentColor" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 34L6 12L22 24L32 7L42 24L58 12L54 34H8Z"/>
+            <path d="M7 36H55" stroke-width="2.8"/>
+          </svg>
+          <span class="font-wide-left textured-black were-word">WE'RE</span>
+          <!-- Hand-drawn white "URBAN" tucked inside the R -->
+          <span class="font-tag" style="position:absolute; left:72%; bottom:12%; transform:rotate(-16deg); color:#ffffff; font-size:clamp(14px, 1.9vw, 28px); pointer-events:none; text-shadow:0 1px 3px rgba(0,0,0,0.45);">
+            URBAN
+          </span>
+        </div>
+
+        <br />
+
+        <div class="dope-row">
+          <span class="font-wide-left textured-black dope-word">DOPE</span>
+          <!-- Hand-drawn outlined "BOLD" inside the D -->
+          <span class="font-tag" style="position:absolute; left:1.5%; top:12%; transform:rotate(-18deg); color:transparent; -webkit-text-stroke:1.4px rgba(255,255,255,0.65); font-size:clamp(15px, 1.9vw, 28px); pointer-events:none;">
+            BOLD
+          </span>
+          <!-- White hand-drawn crown scribble on E -->
+          <svg style="position:absolute; right:-1%; top:-10%; width:clamp(32px, 3.8vw, 54px); color:#ffffff; z-index:14; pointer-events:none; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.6));" viewBox="0 0 54 38" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 32L4 8L20 22L27 6L34 22L48 8L46 32H6Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Top-Right Skatepark Ollie Photo -->
+      <div class="skate-photo-wrap">
+        <img src="images/dich/skate-ollie.jpg" alt="Skateboarder performing high ollie over ramp" />
       </div>
     </div>
 
-    <!-- Mobile Dropdown Drawer -->
-    <div id="mobileMenu" class="hidden md:hidden bg-dich-black text-white px-6 py-4 space-y-3 text-xs font-bold tracking-widest uppercase border-t border-white/10">
-      <a href="#featured" onclick="toggleMobileMenu()" class="block py-1 hover:text-dich-pink">ARCHIVE SHOP</a>
-      <a href="#editorial" onclick="toggleMobileMenu()" class="block py-1 hover:text-dich-pink">LOOKBOOK 04</a>
-      <a href="#editorial" onclick="toggleMobileMenu()" class="block py-1 hover:text-dich-pink">MANIFESTO</a>
-      <a href="#footer" onclick="toggleMobileMenu()" class="block py-1 hover:text-dich-pink">CONTACT</a>
-    </div>
-  </header>
+    <!-- Lower 3-Column Editorial Layout -->
+    <div id="lookbook" class="editorial-lower-grid">
 
-  <!-- 3. HERO SECTION WITH PHOTOREALISTIC STUDIO SNEAKERS -->
-  <section id="hero" class="relative min-h-[94vh] w-full flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#49737D] via-[#658E97] to-[#87ACB4] noise-overlay pt-4 pb-6 px-4 sm:px-8 border-b-2 border-dich-black">
-    
-    <!-- Subtle Architectural Grid Lines -->
-    <div class="pointer-events-none absolute inset-0 max-w-[1440px] mx-auto grid grid-cols-4 border-x border-black/10">
-      <div class="border-r border-black/10"></div>
-      <div class="border-r border-black/10"></div>
-      <div class="border-r border-black/10"></div>
-      <div></div>
-    </div>
+      <!-- Left Column: Copy + Wall Crack + Top-Down Sneakers -->
+      <div class="editorial-left-col">
+        <p class="editorial-caption">
+          HERE, EACH PIECE TELLS A STORY, MERGING ARTISTRY AND FASHION.
+        </p>
 
-    <!-- Top Technical Metadata Strip -->
-    <div class="relative z-30 max-w-[1440px] w-full mx-auto flex items-center justify-between text-[10px] sm:text-xs font-mono uppercase tracking-widest text-white/90 pt-1">
-      <span class="bg-dich-black/85 text-white px-2.5 py-1 rounded-xs">COLLECTION // 04 — CONCRETE ARCHIVE</span>
-      <span class="hidden sm:inline-block font-bold text-dich-black bg-dich-yellow px-2.5 py-0.5 rounded-xs">480GSM HEAVYWEIGHT APPAREL &amp; FOOTWEAR</span>
-      <span>LAT 34.6037° S</span>
-    </div>
-
-    <!-- Centerpiece Giant Typography & Overlapping Photorealistic Sneakers -->
-    <div class="relative my-auto max-w-[1400px] w-full mx-auto flex flex-col items-center justify-center py-8 sm:py-12">
-      
-      <!-- LINE 1: EMBRACE -->
-      <div class="relative z-10 text-center">
-        <!-- Hand-drawn Neon Pink Annotation: LIMITED DROP 04 -->
-        <span class="font-script text-dich-pink text-2xl sm:text-4xl md:text-5xl font-bold absolute -top-5 sm:-top-7 left-[6%] sm:left-[14%] -rotate-12 drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] select-none pointer-events-none z-30">
-          LIMITED DROP 04
-        </span>
-        <!-- Hand-drawn Neon Pink Annotation: HEAVYWEIGHT -->
-        <span class="font-script text-dich-pink text-xl sm:text-3xl md:text-4xl font-bold absolute -top-4 sm:-top-6 right-[8%] sm:right-[15%] rotate-12 drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] select-none pointer-events-none z-30">
-          HEAVYWEIGHT
-        </span>
-
-        <h1 class="hero-word text-dich-espresso text-[18vw] sm:text-[15.5vw] lg:text-[185px] tracking-tight drop-shadow-[0_4px_0_rgba(255,255,255,0.18)]">
-          EMBRACE
-        </h1>
-      </div>
-
-      <!-- LINE 2: WHAT MAKES YOU -->
-      <div class="relative z-10 text-center -mt-1 sm:-mt-3">
-        <h2 class="hero-word text-white text-[13.5vw] sm:text-[11.2vw] lg:text-[134px] drop-shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
-          WHAT MAKES YOU
-        </h2>
-      </div>
-
-      <!-- LINE 3: DICH® + Pink Crown + 100% STREETWEAR -->
-      <div class="relative z-10 text-center -mt-1 sm:-mt-3 inline-flex items-start justify-center">
-        <!-- Neon Pink Crown perched on DICH -->
-        <svg class="w-10 h-8 sm:w-16 sm:h-12 text-dich-pink absolute -top-5 sm:-top-9 left-[42%] -rotate-6 pointer-events-none z-30 drop-shadow-[0_3px_8px_rgba(0,0,0,0.4)]" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 26L8 8L18 18L24 5L30 18L40 8L44 26H4Z"/>
-          <circle cx="8" cy="5" r="1.8" fill="currentColor"/>
-          <circle cx="24" cy="2" r="1.8" fill="currentColor"/>
-          <circle cx="40" cy="5" r="1.8" fill="currentColor"/>
+        <!-- Wall Crack Vector -->
+        <svg style="align-self:flex-end; margin-right:8%; margin-top:28px; width:clamp(60px, 7.5vw, 108px); pointer-events:none;" viewBox="0 0 110 130" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M74 4L56 32L60 44L40 66L45 84L72 96L94 124"/>
+          <path d="M40 66L16 74M72 96L54 114M72 96L92 84"/>
         </svg>
 
-        <span class="hero-word text-dich-espresso text-[21vw] sm:text-[16.5vw] lg:text-[198px]">
-          DICH
-        </span>
-        <span class="font-sans font-bold text-dich-espresso text-base sm:text-2xl mt-2 sm:mt-4 ml-1">®</span>
-
-        <!-- Hand-drawn Neon Pink Annotation: 100% STREETWEAR -->
-        <span class="font-script text-dich-pink text-2xl sm:text-4xl font-bold absolute -bottom-5 sm:-bottom-6 -right-6 sm:-right-28 -rotate-6 drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] select-none pointer-events-none z-30 whitespace-nowrap">
-          100% STREETWEAR
-        </span>
-      </div>
-
-      <!-- PHOTOREALISTIC FLOATING SNEAKER LEFT (Real High-Res Studio Photography with Cyan/Pink Rim Glow & 3D Shadow) -->
-      <div id="heroSneakerLeft" onclick="openQuickView(4)" title="View DICH® Low-Top Sneaker Concrete" class="sneaker-float-left absolute left-[-4%] sm:left-[2%] lg:left-[4%] top-[44%] sm:top-[28%] w-[42vw] sm:w-[27vw] max-w-[350px] z-20 cursor-pointer group">
-        <div class="relative rounded-2xl overflow-hidden border-2 border-dich-black bg-[#121619] sneaker-studio-card transition-transform duration-500 group-hover:scale-105">
-          <!-- Studio Rim-Light Gradient Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-cyan-400/25 via-transparent to-dich-pink/30 mix-blend-screen pointer-events-none z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90" 
-            alt="DICH® Low-Top Sneaker Studio Shot" 
-            onerror="this.src='https://placehold.co/800x600/121619/FFFFFF?text=DICH+SNEAKER+01'"
-            class="w-full aspect-[4/3] object-cover object-center contrast-115 brightness-105"
-          />
-          <div class="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between bg-dich-black/90 text-white px-2.5 py-1 rounded-md text-[9px] font-mono uppercase tracking-wider z-20">
-            <span>DICH® CONCRETE LOW</span>
-            <span class="text-dich-pink font-bold">$165</span>
-          </div>
+        <!-- Bottom-Left Top-Down Sneakers Photo -->
+        <div class="topdown-photo-wrap">
+          <img src="images/dich/sneakers-topdown.jpg" alt="Streetwear corduroy trousers and retro sneakers top-down view" />
         </div>
       </div>
 
-      <!-- PHOTOREALISTIC FLOATING SNEAKER RIGHT (Real High-Res Streetwear Sneaker Photography) -->
-      <div id="heroSneakerRight" onclick="openQuickView(4)" title="View DICH® Low-Top Sneaker Concrete" class="sneaker-float-right absolute right-[-4%] sm:right-[2%] lg:right-[4%] top-[44%] sm:top-[28%] w-[42vw] sm:w-[27vw] max-w-[350px] z-20 cursor-pointer group">
-        <div class="relative rounded-2xl overflow-hidden border-2 border-dich-black bg-[#121619] sneaker-studio-card transition-transform duration-500 group-hover:scale-105">
-          <!-- Studio Rim-Light Gradient Overlay -->
-          <div class="absolute inset-0 bg-gradient-to-tl from-dich-pink/30 via-transparent to-cyan-400/25 mix-blend-screen pointer-events-none z-10"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=900&q=90" 
-            alt="DICH® Streetwear Runner Studio Shot" 
-            onerror="this.src='https://placehold.co/800x600/121619/FF2E93?text=DICH+RUNNER+02'"
-            class="w-full aspect-[4/3] object-cover object-center contrast-115 brightness-105"
-          />
-          <div class="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between bg-dich-black/90 text-white px-2.5 py-1 rounded-md text-[9px] font-mono uppercase tracking-wider z-20">
-            <span>SUEDE &amp; FULL-GRAIN</span>
-            <span class="text-dich-yellow font-bold">IN STOCK</span>
+      <!-- Center Column: Model Portrait + "LiMiTED" + "ONLY 1500 PIECES FOR THIS DROP" -->
+      <div class="lookbook-center-col">
+        <div class="lookbook-photo-stage">
+          <button type="button" class="lookbook-arrow-btn prev" onclick="cycleLookbook(-1)" aria-label="Previous lookbook shot">
+            <svg width="20" height="36" viewBox="0 0 20 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4C8 10 8 26 16 32"/>
+              <path d="M11 2L16 4L14 9M14 27L16 32L11 34"/>
+            </svg>
+          </button>
+
+          <div class="lookbook-photo-box">
+            <img id="lookbookImg" src="images/dich/model-limited.jpg" alt="DICH Limited Drop Editorial Lookbook Portrait" />
           </div>
+
+          <button type="button" class="lookbook-arrow-btn next" onclick="cycleLookbook(1)" aria-label="Next lookbook shot">
+            <svg width="20" height="36" viewBox="0 0 20 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4C12 10 12 26 4 32"/>
+              <path d="M9 2L4 4L6 9M6 27L4 32L9 34"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- "LiMiTED" graffiti + ONLY 1500 PIECES / FOR THIS DROP overlapping bottom edge -->
+        <div class="limited-overlay-wrap">
+          <svg style="width:clamp(190px, 20vw, 250px); height:auto; margin-bottom:2px;" viewBox="0 0 260 94" fill="none">
+            <!-- Hand-drawn white/pink "LiMiTED" street tag -->
+            <text x="130" y="54" text-anchor="middle" font-family="'Sedgwick Ave', 'Permanent Marker', cursive" font-size="52" fill="none" stroke="#ffffff" stroke-width="2.5" letter-spacing="1" transform="rotate(-6 130 48)">LiMiTED</text>
+            <text x="130" y="54" text-anchor="middle" font-family="'Sedgwick Ave', 'Permanent Marker', cursive" font-size="52" fill="#f7d5e4" opacity="0.92" letter-spacing="1" transform="rotate(-6 130 48)">LiMiTED</text>
+            <!-- Pink marker zig-zag underline -->
+            <path d="M84 72L168 64L122 80L198 76" stroke="#f4a8c8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span id="lookbookLine1" class="only-1500-white">ONLY 1500 PIECES</span>
+          <span id="lookbookLine2" class="for-this-drop-black">FOR THIS DROP</span>
         </div>
       </div>
 
-      <!-- CENTER CTA: SHOP THE DROP with double animated neon pink underline -->
-      <div class="relative z-30 mt-28 sm:mt-10">
-        <a href="#featured" class="group inline-flex flex-col items-center bg-dich-black text-white px-7 py-3.5 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:border-dich-black transition-all duration-300 shadow-[0_14px_30px_rgba(0,0,0,0.35)] cursor-pointer">
-          <div class="flex items-center gap-2.5">
-            <span class="font-display text-xl sm:text-2xl tracking-wider uppercase">
-              SHOP THE DROP
-            </span>
-            <span class="text-dich-yellow group-hover:text-dich-black font-bold text-lg transition-transform group-hover:translate-x-1">→</span>
-          </div>
-          <!-- Double Hand-Drawn Neon Pink/Yellow Underline -->
-          <svg class="w-36 sm:w-44 h-3 text-dich-pink group-hover:text-dich-black -mt-0.5" viewBox="0 0 180 14" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round">
-            <path class="draw-path draw-path-hover" d="M6 5 C55 2, 125 3, 174 5"/>
-            <path class="draw-path draw-path-hover" d="M22 11 C68 8, 118 8, 158 11"/>
+      <!-- Right Column: Copy + BUY SHOES CTA -->
+      <div class="editorial-right-col">
+        <p class="editorial-caption editorial-caption-right">
+          CRAFTING UNIQUE NARRATIVES THROUGH LIMITED EDITION DROPS
+        </p>
+
+        <a href="#featured" class="buy-shoes-cta">
+          <span class="buy-shoes-text">BUY SHOES</span>
+          <svg class="yellow-underline-svg" viewBox="0 0 210 18" fill="none">
+            <path class="yellow-underline-path" d="M6 12C68 8 134 6 196 5" stroke="#FFE200" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="204" cy="11" r="2.6" fill="#FFE200"/>
           </svg>
         </a>
       </div>
+
     </div>
 
-    <!-- BOTTOM HERO GARMENT & CONSTRUCTION SPECS BAR -->
-    <div class="relative z-30 max-w-[1440px] w-full mx-auto pt-4 border-t border-black/15 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-white">
-      <div class="font-mono tracking-widest bg-dich-black/80 px-3 py-1 rounded-xs">
-        SPEC // 480GSM FRENCH TERRY · YKK® METAL
-      </div>
-      
-      <p class="max-w-lg text-center leading-relaxed text-[10px] sm:text-[11px] tracking-widest text-white drop-shadow-xs">
-        ARCHITECTURAL STREETWEAR CUT IN SMALL BATCHES. HEAVYWEIGHT 480GSM COTTON, TECHNICAL RIPSTOP &amp; HAND-FINISHED FOOTWEAR.
-      </p>
-
-      <div class="flex items-center space-x-5 font-mono text-dich-black font-bold">
-        <a href="#featured" class="hover:text-white transition-colors">HOODIES</a>
-        <a href="#featured" class="hover:text-white transition-colors">CARGOS</a>
-        <a href="#featured" class="hover:text-white transition-colors">SNEAKERS</a>
+    <!-- Diagonal Tilted TOP SECRET Caution Tape -->
+    <div class="top-secret-tape-wrap" aria-label="Top Secret Drop Tape">
+      <div class="marquee-track-fast">
+        <div style="display:flex; align-items:center;" id="tapeGroupA"></div>
+        <div style="display:flex; align-items:center;" id="tapeGroupB" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <!-- 4. REDESIGNED EDITORIAL LOOKBOOK SECTION ("WE'RE DOPE" — CLEAN 12-COL BRUTALIST GRID) -->
-  <section id="editorial" class="editorial-bg relative bg-dich-paper text-dich-black py-16 sm:py-24 px-4 sm:px-8 border-b-2 border-dich-black transition-colors duration-300">
-    <div class="max-w-[1440px] mx-auto">
+  <!-- =========================================================
+       4. FEATURED SECTION (STICKY LEFT + PRODUCT FEED RIGHT)
+       ========================================================= -->
+  <section id="featured" class="featured-section">
+    <div class="featured-grid">
 
-      <!-- Section Top Header Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-10 border-b-2 border-dich-black brutal-border">
-        <div class="flex items-center gap-3">
-          <span class="w-3 h-3 rounded-full bg-dich-pink inline-block"></span>
-          <span class="font-mono text-xs font-bold uppercase tracking-widest">EDITORIAL LOOKBOOK // SEASON 04</span>
-        </div>
-        <span class="font-mono text-xs uppercase tracking-widest opacity-75">DESIGNED FOR THE CONCRETE — BUENOS AIRES / TOKYO / NYC</span>
-      </div>
-
-      <!-- 12-COLUMN ASYMMETRIC BRUTALIST GRID -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-        
-        <!-- LEFT COLUMN (7 COLS): Giant "WE'RE DOPE" + Full Streetwear Outfit Portrait + Rotating Stamp -->
-        <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-          
-          <!-- Display Title Block with Hand-Drawn Pink Underline & Crown -->
-          <div class="relative">
-            <div class="flex flex-wrap items-baseline gap-x-5">
-              <h2 class="hero-word text-[17vw] sm:text-[11vw] lg:text-[124px] leading-[0.86]">
-                WE'RE <span class="relative inline-block text-dich-black">
-                  DOPE
-                  <!-- Neon Pink Hand-Drawn Underline -->
-                  <svg class="w-full h-5 text-dich-pink -mt-2" viewBox="0 0 260 22" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
-                    <path d="M6 12 C85 4, 175 5, 254 12"/>
-                    <path d="M28 19 C95 14, 165 14, 232 18" stroke-width="3"/>
-                  </svg>
-                </span>
-              </h2>
-              <span class="font-script text-dich-pink text-3xl sm:text-5xl font-bold -rotate-6 select-none">
-                no compromises.
-              </span>
-            </div>
-          </div>
-
-          <!-- Editorial Model Portrait Frame (Cleanly Bounded with 2px Black Brutalist Border) -->
-          <div class="surface-card relative rounded-xl overflow-hidden border-2 border-dich-black bg-stone-900 shadow-[8px_8px_0px_#0A0A0A] group">
-            <div class="aspect-[4/4.3] sm:aspect-[16/13] w-full overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85" 
-                alt="DICH® Oversized Hoodie and Cargo Streetwear Lookbook" 
-                onerror="this.src='https://placehold.co/1000x800/141414/FF2E93?text=DICH+STREETWEAR+LOOKBOOK'"
-                class="w-full h-full object-cover object-top contrast-110 group-hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-
-            <!-- Subtle Bottom Gradient for Crisp Readability -->
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent pointer-events-none"></div>
-
-            <!-- Top-Left Brutalist Floating Badge -->
-            <div class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-dich-black text-white border-2 border-dich-pink px-3.5 py-2 rounded-lg shadow-lg">
-              <span class="block text-[10px] font-mono text-dich-pink uppercase tracking-widest">LIMITED EDITION</span>
-              <span class="font-display text-sm sm:text-lg tracking-wider uppercase">ONLY 1500 PIECES FOR THIS DROP</span>
-            </div>
-
-            <!-- Top-Right Rotating Circular Stamp: DICH® AUTHENTIC STREETWEAR -->
-            <div class="absolute top-4 right-4 sm:top-6 sm:right-6 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-dich-yellow text-dich-black border-2 border-dich-black flex items-center justify-center shadow-lg">
-              <svg class="w-full h-full animate-spin-slow p-1" viewBox="0 0 100 100">
-                <defs>
-                  <path id="circleStampPath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
-                </defs>
-                <text font-size="9.2" font-weight="800" font-family="Space Grotesk, sans-serif" letter-spacing="1.8" fill="#0A0A0A">
-                  <textPath href="#circleStampPath" startOffset="0%">
-                    DICH® AUTHENTIC STREETWEAR ·
-                  </textPath>
-                </text>
-              </svg>
-              <span class="absolute font-display text-sm sm:text-base tracking-tight">DICH®</span>
-            </div>
-
-            <!-- Bottom Overlay Outfit Breakdown -->
-            <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
-              <div>
-                <span class="font-script text-dich-pink text-2xl sm:text-3xl font-bold block -mb-1">Look 01 // Concrete Uniform</span>
-                <p class="text-xs sm:text-sm font-mono uppercase tracking-wider text-white/90">
-                  WEARING: DICH® BOXY HEAVYWEIGHT HOODIE (XL) + PARACHUTE CARGO V2
-                </p>
-              </div>
-              <a href="#featured" class="self-start sm:self-end px-4 py-2 rounded-full bg-white text-dich-black font-display text-xs sm:text-sm tracking-wider uppercase hover:bg-dich-pink hover:text-white transition shrink-0">
-                SHOP THIS FIT →
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- RIGHT COLUMN (5 COLS): Manifesto + Secondary Streetwear Detail Photo + Clean Caution Tape + Metrics -->
-        <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
-          
-          <!-- Manifesto Card -->
-          <div class="surface-card bg-white border-2 border-dich-black rounded-xl p-6 sm:p-8 shadow-[6px_6px_0px_#0A0A0A]">
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 bg-dich-pink text-white text-[10px] font-mono font-bold uppercase tracking-widest rounded-xs">
-                MANIFESTO // 04
-              </span>
-              <span class="font-mono text-xs font-bold">NO RESTOCKS</span>
-            </div>
-
-            <h3 class="font-display text-2xl sm:text-3xl uppercase tracking-wide leading-tight mb-3">
-              CRAFTED FOR THE CONCRETE. HEAVYWEIGHT 480GSM COTTON &amp; TECHNICAL FABRICS.
-            </h3>
-
-            <p class="text-xs sm:text-sm leading-relaxed opacity-80">
-              Every DICH® garment is cut and sewn in numbered micro-runs. Built with custom-milled 480GSM brushed French terry, water-repellent ripstop nylon, and reinforced double-needle seams engineered to outlast trends.
-            </p>
-          </div>
-
-          <!-- Cleanly Framed Diagonal Caution Tape Banner (Zero Broken Overflow) -->
-          <div class="relative overflow-hidden rounded-xl border-2 border-dich-black bg-dich-black text-dich-yellow py-3 shadow-[6px_6px_0px_#FF2E93] select-none">
-            <div class="animate-marquee-fast whitespace-nowrap font-display text-sm sm:text-base tracking-widest uppercase">
-              <div class="flex items-center space-x-6 px-3">
-                <span>⚡ TOP SECRET DROP 04</span>
-                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
-                <span>⚡ TOP SECRET DROP 04</span>
-                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
-              </div>
-              <div class="flex items-center space-x-6 px-3" aria-hidden="true">
-                <span>⚡ TOP SECRET DROP 04</span>
-                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
-                <span>⚡ TOP SECRET DROP 04</span>
-                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Secondary High-Res Streetwear & Sneaker Detail Image -->
-          <div class="surface-card relative rounded-xl overflow-hidden border-2 border-dich-black bg-stone-900 shadow-[6px_6px_0px_#0A0A0A] group flex-1 min-h-[230px]">
-            <img 
-              src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=900&q=85" 
-              alt="Streetwear Detail Texture and Layering" 
-              onerror="this.src='https://placehold.co/800x550/2A1A17/FFFFFF?text=STREETWEAR+DETAIL'"
-              class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
-            <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white text-[11px] font-mono uppercase">
-              <span>DETAIL // ENZYME ACID WASH &amp; CARGO HARDWARE</span>
-              <span class="text-dich-pink font-bold">02 / 02</span>
-            </div>
-          </div>
-
-          <!-- 3-Column Quality Metrics Strip -->
-          <div class="grid grid-cols-3 gap-3">
-            <div class="surface-card bg-white border-2 border-dich-black rounded-xl p-3.5 text-center shadow-[4px_4px_0px_#0A0A0A]">
-              <span class="font-display text-xl sm:text-2xl text-dich-pink block leading-none">480 GSM</span>
-              <span class="text-[10px] font-mono font-bold uppercase tracking-wider mt-1 block">HEAVY COTTON</span>
-            </div>
-            <div class="surface-card bg-white border-2 border-dich-black rounded-xl p-3.5 text-center shadow-[4px_4px_0px_#0A0A0A]">
-              <span class="font-display text-xl sm:text-2xl block leading-none">HAND-MADE</span>
-              <span class="text-[10px] font-mono font-bold uppercase tracking-wider mt-1 block">FINISH &amp; WASH</span>
-            </div>
-            <div class="surface-card bg-white border-2 border-dich-black rounded-xl p-3.5 text-center shadow-[4px_4px_0px_#0A0A0A]">
-              <span class="font-display text-xl sm:text-2xl text-dich-pink block leading-none">GLOBAL</span>
-              <span class="text-[10px] font-mono font-bold uppercase tracking-wider mt-1 block">EXPRESS SHIP</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. FEATURED STREETWEAR CATALOG SECTION ("ARCHIVE DROP") -->
-  <section id="featured" class="editorial-bg relative bg-dich-paper text-dich-black pt-16 sm:pt-24 pb-24 px-4 sm:px-8 transition-colors duration-300">
-    <div class="max-w-[1440px] mx-auto">
-      
-      <!-- Top Catalog Header & Category Filters -->
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 mb-12 border-b-2 border-dich-black brutal-border">
+      <!-- Left Sticky Column -->
+      <div class="featured-sticky-left">
         <div>
-          <div class="inline-flex items-center gap-3">
-            <h2 class="hero-word text-6xl sm:text-7xl xl:text-[88px]">
-              ARCHIVE DROP
-            </h2>
-            <!-- Hand-drawn Neon Pink Arrow -->
-            <svg class="w-16 sm:w-24 h-10 text-dich-pink shrink-0" viewBox="0 0 120 40" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 22 C38 19, 75 20, 112 20"/>
-              <path d="M94 8 L114 20 L94 32"/>
+          <div class="featured-heading-row">
+            <h2 class="font-wide-left textured-black featured-title">FEATURED</h2>
+            <!-- Pastel Pink Hand-Drawn Arrow Pointing Right -->
+            <svg style="width:clamp(56px, 7.5vw, 112px); margin-left:clamp(34px, 5vw, 84px); color:var(--pink); flex-shrink:0;" viewBox="0 0 120 36" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 20C36 18 76 17 112 18"/>
+              <path d="M95 7L114 18L95 29"/>
             </svg>
           </div>
-          <p class="mt-2 text-xs font-mono uppercase tracking-widest opacity-75">
-            SELECT CATEGORY OR CLICK ANY GARMENT FOR SIZING &amp; SPECS
+
+          <p class="editorial-caption" style="margin-top:26px;">
+            CRAFTING UNIQUE NARRATIVES THROUGH LIMITED EDITION DROPS
           </p>
         </div>
 
-        <!-- Category Filter Pills -->
-        <div class="flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-wider">
-          <button onclick="filterProducts('all')" data-filter="all" class="filter-pill px-4 py-2 rounded-full bg-dich-black text-white border-2 border-dich-black transition cursor-pointer">
-            ALL (6)
-          </button>
-          <button onclick="filterProducts('hoodies')" data-filter="hoodies" class="filter-pill px-4 py-2 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:text-white hover:border-dich-pink transition cursor-pointer">
-            HOODIES
-          </button>
-          <button onclick="filterProducts('pants')" data-filter="pants" class="filter-pill px-4 py-2 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:text-white hover:border-dich-pink transition cursor-pointer">
-            PANTS
-          </button>
-          <button onclick="filterProducts('tees')" data-filter="tees" class="filter-pill px-4 py-2 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:text-white hover:border-dich-pink transition cursor-pointer">
-            TEES
-          </button>
-          <button onclick="filterProducts('outerwear')" data-filter="outerwear" class="filter-pill px-4 py-2 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:text-white hover:border-dich-pink transition cursor-pointer">
-            OUTERWEAR
-          </button>
-          <button onclick="filterProducts('sneakers')" data-filter="sneakers" class="filter-pill px-4 py-2 rounded-full border-2 border-dich-black hover:bg-dich-pink hover:text-white hover:border-dich-pink transition cursor-pointer">
-            SNEAKERS
-          </button>
+        <!-- DESTROY ME + Thin Pink Arrow + Jagged Wall Crack -->
+        <div class="destroy-me-block" onclick="pulseCrack()" title="Destroy Me">
+          <div style="position:relative; display:inline-flex; flex-direction:column; align-items:flex-end;">
+            <span class="font-tag" style="font-size:clamp(16px, 1.8vw, 24px); color:var(--ink); transform:rotate(-6deg);">
+              DESTROY ME
+            </span>
+            <svg style="width:52px; color:var(--pink); margin-top:4px; margin-right:-16px;" viewBox="0 0 64 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4L58 20"/>
+              <path d="M51 13L59 20L49 22"/>
+            </svg>
+          </div>
+
+          <svg id="destroyCrackSvg" class="destroy-crack-svg" style="width:clamp(74px, 8vw, 112px);" viewBox="0 0 110 130" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M74 4L56 32L60 44L40 66L45 84L72 96L94 124"/>
+            <path d="M40 66L16 74M72 96L54 114M72 96L92 84"/>
+          </svg>
         </div>
+
+        <!-- Bottom-Left: ALL PRODUCTS + Swooping Pink Ribbon Arrow -->
+        <button type="button" class="all-products-btn" onclick="toggleAllProducts()">
+          <span class="all-products-text" id="allProductsLabel">ALL PRODUCTS</span>
+          <svg style="width:clamp(160px, 18vw, 240px); color:var(--pink); margin-top:-2px;" viewBox="0 0 240 40" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M210 22C160 8 76 8 10 24"/>
+            <path d="M26 10L8 25L29 33"/>
+            <path d="M208 24L188 30L212 32"/>
+          </svg>
+        </button>
       </div>
 
-      <!-- RESPONSIVE 3-COLUMN STREETWEAR PRODUCT GRID -->
-      <div id="productFeed" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Rendered dynamically via JS -->
+      <!-- Right Column: Stacked Product Cards -->
+      <div class="product-stack" id="productStack">
+        <!-- Rendered by JS -->
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer id="footer" class="bg-dich-black text-white pt-16 pb-10 px-4 sm:px-8 border-t-2 border-dich-black">
-    <div class="max-w-[1440px] mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-white/15">
-        <div class="md:col-span-6">
-          <div class="inline-flex items-center px-5 py-1.5 rounded-full border-2 border-white/40 mb-5">
-            <span class="font-display text-2xl tracking-wider">DICH<sup class="text-xs font-sans ml-0.5">®</sup></span>
-          </div>
-          <h3 class="hero-word text-4xl sm:text-6xl text-white max-w-md leading-[0.9]">
-            EMBRACE WHAT MAKES YOU <span class="text-dich-pink">DICH.</span>
-          </h3>
-        </div>
-
-        <div class="md:col-span-6 flex flex-col justify-between">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-dich-yellow mb-2">
-              SUBSCRIBE &amp; GET 15% OFF — USE CODE: FIRST15
-            </p>
-            <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-2.5 max-w-md">
-              <input 
-                type="email" 
-                required 
-                placeholder="ENTER YOUR EMAIL..." 
-                class="flex-1 bg-white/10 border border-white/25 rounded-full px-4 py-2.5 text-xs font-mono text-white placeholder:text-white/40 focus:outline-none focus:border-dich-pink"
-              />
-              <button type="submit" class="px-6 py-2.5 rounded-full bg-dich-pink text-white font-display text-sm tracking-wider uppercase hover:bg-white hover:text-dich-black transition cursor-pointer">
-                JOIN DROP LIST
-              </button>
-            </form>
-            <p id="newsletterMsg" class="text-xs font-mono text-dich-pink mt-2 hidden"></p>
-          </div>
-
-          <div class="flex flex-wrap gap-6 mt-8 text-xs font-bold uppercase tracking-widest text-white/70">
-            <a href="#hero" class="hover:text-white">TOP ↑</a>
-            <a href="#featured" class="hover:text-white">ARCHIVE SHOP</a>
-            <a href="#editorial" class="hover:text-white">LOOKBOOK 04</a>
-            <span>INSTAGRAM</span>
-            <span>TIKTOK</span>
-          </div>
-        </div>
+  <!-- =========================================================
+       5. FOOTER
+       ========================================================= -->
+  <footer id="footer" class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <a href="#hero" class="nav-logo-pill">DICH<sup>™</sup></a>
+        <h3 class="font-wide-left footer-brand-title" style="color:#ffffff; display:block; transform:none; letter-spacing:-0.03em;">
+          EMBRACE WHAT MAKES YOU <span style="color:var(--pink);">DICH.</span>
+        </h3>
       </div>
 
-      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-white/50 gap-2">
-        <span>© 2026 DICH® STREETWEAR GARMENT LABS. ALL RIGHTS RESERVED.</span>
-        <span>480GSM SMALL-BATCH PRODUCTION // ZERO MASS WASTE</span>
+      <div>
+        <span class="footer-newsletter-label">SUBSCRIBE &amp; SAVE 15% OFF YOUR FIRST ORDER — CODE: FIRST15</span>
+        <form class="footer-form" onsubmit="handleNewsletter(event)">
+          <input type="email" required placeholder="ENTER YOUR EMAIL..." aria-label="Email address" />
+          <button type="submit">JOIN DROP</button>
+        </form>
+        <p id="newsletterFeedback" style="font-size:11px; color:var(--pink); margin-top:8px; display:none;"></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>©2025 DICH™ — SMALL-BATCH NATURAL MATERIAL FOOTWEAR</span>
+      <div class="footer-links">
+        <a href="#hero">TOP ↑</a>
+        <a href="#featured">SHOP</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#lookbook">LOOKBOOKS</a>
+        <a href="#footer">FB</a>
+        <a href="#footer">X</a>
+        <a href="#footer">IG</a>
       </div>
     </div>
   </footer>
 
-  <!-- QUICK-VIEW PRODUCT MODAL (Dynamic Apparel S-XL or Footwear US 8-12 Sizing) -->
-  <div id="quickViewModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4" onclick="closeQuickViewOnBackdrop(event)">
-    <div class="bg-dich-paper text-dich-black w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border-2 border-dich-black relative">
-      <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-dich-black text-white flex items-center justify-center font-bold hover:bg-dich-pink transition cursor-pointer">
-        ✕
-      </button>
-
-      <div id="quickViewContent" class="grid grid-cols-1 md:grid-cols-2">
-        <!-- Populated dynamically -->
-      </div>
-    </div>
+  <!-- =========================================================
+       6. QUICK-VIEW SIZE MODAL
+       ========================================================= -->
+  <div id="quickViewModal" class="modal-backdrop" onclick="if(event.target===this) closeQuickView()">
+    <div class="modal-card" id="quickViewBody"></div>
   </div>
 
-  <!-- SLIDE-OVER SHOPPING CART DRAWER -->
-  <div id="cartOverlay" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs transition-opacity" onclick="closeCart()"></div>
-  <aside id="cartDrawer" class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-dich-paper text-dich-black shadow-2xl border-l-2 border-dich-black transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
-    
-    <!-- Cart Header -->
-    <div class="p-6 border-b border-dich-black/15 flex items-center justify-between bg-dich-black text-white">
-      <div class="flex items-center gap-3">
-        <span class="font-display text-2xl tracking-wider uppercase">YOUR BAG</span>
-        <span id="drawerCountBadge" class="px-2.5 py-0.5 rounded-full bg-dich-pink text-white text-xs font-bold font-mono">0</span>
+  <!-- =========================================================
+       7. SLIDE-OVER CART DRAWER
+       ========================================================= -->
+  <div id="cartOverlay" class="cart-overlay" onclick="closeCart()"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping bag">
+    <div style="padding:18px 20px; background:#0b0b0c; color:#ffffff; display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="font-family:'Archivo Black',sans-serif; font-size:16px; text-transform:uppercase;">YOUR BAG</span>
+        <span id="drawerBadge" style="background:var(--pink); color:#0b0b0c; font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px;">00</span>
       </div>
-      <button onclick="closeCart()" class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-sm hover:bg-white hover:text-dich-black transition cursor-pointer">
-        ✕
-      </button>
+      <button type="button" onclick="closeCart()" style="background:none; border:1px solid rgba(255,255,255,0.35); color:#ffffff; width:28px; height:28px; cursor:pointer;">✕</button>
     </div>
 
-    <!-- Cart Items List -->
-    <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
-      <!-- Populated dynamically -->
-    </div>
+    <div id="cartItems" style="flex:1; overflow-y:auto; padding:18px 20px; display:flex; flex-direction:column; gap:12px;"></div>
 
-    <!-- Cart Footer (Promo Code + Subtotal + Checkout) -->
-    <div class="p-6 border-t border-dich-black/15 bg-white space-y-4">
-      <div>
-        <label class="block text-[10px] font-bold uppercase tracking-widest text-stone-500 mb-1.5">
-          PROMO CODE (TRY <span class="text-dich-black underline">FIRST15</span> FOR 15% OFF)
-        </label>
-        <div class="flex gap-2">
-          <input 
-            id="promoInput" 
-            type="text" 
-            placeholder="FIRST15" 
-            class="flex-1 border-2 border-dich-black/25 rounded-lg px-3 py-2 text-xs font-mono uppercase focus:outline-none focus:border-dich-black"
-          />
-          <button onclick="applyPromoCode()" class="px-4 py-2 rounded-lg bg-dich-black text-white text-xs font-bold uppercase tracking-wider hover:bg-dich-pink transition cursor-pointer">
-            APPLY
-          </button>
-        </div>
-        <p id="promoFeedback" class="text-[11px] font-mono mt-1 hidden"></p>
+    <div style="padding:18px 20px; border-top:1px solid #e5e5e5; background:#fafafa;">
+      <div style="display:flex; gap:8px; margin-bottom:12px;">
+        <input id="promoInput" type="text" placeholder="PROMO CODE (FIRST15)" style="flex:1; border:1.5px solid #d4d4d4; padding:8px 10px; font-size:11px; text-transform:uppercase; outline:none;" />
+        <button type="button" onclick="applyPromo()" style="background:#111111; color:#ffffff; border:none; padding:8px 14px; font-size:11px; font-weight:600; text-transform:uppercase; cursor:pointer;">APPLY</button>
+      </div>
+      <p id="promoMsg" style="font-size:10.5px; margin-bottom:10px; display:none;"></p>
+
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:#555555; margin-bottom:6px; text-transform:uppercase;">
+        <span>SUBTOTAL</span>
+        <span id="cartSubtotal">$0</span>
+      </div>
+      <div id="discountLine" style="display:none; justify-content:space-between; font-size:11px; color:#d63384; font-weight:600; margin-bottom:6px; text-transform:uppercase;">
+        <span>FIRST15 (-15%)</span>
+        <span id="cartDiscount">-$0</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-family:'Archivo Black',sans-serif; font-size:16px; margin-bottom:14px; padding-top:8px; border-top:1px dashed #cccccc;">
+        <span>TOTAL</span>
+        <span id="cartTotal">$0</span>
       </div>
 
-      <div class="space-y-1.5 text-xs font-bold uppercase tracking-wider pt-2 border-t border-dashed border-stone-300">
-        <div class="flex justify-between text-stone-600">
-          <span>SUBTOTAL</span>
-          <span id="cartSubtotal" class="font-mono">$0</span>
-        </div>
-        <div id="discountRow" class="hidden justify-between text-dich-pink">
-          <span>DISCOUNT (FIRST15 -15%)</span>
-          <span id="cartDiscount" class="font-mono">-$0</span>
-        </div>
-        <div class="flex justify-between text-base font-display tracking-wide pt-1 text-dich-black">
-          <span>TOTAL</span>
-          <span id="cartTotal" class="font-mono">$0</span>
-        </div>
-      </div>
-
-      <button onclick="simulateCheckout()" class="w-full py-3.5 rounded-full bg-dich-black text-white font-display text-lg tracking-widest uppercase hover:bg-dich-pink transition-all duration-200 shadow-lg cursor-pointer">
+      <button type="button" onclick="checkout()" style="width:100%; background:#111111; color:#ffffff; border:none; padding:13px; font-family:'Archivo Black',sans-serif; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer;">
         PROCEED TO CHECKOUT →
       </button>
     </div>
   </aside>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
-    <div class="bg-dich-black text-white border-2 border-dich-pink px-5 py-3 rounded-full shadow-2xl flex items-center gap-3 text-xs font-bold uppercase tracking-wider">
-      <span class="text-dich-pink text-base">⚡</span>
-      <span id="toastText">ITEM ADDED TO BAG</span>
-    </div>
-  </div>
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-banner">ADDED TO CART</div>
 
   <script>
     // ==========================================
-    // STREETWEAR APPAREL & FOOTWEAR CATALOG DATA
+    // 1. PRODUCT DATA (MATCHING REFERENCE VIDEO)
     // ==========================================
     const PRODUCTS = [
       {
-        id: 'dich-hoodie-01',
-        badge: 'AVAILABLE 28/250',
-        name: 'DICH® BOXY HEAVYWEIGHT HOODIE',
-        subtitle: '480GSM Washed Black French Terry · Drop Shoulder',
-        price: 110,
-        category: 'hoodies',
-        image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=85',
-        sizes: ['S', 'M', 'L', 'XL'],
-        defaultSize: 'L',
-        description: 'Cut in a boxy cropped silhouette from custom 480GSM organic French terry. Features vintage charcoal enzyme wash, double-lined hood, and puff-print DICH® chest branding.'
-      },
-      {
-        id: 'dich-cargo-02',
-        badge: 'AVAILABLE 19/250',
-        name: 'PARACHUTE CARGO PANTS V2',
-        subtitle: 'Technical Cotton-Nylon Ripstop · 8 Utility Pockets',
-        price: 135,
-        category: 'pants',
-        image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=85',
-        sizes: ['S', 'M', 'L', 'XL'],
-        defaultSize: 'M',
-        description: 'Articulated knee pleats, adjustable ankle bungee toggles, and heavy-duty matte black hardware. Engineered for relaxed stacked draping over bulky sneakers.'
-      },
-      {
-        id: 'dich-tee-03',
-        badge: 'AVAILABLE 42/250',
-        name: 'ACID WASH GRAPHIC TEE',
-        subtitle: '300GSM Heavy Jersey · Brutalist Screenprint',
-        price: 58,
-        category: 'tees',
-        image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=85',
-        sizes: ['S', 'M', 'L', 'XL'],
-        defaultSize: 'L',
-        description: 'Sun-faded acid wash heavyweight cotton tee with thick high-ribbed collar and distressed neon-pink & white archive screenprint across chest and back.'
-      },
-      {
-        id: 'dich-bomber-04',
-        badge: 'AVAILABLE 12/250',
-        name: 'DISTRESSED VARSITY BOMBER',
-        subtitle: 'Heavyweight Twill & Chenille Patches · Quilted Lining',
-        price: 210,
-        category: 'outerwear',
-        image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=85',
-        sizes: ['S', 'M', 'L', 'XL'],
-        defaultSize: 'L',
-        description: 'Oversized cropped varsity bomber jacket featuring hand-distressed rib trims, custom chenille DICH® emblems, two-way YKK® metal zipper, and satin diamond lining.'
-      },
-      {
-        id: 'dich-sneaker-05',
-        badge: 'AVAILABLE 15/250',
-        name: 'DICH® LOW-TOP SNEAKER "CONCRETE"',
-        subtitle: 'Full-Grain Leather & Suede · Sculpted Cup Sole',
-        price: 165,
-        category: 'sneakers',
-        image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85',
-        sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+        id: 'mostro-dark-vibe',
+        badge: 'AVAILABLE 25/250',
+        title: 'A$AP ROCKY MOSTRO',
+        subtitle: 'DARK VIBE',
+        price: 245,
+        image: 'images/dich/shoe-mostro.jpg',
+        sizes: ['US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 11'],
         defaultSize: 'US 9.5',
-        description: 'Hand-lasted low-top skate & street silhouette crafted with supple full-grain leather, hairy suede overlays, padded fat tongue, and custom DICH® tread outsole.'
+        description: 'Chunky retro-futuristic silhouette crafted in natural cream suede, breathable black mesh, and sculpted coral-pink midsole with local small-batch assembly.',
+        extra: false
       },
       {
-        id: 'dich-utility-06',
+        id: 'x-perks-mix',
         badge: 'AVAILABLE 34/250',
-        name: 'UTILITY CROSSBODY BAG & BEANIE SET',
-        subtitle: 'Cordura® Ballistic Sling + Ribbed Knit Beanie',
-        price: 65,
-        category: 'outerwear',
-        image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',
-        sizes: ['ONE SIZE'],
-        defaultSize: 'ONE SIZE',
-        description: 'Two-piece tactical street bundle pairing a weatherproof 1000D Cordura® crossbody pouch with a heavyweight fisherman knit beanie with woven DICH® label.'
+        title: 'X PERKS',
+        subtitle: 'MIX',
+        price: 285,
+        image: 'images/dich/shoe-xperks.jpg',
+        sizes: ['US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 11'],
+        defaultSize: 'US 9.5',
+        description: 'Coral-pink suede low-top skate edition featuring hand-stenciled "DICH DOPE" side branding, vulcanized black waffle tread sole, and padded tongue patch.',
+        extra: false
+      },
+      {
+        id: 'dich-concrete-teal',
+        badge: 'AVAILABLE 67/250',
+        title: 'DICH® CONCRETE RUNNER',
+        subtitle: 'CYBER TEAL',
+        price: 260,
+        image: 'images/dich/shoe-concrete.jpg',
+        sizes: ['US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 11'],
+        defaultSize: 'US 10',
+        description: 'Technical trail-inspired sneaker combining cream nubuck, espresso overlays, orange webbing accents, and signature turquoise ribbed outsole.',
+        extra: false
+      },
+      {
+        id: 'dich-archive-04',
+        badge: 'AVAILABLE 14/250',
+        title: 'DICH® SUNLIGHT LOW',
+        subtitle: 'RAW CORDUROY',
+        price: 220,
+        image: 'images/dich/sneakers-topdown.jpg',
+        sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+        defaultSize: 'US 9',
+        description: 'Heritage court sneaker finished with organic off-white canvas, crimson & solar-yellow piping, and recycled natural rubber cup sole.',
+        extra: true
       }
     ];
 
+    const LOOKBOOK_SLIDES = [
+      {
+        img: 'images/dich/model-limited.jpg',
+        line1: 'ONLY 1500 PIECES',
+        line2: 'FOR THIS DROP'
+      },
+      {
+        img: 'images/dich/skate-ollie.jpg',
+        line1: 'BUILT FOR CONCRETE',
+        line2: 'ZERO COMPROMISE'
+      },
+      {
+        img: 'images/dich/sneakers-topdown.jpg',
+        line1: 'HAND-NUMBERED RUN',
+        line2: 'LOCAL PRODUCTION'
+      }
+    ];
+
+    const SKULL_SVG = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2C7.03 2 3 5.8 3 10.5C3 13.3 4.45 15.78 6.7 17.3V20.5C6.7 21.33 7.37 22 8.2 22H15.8C16.63 22 17.3 21.33 17.3 20.5V17.3C19.55 15.78 21 13.3 21 10.5C21 5.8 16.97 2 12 2ZM8.8 13.2C7.8 13.2 7 12.4 7 11.4C7 10.4 7.8 9.6 8.8 9.6C9.8 9.6 10.6 10.4 10.6 11.4C10.6 12.4 9.8 13.2 8.8 13.2ZM12 16.2L10.9 14.5H13.1L12 16.2ZM15.2 13.2C14.2 13.2 13.4 12.4 13.4 11.4C13.4 10.4 14.2 9.6 15.2 9.6C16.2 9.6 17 10.4 17 11.4C17 12.4 16.2 13.2 15.2 13.2Z"/>
+      </svg>
+    `;
+
     // ==========================================
-    // STATE MANAGEMENT
+    // 2. STATE & INITIAL RENDER
     // ==========================================
     let cart = [];
-    let activeFilter = 'all';
     let promoApplied = false;
-    let selectedQuickSize = 'L';
+    let lookbookIdx = 0;
+    let showAllExtra = false;
+    let activeModalSize = 'US 9.5';
 
-    // ==========================================
-    // RENDER STREETWEAR PRODUCT GRID
-    // ==========================================
+    function initTopSecretTape() {
+      const items = Array.from({ length: 10 }, () => `
+        <span class="tape-item">
+          ${SKULL_SVG}
+          <span>TOP SECRET</span>
+        </span>
+      `).join('');
+      document.getElementById('tapeGroupA').innerHTML = items;
+      document.getElementById('tapeGroupB').innerHTML = items;
+    }
+
     function renderProducts() {
-      const feed = document.getElementById('productFeed');
-      const filtered = activeFilter === 'all' 
-        ? PRODUCTS 
-        : PRODUCTS.filter(p => p.category === activeFilter);
+      const stack = document.getElementById('productStack');
+      const ribbonRepeat = Array.from({ length: 8 }, () => `
+        <span class="ribbon-item">
+          ${SKULL_SVG}
+          <span>ADD TO CART</span>
+        </span>
+      `).join('');
 
-      feed.innerHTML = filtered.map((product) => {
-        const originalIndex = PRODUCTS.findIndex(p => p.id === product.id);
+      stack.innerHTML = PRODUCTS.map((p, idx) => {
+        const extraCls = p.extra ? (showAllExtra ? 'hidden-extra revealed' : 'hidden-extra') : '';
         return `
-          <article class="surface-card group bg-white border-2 border-dich-black rounded-xl overflow-hidden shadow-[6px_6px_0px_#0A0A0A] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1">
-            <div>
-              <!-- Top Stock & Category Header -->
-              <div class="px-4 py-2.5 border-b-2 border-dich-black brutal-border flex items-center justify-between bg-dich-black text-white">
-                <span class="text-[10px] font-mono font-bold tracking-widest uppercase text-dich-yellow">
-                  ${product.badge}
-                </span>
-                <span class="text-[10px] font-mono uppercase tracking-wider text-white/70">
-                  ${product.category}
-                </span>
-              </div>
-
-              <!-- Studio Product Photo Container -->
-              <div onclick="openQuickView(${originalIndex})" class="relative aspect-[4/4.2] w-full bg-stone-900 overflow-hidden cursor-pointer">
-                <img 
-                  src="${product.image}" 
-                  alt="${product.name}" 
-                  onerror="this.src='https://placehold.co/800x840/141414/FFFFFF?text=${encodeURIComponent(product.name)}'"
-                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                />
-
-                <!-- Diagonal Interactive ADD TO CART Ribbon -->
-                <button 
-                  type="button"
-                  onclick="event.stopPropagation(); quickAddToCart(${originalIndex})"
-                  title="Quick Add ${product.name}"
-                  class="absolute inset-x-[-12%] top-1/2 -translate-y-1/2 -rotate-12 bg-dich-black text-white border-y-2 border-dich-pink py-2 shadow-2xl overflow-hidden opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 cursor-pointer z-20"
-                >
-                  <div class="animate-marquee-fast whitespace-nowrap font-display text-sm tracking-widest uppercase flex items-center">
-                    <span class="mx-4">⚡ ADD TO CART</span>
-                    <span class="mx-4 text-dich-pink">⚡ ADD TO CART</span>
-                    <span class="mx-4">⚡ ADD TO CART</span>
-                    <span class="mx-4 text-dich-pink">⚡ ADD TO CART</span>
-                    <span class="mx-4">⚡ ADD TO CART</span>
-                    <span class="mx-4 text-dich-pink">⚡ ADD TO CART</span>
-                  </div>
-                </button>
-
-                <!-- Select Size Pill -->
-                <span class="absolute bottom-3 right-3 bg-white text-dich-black border border-dich-black text-[10px] font-mono font-bold uppercase px-3 py-1 rounded-full shadow-md">
-                  SIZES: ${product.sizes[0]}–${product.sizes[product.sizes.length - 1]}
-                </span>
-              </div>
-            </div>
-
-            <!-- Card Footer Info & Action -->
-            <div class="p-4 sm:p-5 flex flex-col justify-between flex-1 space-y-4">
-              <div>
-                <div class="flex items-start justify-between gap-2">
-                  <h3 onclick="openQuickView(${originalIndex})" class="font-display text-xl sm:text-2xl uppercase tracking-wide leading-tight hover:text-dich-pink cursor-pointer transition-colors">
-                    ${product.name}
-                  </h3>
-                  <span class="font-mono font-bold text-lg shrink-0">$${product.price}</span>
+          <article class="product-card ${extraCls}">
+            <span class="torn-badge">${p.badge}</span>
+            <div class="product-media-box" onclick="openQuickView(${idx})">
+              <img src="${p.image}" alt="${p.title} - ${p.subtitle}" />
+              <button
+                type="button"
+                class="add-to-cart-ribbon"
+                onclick="event.stopPropagation(); quickAdd(${idx})"
+                aria-label="Add ${p.title} to cart"
+              >
+                <div class="marquee-track-fast">
+                  <div style="display:flex; align-items:center;">${ribbonRepeat}</div>
+                  <div style="display:flex; align-items:center;" aria-hidden="true">${ribbonRepeat}</div>
                 </div>
-                <p class="text-[11px] font-mono opacity-70 mt-1">${product.subtitle}</p>
+              </button>
+            </div>
+            <div class="product-meta">
+              <div class="product-meta-title" onclick="openQuickView(${idx})">
+                <span>${p.title}</span>
+                <span class="product-meta-sub">${p.subtitle}</span>
               </div>
-
-              <div class="flex gap-2 pt-1">
-                <button 
-                  type="button"
-                  onclick="openQuickView(${originalIndex})"
-                  class="flex-1 py-2.5 rounded-full border-2 border-dich-black font-bold text-xs uppercase tracking-wider hover:bg-dich-black hover:text-white transition cursor-pointer"
-                >
-                  SELECT SIZE
-                </button>
-                <button 
-                  type="button"
-                  onclick="quickAddToCart(${originalIndex})"
-                  class="px-4 py-2.5 rounded-full bg-dich-pink text-white font-display text-sm tracking-wider uppercase hover:bg-dich-black transition cursor-pointer"
-                >
-                  + BAG
-                </button>
-              </div>
+              <span class="product-meta-price">$${p.price}</span>
             </div>
           </article>
         `;
       }).join('');
     }
 
-    function filterProducts(category) {
-      activeFilter = category;
-      document.querySelectorAll('.filter-pill').forEach(btn => {
-        if (btn.dataset.filter === category) {
-          btn.classList.add('bg-dich-black', 'text-white');
-        } else {
-          btn.classList.remove('bg-dich-black', 'text-white');
-        }
-      });
+    function toggleAllProducts() {
+      showAllExtra = !showAllExtra;
+      document.getElementById('allProductsLabel').textContent = showAllExtra ? 'FEATURED ONLY' : 'ALL PRODUCTS';
       renderProducts();
+      showToast(showAllExtra ? 'SHOWING FULL ARCHIVE DROP' : 'SHOWING FEATURED DROP');
+    }
+
+    function cycleLookbook(delta) {
+      lookbookIdx = (lookbookIdx + delta + LOOKBOOK_SLIDES.length) % LOOKBOOK_SLIDES.length;
+      const slide = LOOKBOOK_SLIDES[lookbookIdx];
+      const img = document.getElementById('lookbookImg');
+      img.style.opacity = '0.35';
+      setTimeout(() => {
+        img.src = slide.img;
+        document.getElementById('lookbookLine1').textContent = slide.line1;
+        document.getElementById('lookbookLine2').textContent = slide.line2;
+        img.style.opacity = '1';
+      }, 160);
+    }
+
+    function pulseCrack() {
+      const crack = document.getElementById('destroyCrackSvg');
+      crack.style.transform = 'scale(1.18) rotate(-3deg)';
+      setTimeout(() => {
+        crack.style.transform = '';
+      }, 240);
+      showToast('NO COMPROMISES — LIMITED TO 250 PAIRS');
     }
 
     // ==========================================
-    // QUICK-VIEW MODAL LOGIC (Apparel & Footwear Sizes)
+    // 3. QUICK-VIEW & CART INTERACTIONS
     // ==========================================
-    function openQuickView(index) {
-      const product = PRODUCTS[index];
-      selectedQuickSize = product.defaultSize;
-
-      const content = document.getElementById('quickViewContent');
-      content.innerHTML = `
-        <div class="relative min-h-[280px] md:min-h-[440px] bg-stone-900 overflow-hidden">
-          <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" />
-          <span class="absolute top-4 left-4 bg-dich-black text-dich-yellow border border-dich-yellow/40 text-[10px] font-mono font-bold px-2.5 py-1">
-            ${product.badge}
-          </span>
+    function openQuickView(idx) {
+      const p = PRODUCTS[idx];
+      activeModalSize = p.defaultSize;
+      const body = document.getElementById('quickViewBody');
+      body.innerHTML = `
+        <div style="background:#2f69a2; aspect-ratio:1/1; overflow:hidden; position:relative;">
+          <img src="${p.image}" alt="${p.title}" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <span class="torn-badge" style="position:absolute; top:12px; left:12px; margin:0;">${p.badge}</span>
         </div>
-
-        <div class="p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div style="padding:24px; display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
           <div>
-            <span class="text-[10px] font-mono uppercase tracking-widest text-stone-500">DICH® DROP 04 // ${product.category}</span>
-            <h3 class="font-display text-3xl uppercase tracking-wide mt-1 leading-none">${product.name}</h3>
-            <p class="font-mono text-xl font-bold mt-2 text-dich-pink">$${product.price}</p>
-            <p class="text-xs text-stone-600 leading-relaxed mt-3">${product.description}</p>
+            <span style="font-size:10px; font-weight:600; letter-spacing:0.06em; color:#666; text-transform:uppercase;">DICH™ DROP // ${p.subtitle}</span>
+            <h3 style="font-family:'Archivo Black',sans-serif; font-size:22px; text-transform:uppercase; margin-top:4px; line-height:1.05;">${p.title}</h3>
+            <p style="font-size:18px; font-weight:700; margin-top:8px;">$${p.price}</p>
+            <p style="font-size:12px; line-height:1.5; color:#444; margin-top:12px;">${p.description}</p>
           </div>
-
           <div>
-            <div class="flex justify-between text-[11px] font-bold uppercase tracking-wider mb-2">
-              <span>SELECT SIZE</span>
-              <span class="text-stone-400">BOXY STREET FIT</span>
-            </div>
-            <div class="grid grid-cols-4 gap-2" id="sizeGrid">
-              ${product.sizes.map(size => `
-                <button 
-                  type="button"
-                  onclick="selectSize('${size}', this)"
-                  class="size-btn py-2 text-xs font-mono font-bold rounded-lg border-2 transition cursor-pointer ${size === selectedQuickSize ? 'bg-dich-black text-white border-dich-black' : 'border-stone-300 hover:border-dich-black'}"
-                >
-                  ${size}
-                </button>
+            <span style="font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;">SELECT SIZE</span>
+            <div class="size-grid">
+              ${p.sizes.map(s => `
+                <button type="button" class="size-pill ${s === activeModalSize ? 'active' : ''}" onclick="pickSize('${s}', this)">${s}</button>
               `).join('')}
             </div>
           </div>
-
-          <button 
-            type="button"
-            onclick="addToCart(${index}, selectedQuickSize); closeQuickView();"
-            class="w-full py-3.5 rounded-full bg-dich-black text-white font-display text-lg tracking-widest uppercase hover:bg-dich-pink transition-all cursor-pointer shadow-md"
-          >
-            ADD TO CART — $${product.price}
+          <button type="button" onclick="addToCart(${idx}, activeModalSize); closeQuickView();" style="width:100%; background:#111111; color:#ffffff; border:none; padding:13px; font-family:'Archivo Black',sans-serif; font-size:12px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer;">
+            ADD TO CART — $${p.price}
           </button>
         </div>
       `;
-
-      const modal = document.getElementById('quickViewModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      document.getElementById('quickViewModal').classList.add('open');
     }
 
-    function selectSize(size, btnEl) {
-      selectedQuickSize = size;
-      document.querySelectorAll('.size-btn').forEach(b => {
-        b.classList.remove('bg-dich-black', 'text-white', 'border-dich-black');
-        b.classList.add('border-stone-300');
-      });
-      btnEl.classList.remove('border-stone-300');
-      btnEl.classList.add('bg-dich-black', 'text-white', 'border-dich-black');
+    function pickSize(size, btn) {
+      activeModalSize = size;
+      document.querySelectorAll('.size-pill').forEach(el => el.classList.remove('active'));
+      btn.classList.add('active');
     }
 
     function closeQuickView() {
-      const modal = document.getElementById('quickViewModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      document.getElementById('quickViewModal').classList.remove('open');
     }
 
-    function closeQuickViewOnBackdrop(e) {
-      if (e.target.id === 'quickViewModal') {
-        closeQuickView();
-      }
+    function quickAdd(idx) {
+      const p = PRODUCTS[idx];
+      addToCart(idx, p.defaultSize);
     }
 
-    // ==========================================
-    // SHOPPING CART LOGIC
-    // ==========================================
-    function quickAddToCart(index) {
-      const product = PRODUCTS[index];
-      addToCart(index, product.defaultSize);
-    }
-
-    function addToCart(index, size) {
-      const product = PRODUCTS[index];
-      const existing = cart.find(item => item.id === product.id && item.size === size);
+    function addToCart(idx, size) {
+      const p = PRODUCTS[idx];
+      const existing = cart.find(item => item.id === p.id && item.size === size);
       if (existing) {
         existing.qty += 1;
       } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-          size: size,
-          qty: 1
-        });
+        cart.push({ id: p.id, title: p.title, subtitle: p.subtitle, price: p.price, image: p.image, size, qty: 1 });
       }
-      updateCartUI();
-      showToast(`ADDED ${product.name} (${size})`);
+      renderCart();
+      showToast(`ADDED ${p.title} (${size})`);
     }
 
     function updateQty(idx, delta) {
       cart[idx].qty += delta;
-      if (cart[idx].qty <= 0) {
-        cart.splice(idx, 1);
-      }
-      updateCartUI();
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      renderCart();
     }
 
-    function removeCartItem(idx) {
-      cart.splice(idx, 1);
-      updateCartUI();
-    }
-
-    function applyPromoCode() {
-      const input = document.getElementById('promoInput').value.trim().toUpperCase();
-      const feedback = document.getElementById('promoFeedback');
-      feedback.classList.remove('hidden');
-
-      if (input === 'FIRST15') {
+    function applyPromo() {
+      const val = document.getElementById('promoInput').value.trim().toUpperCase();
+      const msg = document.getElementById('promoMsg');
+      msg.style.display = 'block';
+      if (val === 'FIRST15') {
         promoApplied = true;
-        feedback.textContent = '✓ PROMO CODE "FIRST15" APPLIED (15% OFF)';
-        feedback.className = 'text-[11px] font-mono mt-1 text-emerald-600 font-bold';
-        updateCartUI();
+        msg.textContent = '✓ FIRST15 APPLIED (15% OFF)';
+        msg.style.color = '#15803d';
       } else {
         promoApplied = false;
-        feedback.textContent = '✕ INVALID CODE. TRY "FIRST15"';
-        feedback.className = 'text-[11px] font-mono mt-1 text-rose-600 font-bold';
-        updateCartUI();
+        msg.textContent = 'INVALID CODE — TRY FIRST15';
+        msg.style.color = '#dc2626';
       }
+      renderCart();
     }
 
-    function updateCartUI() {
-      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cartCountBadge').textContent = `(${totalItems})`;
-      document.getElementById('drawerCountBadge').textContent = totalItems;
+    function renderCart() {
+      const count = cart.reduce((acc, i) => acc + i.qty, 0);
+      const pad = String(count).padStart(2, '0');
+      document.getElementById('cartCount').textContent = pad;
+      document.getElementById('drawerBadge').textContent = pad;
 
-      const container = document.getElementById('cartItemsContainer');
+      const list = document.getElementById('cartItems');
       if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="h-full flex flex-col items-center justify-center text-center py-12 space-y-4">
-            <span class="font-display text-4xl text-stone-300 uppercase">YOUR BAG IS EMPTY</span>
-            <p class="text-xs text-stone-500 max-w-xs uppercase tracking-wider">
-              EXPLORE OUR 480GSM HEAVYWEIGHT STREETWEAR &amp; FOOTWEAR DROP.
-            </p>
-            <button onclick="closeCart()" class="px-6 py-2.5 rounded-full bg-dich-black text-white text-xs font-bold uppercase tracking-widest hover:bg-dich-pink transition cursor-pointer">
-              BROWSE DROP 04
-            </button>
+        list.innerHTML = `
+          <div style="margin:auto 0; text-align:center; padding:36px 12px;">
+            <p style="font-family:'Archivo Black',sans-serif; font-size:20px; color:#c4c4c4; text-transform:uppercase;">BAG IS EMPTY</p>
+            <p style="font-size:11px; color:#666; margin-top:8px; text-transform:uppercase;">HOVER ANY SNEAKER AND CLICK ADD TO CART.</p>
           </div>
         `;
       } else {
-        container.innerHTML = cart.map((item, idx) => `
-          <div class="flex gap-4 p-3 bg-white rounded-xl border-2 border-dich-black/15 shadow-xs">
-            <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg" />
-            <div class="flex-1 flex flex-col justify-between">
-              <div class="flex justify-between items-start gap-2">
+        list.innerHTML = cart.map((item, idx) => `
+          <div style="display:flex; gap:12px; padding:10px; border:1px solid #e5e5e5; background:#fff;">
+            <img src="${item.image}" alt="${item.title}" style="width:68px; height:68px; object-fit:cover;" />
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
                 <div>
-                  <h4 class="font-bold text-xs uppercase leading-tight">${item.name}</h4>
-                  <span class="text-[10px] font-mono text-stone-500">SIZE: ${item.size}</span>
+                  <div style="font-size:11px; font-weight:700; text-transform:uppercase;">${item.title}</div>
+                  <div style="font-size:10px; color:#666; text-transform:uppercase;">${item.subtitle} · ${item.size}</div>
                 </div>
-                <button onclick="removeCartItem(${idx})" class="text-xs text-stone-400 hover:text-rose-600 cursor-pointer" title="Remove">✕</button>
+                <button type="button" onclick="cart.splice(${idx},1); renderCart();" style="background:none; border:none; color:#999; cursor:pointer; font-size:12px;">✕</button>
               </div>
-              <div class="flex items-center justify-between mt-2">
-                <div class="inline-flex items-center border border-stone-300 rounded-full overflow-hidden text-xs font-mono">
-                  <button onclick="updateQty(${idx}, -1)" class="px-2.5 py-0.5 hover:bg-stone-100 cursor-pointer">-</button>
-                  <span class="px-2 font-bold">${item.qty}</span>
-                  <button onclick="updateQty(${idx}, 1)" class="px-2.5 py-0.5 hover:bg-stone-100 cursor-pointer">+</button>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <div style="display:inline-flex; border:1px solid #ccc; font-size:11px;">
+                  <button type="button" onclick="updateQty(${idx},-1)" style="border:none; background:none; padding:2px 8px; cursor:pointer;">-</button>
+                  <span style="padding:2px 6px; font-weight:600;">${item.qty}</span>
+                  <button type="button" onclick="updateQty(${idx},1)" style="border:none; background:none; padding:2px 8px; cursor:pointer;">+</button>
                 </div>
-                <span class="font-mono font-bold text-sm">$${item.price * item.qty}</span>
+                <span style="font-size:12px; font-weight:700;">$${item.price * item.qty}</span>
               </div>
             </div>
           </div>
         `).join('');
       }
 
-      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-      const discount = promoApplied ? Math.round(subtotal * 0.15) : 0;
-      const total = subtotal - discount;
+      const sub = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
+      const disc = promoApplied ? Math.round(sub * 0.15) : 0;
+      const tot = sub - disc;
 
-      document.getElementById('cartSubtotal').textContent = `$${subtotal}`;
-      const discountRow = document.getElementById('discountRow');
-      if (promoApplied && subtotal > 0) {
-        discountRow.classList.remove('hidden');
-        discountRow.classList.add('flex');
-        document.getElementById('cartDiscount').textContent = `-$${discount}`;
+      document.getElementById('cartSubtotal').textContent = `$${sub}`;
+      const discLine = document.getElementById('discountLine');
+      if (promoApplied && sub > 0) {
+        discLine.style.display = 'flex';
+        document.getElementById('cartDiscount').textContent = `-$${disc}`;
       } else {
-        discountRow.classList.add('hidden');
-        discountRow.classList.remove('flex');
+        discLine.style.display = 'none';
       }
-      document.getElementById('cartTotal').textContent = `$${total}`;
+      document.getElementById('cartTotal').textContent = `$${tot}`;
     }
 
     function openCart() {
-      document.getElementById('cartOverlay').classList.remove('hidden');
-      document.getElementById('cartDrawer').classList.remove('translate-x-full');
+      document.getElementById('cartOverlay').classList.add('open');
+      document.getElementById('cartDrawer').classList.add('open');
     }
 
     function closeCart() {
-      document.getElementById('cartOverlay').classList.add('hidden');
-      document.getElementById('cartDrawer').classList.add('translate-x-full');
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartDrawer').classList.remove('open');
     }
 
-    function simulateCheckout() {
+    function checkout() {
       if (cart.length === 0) {
-        showToast('ADD A STREETWEAR PIECE FIRST!');
+        showToast('ADD A SNEAKER FIRST');
         return;
       }
-      const orderNum = Math.floor(100000 + Math.random() * 900000);
+      const orderId = Math.floor(10000 + Math.random() * 90000);
       cart = [];
       promoApplied = false;
       document.getElementById('promoInput').value = '';
-      document.getElementById('promoFeedback').classList.add('hidden');
-      updateCartUI();
+      document.getElementById('promoMsg').style.display = 'none';
+      renderCart();
       closeCart();
-      showToast(`ORDER #DICH-${orderNum} CONFIRMED! 🔥`);
+      showToast(`ORDER #DICH-${orderId} CONFIRMED`);
     }
 
     // ==========================================
-    // URBAN MODE, PARALLAX & INTERACTIONS
+    // 4. URBAN MODE, SCROLL CHROME & UTILS
     // ==========================================
     function toggleUrbanMode() {
-      const isUrban = document.body.classList.toggle('urban-mode');
-      const dot = document.getElementById('urbanDot');
-      const label = document.getElementById('urbanLabel');
-      if (isUrban) {
-        dot.classList.remove('bg-dich-black');
-        dot.classList.add('bg-dich-acid');
-        label.textContent = 'URBAN: ON';
-        showToast('NIGHT STREET MODE ACTIVATED ⚡');
-      } else {
-        dot.classList.remove('bg-dich-acid');
-        dot.classList.add('bg-dich-black');
-        label.textContent = 'URBAN MODE';
-        showToast('EDITORIAL DAYLIGHT MODE');
-      }
+      const on = document.body.classList.toggle('urban-mode');
+      document.getElementById('urbanLabel').textContent = on ? 'URBAN MODE: ON' : 'URBAN MODE';
+      showToast(on ? 'URBAN NIGHT MODE ON' : 'EDITORIAL LIGHT MODE');
     }
 
     function toggleMobileMenu() {
-      document.getElementById('mobileMenu').classList.toggle('hidden');
+      document.getElementById('mobileDrawer').classList.toggle('open');
     }
-
-    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
 
     function handleNewsletter(e) {
       e.preventDefault();
-      const msg = document.getElementById('newsletterMsg');
-      msg.textContent = '✓ WELCOME TO DICH®. USE CODE "FIRST15" AT CHECKOUT FOR 15% OFF.';
-      msg.classList.remove('hidden');
+      const fb = document.getElementById('newsletterFeedback');
+      fb.textContent = '✓ SUBSCRIBED — USE CODE FIRST15 FOR 15% OFF YOUR FIRST ORDER.';
+      fb.style.display = 'block';
       e.target.reset();
     }
 
-    let toastTimeout;
-    function showToast(message) {
-      const toast = document.getElementById('toastNotification');
-      document.getElementById('toastText').textContent = message;
-      toast.classList.remove('opacity-0', 'translate-y-4');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-4');
-      }, 2800);
+    let toastTimer;
+    function showToast(text) {
+      const el = document.getElementById('toast');
+      el.textContent = text;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
     }
 
-    // Subtle scroll parallax on floating studio sneakers
+    // Switch header tint smoothly when scrolling past hero
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const header = document.getElementById('mainHeader');
-      if (scrollY > 40) {
-        header.classList.add('shadow-md');
+      const nav = document.getElementById('mainNav');
+      const hero = document.getElementById('hero');
+      const threshold = hero ? hero.offsetHeight - 90 : 500;
+      if (window.scrollY >= threshold) {
+        nav.classList.add('scrolled');
       } else {
-        header.classList.remove('shadow-md');
-      }
-
-      const leftSneaker = document.getElementById('heroSneakerLeft');
-      const rightSneaker = document.getElementById('heroSneakerRight');
-      if (leftSneaker && rightSneaker && scrollY < 900) {
-        leftSneaker.style.marginTop = `${scrollY * 0.07}px`;
-        rightSneaker.style.marginTop = `${scrollY * 0.09}px`;
+        nav.classList.remove('scrolled');
       }
     });
 
-    // Initialize Page
+    // Briefly play the SHOP NOW burst rays animation after page load
+    setTimeout(() => {
+      const cta = document.getElementById('shopNowCta');
+      if (cta) cta.classList.remove('burst-intro');
+    }, 2400);
+
+    initTopSecretTape();
     renderProducts();
-    updateCartUI();
+    renderCart();
   </script>
 </body>
 </html>

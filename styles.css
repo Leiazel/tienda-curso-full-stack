@@ -1,0 +1,54 @@
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.modal-body img {
+    max-height: 280px;
+    object-fit: cover;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.dropdown-item:active,
+.dropdown-item.active {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.dropdown-item-highlight {
+    color: #dc3545;
+    /* letra roja en reposo */
+}
+
+.dropdown-item-highlight:hover,
+.dropdown-item-highlight:focus {
+    background-color: #dc3545;
+    color: #fff;
+    /* letra blanca cuando el fondo se pone rojo */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    filter: none;
+    opacity: 0.3;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(0.5) grayscale(100);
+}

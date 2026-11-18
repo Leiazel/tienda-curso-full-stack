@@ -2,153 +2,689 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda DELB</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DICH® Streetwear Garment Labs — Architectural heavyweight 480GSM streetwear, technical ripstop cargos, and hand-finished footwear." />
+  <title>DICH® — Embrace What Makes You Dich</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml" />
+
+  <!-- Bootstrap 5.3.8 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+  />
+
+  <!-- Google Fonts: Anton, Space Grotesk, Caveat & Permanent Marker -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Custom Brutalist Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <!-- Logotipo de la empresa -->
-                <img src="images/logo.svg" alt="Logo Tienda DELB" width="38" height="38"
-                    class="rounded-circle shadow-sm">
-                <span class="fw-bold">Tienda DELB</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="categorias.html" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Menú
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="categorias.html#pizzas">Pizzas</a></li>
-                            <li><a class="dropdown-item" href="categorias.html#hamburguesas">Hamburguesas</a></li>
-                            <li><a class="dropdown-item" href="categorias.html#pastas">Pastas</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item fw-bold dropdown-item-highlight" href="categorias.html">Ver
-                                    todas las
-                                    categorías</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
-            </div>
+<body class="dich-page">
+
+  <!-- 1. TOP PROMO MARQUEE BAR -->
+  <div class="promo-marquee-bar">
+    <div class="animate-marquee text-nowrap">
+      <div class="d-flex align-items-center gap-5 px-4">
+        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
+        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — 480GSM ORGANIC COTTON</span>
+        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
+        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — WORLDWIDE EXPRESS</span>
+      </div>
+      <div class="d-flex align-items-center gap-5 px-4" aria-hidden="true">
+        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
+        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — 480GSM ORGANIC COTTON</span>
+        <span>🔥 <span class="text-dich-yellow">SUBSCRIBE &amp; SAVE 15% OFF</span> YOUR FIRST ORDER — CODE: FIRST15</span>
+        <span>⚡ <span class="text-dich-pink">DROP 04: HEAVYWEIGHT STREETWEAR</span> — WORLDWIDE EXPRESS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. STICKY BOOTSTRAP HEADER NAVIGATION -->
+  <header id="mainHeader" class="sticky-top dich-navbar">
+    <nav class="navbar navbar-expand-md py-2">
+      <div class="container-xxl px-3 px-sm-4">
+
+        <!-- Mobile Menu Trigger -->
+        <button
+          class="navbar-toggler rounded-pill order-1 d-md-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#dichNavbarNav"
+          aria-controls="dichNavbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          MENU
+        </button>
+
+        <!-- Center Oval Pill Logo: DICH® with neon pink crown -->
+        <a href="#hero" class="dich-logo-pill order-2 order-md-2 mx-md-auto">
+          <svg
+            class="dich-logo-crown"
+            viewBox="0 0 36 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M3 19L6 6L14 13L18 4L22 13L30 6L33 19H3Z" />
+          </svg>
+          <span class="font-display fs-5 lh-1 tracking-wider">DICH<sup style="font-size: 0.55rem;" class="font-sans ms-1">®</sup></span>
+        </a>
+
+        <!-- Right Nav Controls -->
+        <div class="d-flex align-items-center justify-content-end gap-2 gap-sm-3 order-3 order-md-3 nav-side-col">
+          <button
+            id="urbanModeBtn"
+            type="button"
+            class="btn-urban-toggle"
+            title="Toggle Urban Night Mode"
+          >
+            <span id="urbanDot" class="urban-dot"></span>
+            <span id="urbanLabel" class="d-none d-sm-inline">URBAN MODE</span>
+            <span class="d-inline d-sm-none">URBAN</span>
+          </button>
+
+          <button
+            type="button"
+            class="btn-cart-pill"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#cartDrawer"
+            aria-controls="cartDrawer"
+          >
+            <span>CART</span>
+            <span id="cartCountBadge" class="font-mono-tech">(0)</span>
+          </button>
         </div>
+
+        <!-- Collapsible Nav Links (Left on Desktop, Dropdown on Mobile) -->
+        <div
+          id="dichNavbarNav"
+          class="collapse navbar-collapse order-4 order-md-1 nav-side-col mt-2 mt-md-0"
+        >
+          <ul class="navbar-nav dich-nav-list gap-md-2 gap-lg-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#featured">ARCHIVE SHOP</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#editorial">LOOKBOOK 04</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#editorial">MANIFESTO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#footer">CONTACT</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </nav>
+  </header>
 
-    <div class="container mt-4">
-        <h1 class="card-title mb-4 text-center text-danger">Tienda DELB</h1>
-        <p class="lead text-center">Bienvenido a nuestra tienda online.
-            Aquí encontrarás una amplia variedad
-            de productos de alta calidad a precios competitivos.
-            <br> Explora nuestras categorías y descubre ofertas exclusivas.
-        </p>
-
-        <!-- Carrusel de Productos -->
-        <div id="carouselExampleDark" class="carousel carousel-dark slide my-4 shadow rounded-4 overflow-hidden"
-            data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="images/hamburguesa.png" class="d-block w-100" alt="Hamburguesa">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Hamburguesa</h5>
-                        <p class="mb-0 text-dark">Una deliciosa hamburguesa con carne de res, lechuga, tomate y salsa
-                            especial.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="images/pizza.jpg" class="d-block w-100" alt="Pizza">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Pizza</h5>
-                        <p class="mb-0 text-dark">Una deliciosa pizza con ingredientes frescos y salsa especial.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="images/pasta.jpg" class="d-block w-100" alt="Pasta">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Pasta</h5>
-                        <p class="mb-0 text-dark">Una deliciosa pasta con ingredientes frescos y salsa especial.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Botón Anterior -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev">
-                <span
-                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow"
-                    style="width: 44px; height: 44px;">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-
-            <!-- Botón Siguiente -->
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="next">
-                <span
-                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow"
-                    style="width: 44px; height: 44px;">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-
-
+  <!-- 3. HERO SECTION WITH STUDIO SNEAKERS -->
+  <section id="hero" class="dich-hero noise-overlay">
+    <!-- Subtle Architectural Grid Lines -->
+    <div class="hero-grid-lines container-xxl px-0">
+      <div class="row g-0 h-100">
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-        </script>
+    <!-- Top Technical Metadata Strip -->
+    <div class="container-xxl px-3 px-sm-4 position-relative z-3">
+      <div class="d-flex align-items-center justify-content-between font-mono-tech text-white-50 hero-meta-badge">
+        <span class="badge bg-dich-black text-white rounded-1 px-2 py-1 font-mono-tech">
+          COLLECTION // 04 — CONCRETE ARCHIVE
+        </span>
+        <span class="d-none d-sm-inline-block badge bg-dich-yellow text-dark fw-bold rounded-1 px-2 py-1 font-mono-tech">
+          480GSM HEAVYWEIGHT APPAREL &amp; FOOTWEAR
+        </span>
+        <span class="text-white fw-semibold">LAT 34.6037° S</span>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer id="contacto" class="bg-danger text-white text-center py-4 mt-5">
-        <div class="container">
-            <h5 class="text-white mb-1">Tienda Delb</h5>
-            <p class="mb-2">La mejor calidad y sabor, directo a tu mesa.</p>
-            <ul class="list-inline mb-2">
-                <li class="list-inline-item"><a href="categorias.html"
-                        class="text-white text-decoration-none px-2">Menú</a></li>
-                <li class="list-inline-item"><a href="contacto.html"
-                        class="text-white text-decoration-none px-2">Contacto</a></li>
-            </ul>
-            <small class="text-white-50">
-                &copy; 2026 Grupo 1 Damián y Ludmila
-            </small>
+    <!-- Centerpiece Giant Typography & Floating Sneakers -->
+    <div class="container-xxl px-3 px-sm-4 my-auto py-4 py-sm-5 position-relative">
+      <div class="d-flex flex-column align-items-center justify-content-center position-relative">
+
+        <h1 class="m-0 text-center w-100">
+          <!-- LINE 1: EMBRACE -->
+          <span class="d-block position-relative z-1 text-center">
+            <span class="hero-annotation hero-annotation-left">LIMITED DROP 04</span>
+            <span class="hero-annotation hero-annotation-right">HEAVYWEIGHT</span>
+            <span class="hero-word hero-word-embrace d-block">EMBRACE</span>
+          </span>
+
+          <!-- LINE 2: WHAT MAKES YOU -->
+          <span class="d-block position-relative z-1 text-center hero-line-tight">
+            <span class="hero-word hero-word-sub d-block">WHAT MAKES YOU</span>
+          </span>
+
+          <!-- LINE 3: DICH® + Pink Crown + 100% STREETWEAR -->
+          <span class="d-inline-flex align-items-start justify-content-center position-relative z-1 hero-line-tight">
+            <svg
+              class="hero-crown-svg"
+              viewBox="0 0 48 32"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 26L8 8L18 18L24 5L30 18L40 8L44 26H4Z" />
+              <circle cx="8" cy="5" r="1.8" fill="currentColor" />
+              <circle cx="24" cy="2" r="1.8" fill="currentColor" />
+              <circle cx="40" cy="5" r="1.8" fill="currentColor" />
+            </svg>
+
+            <span class="hero-word hero-word-dich">DICH</span>
+            <span class="fw-bold text-dich-espresso fs-4 fs-md-2 mt-2 mt-md-3 ms-1">®</span>
+
+            <span class="hero-annotation hero-annotation-bottom">100% STREETWEAR</span>
+          </span>
+        </h1>
+
+        <!-- Floating Sneaker Left -->
+        <div
+          id="heroSneakerLeft"
+          class="hero-sneaker-slot hero-sneaker-left sneaker-float-left"
+          data-action="quick-view"
+          data-index="4"
+          title="View DICH® Low-Top Sneaker Concrete"
+        >
+          <div class="sneaker-studio-card">
+            <div class="position-absolute top-0 start-0 w-100 h-100 sneaker-rim-left pe-none z-1"></div>
+            <img
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90"
+              alt="DICH® Low-Top Sneaker Studio Shot"
+              data-fallback="https://placehold.co/800x600/121619/FFFFFF?text=DICH+SNEAKER+01"
+              class="sneaker-studio-img"
+            />
+            <div class="sneaker-tag-bar d-flex align-items-center justify-content-between font-mono-tech">
+              <span>DICH® CONCRETE LOW</span>
+              <span class="text-dich-pink fw-bold">$165</span>
+            </div>
+          </div>
         </div>
-    </footer>
+
+        <!-- Floating Sneaker Right -->
+        <div
+          id="heroSneakerRight"
+          class="hero-sneaker-slot hero-sneaker-right sneaker-float-right"
+          data-action="quick-view"
+          data-index="4"
+          title="View DICH® Low-Top Sneaker Concrete"
+        >
+          <div class="sneaker-studio-card">
+            <div class="position-absolute top-0 start-0 w-100 h-100 sneaker-rim-right pe-none z-1"></div>
+            <img
+              src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?auto=format&fit=crop&w=900&q=90"
+              alt="DICH® Streetwear Runner Studio Shot"
+              data-fallback="https://placehold.co/800x600/121619/FF2E93?text=DICH+RUNNER+02"
+              class="sneaker-studio-img"
+            />
+            <div class="sneaker-tag-bar d-flex align-items-center justify-content-between font-mono-tech">
+              <span>SUEDE &amp; FULL-GRAIN</span>
+              <span class="text-dich-yellow fw-bold">IN STOCK</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center CTA -->
+        <div class="hero-cta-wrap">
+          <a href="#featured" class="btn-shop-drop">
+            <div class="d-flex align-items-center gap-2">
+              <span class="font-display fs-4 text-uppercase">SHOP THE DROP</span>
+              <span class="arrow-icon fw-bold fs-5">→</span>
+            </div>
+            <svg
+              class="underline-svg"
+              viewBox="0 0 180 14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.8"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path class="draw-path draw-path-hover" d="M6 5 C55 2, 125 3, 174 5" />
+              <path class="draw-path draw-path-hover" d="M22 11 C68 8, 118 8, 158 11" />
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Hero Specs Bar -->
+    <div class="container-xxl px-3 px-sm-4 position-relative z-3">
+      <div class="hero-specs-bar pt-3 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 text-white fw-bold">
+        <div class="font-mono-tech bg-dich-black bg-opacity-75 px-3 py-1 rounded-1">
+          SPEC // 480GSM FRENCH TERRY · YKK® METAL
+        </div>
+
+        <p class="mb-0 text-center lh-base" style="max-width: 34rem;">
+          ARCHITECTURAL STREETWEAR CUT IN SMALL BATCHES. HEAVYWEIGHT 480GSM COTTON, TECHNICAL RIPSTOP &amp; HAND-FINISHED FOOTWEAR.
+        </p>
+
+        <div class="hero-quick-links d-flex align-items-center gap-4 font-mono-tech text-dark">
+          <a href="#featured">HOODIES</a>
+          <a href="#featured">CARGOS</a>
+          <a href="#featured">SNEAKERS</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EDITORIAL LOOKBOOK SECTION ("WE'RE DOPE") -->
+  <section id="editorial" class="dich-editorial editorial-bg py-5">
+    <div class="container-xxl px-3 px-sm-4 py-md-4">
+
+      <!-- Section Top Header Bar -->
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pb-3 mb-4 mb-lg-5 border-bottom border-2 border-dark brutal-border">
+        <div class="d-flex align-items-center gap-2">
+          <span class="pink-dot"></span>
+          <span class="font-mono-tech small fw-bold text-uppercase" style="letter-spacing: 0.12em;">
+            EDITORIAL LOOKBOOK // SEASON 04
+          </span>
+        </div>
+        <span class="font-mono-tech small text-uppercase opacity-75" style="letter-spacing: 0.12em;">
+          DESIGNED FOR THE CONCRETE — BUENOS AIRES / TOKYO / NYC
+        </span>
+      </div>
+
+      <!-- 12-COLUMN ASYMMETRIC BRUTALIST BOOTSTRAP GRID -->
+      <div class="row g-4 g-lg-5 align-items-stretch">
+
+        <!-- LEFT COLUMN (7 COLS) -->
+        <div class="col-12 col-lg-7 d-flex flex-column justify-content-between gap-4">
+          <div class="d-flex flex-wrap align-items-baseline gap-3">
+            <h2 class="hero-word display-1 mb-0" style="font-size: clamp(3.6rem, 9vw, 7.6rem);">
+              WE'RE
+              <span class="position-relative d-inline-block dich-black-text">
+                DOPE
+                <svg
+                  class="w-100 text-dich-pink d-block"
+                  style="height: 1.15rem; margin-top: -0.35rem;"
+                  viewBox="0 0 260 22"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M6 12 C85 4, 175 5, 254 12" />
+                  <path d="M28 19 C95 14, 165 14, 232 18" stroke-width="3" />
+                </svg>
+              </span>
+            </h2>
+            <span class="font-script text-dich-pink fs-1 fw-bold" style="transform: rotate(-6deg);">
+              no compromises.
+            </span>
+          </div>
+
+          <!-- Editorial Model Portrait Frame -->
+          <div class="surface-card brutal-card-lg lookbook-portrait-box">
+            <img
+              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85"
+              alt="DICH® Oversized Hoodie and Cargo Streetwear Lookbook"
+              data-fallback="https://placehold.co/1000x800/141414/FF2E93?text=DICH+STREETWEAR+LOOKBOOK"
+              class="lookbook-portrait-img"
+            />
+            <div class="lookbook-gradient"></div>
+
+            <!-- Top-Left Floating Badge -->
+            <div class="lookbook-badge-limited">
+              <span class="d-block font-mono-tech text-dich-pink text-uppercase" style="font-size: 0.62rem; letter-spacing: 0.12em;">
+                LIMITED EDITION
+              </span>
+              <span class="font-display fs-6 text-uppercase">ONLY 1500 PIECES FOR THIS DROP</span>
+            </div>
+
+            <!-- Top-Right Rotating Circular Stamp -->
+            <div class="stamp-badge">
+              <svg class="w-100 h-100 animate-spin-slow p-1" viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <path id="circleStampPath" d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0" />
+                </defs>
+                <text font-size="9.2" font-weight="800" font-family="Space Grotesk, sans-serif" letter-spacing="1.8" fill="#0A0A0A">
+                  <textPath href="#circleStampPath" startOffset="0%">
+                    DICH® AUTHENTIC STREETWEAR ·
+                  </textPath>
+                </text>
+              </svg>
+              <span class="position-absolute font-display fs-6">DICH®</span>
+            </div>
+
+            <!-- Bottom Outfit Breakdown -->
+            <div class="position-absolute bottom-0 start-0 end-0 p-3 p-sm-4 d-flex flex-column flex-sm-row align-items-sm-end justify-content-between gap-3 text-white">
+              <div>
+                <span class="font-script text-dich-pink fs-2 fw-bold d-block lh-1">
+                  Look 01 // Concrete Uniform
+                </span>
+                <p class="font-mono-tech small text-uppercase mb-0 mt-1 text-white-50">
+                  WEARING: DICH® BOXY HEAVYWEIGHT HOODIE (XL) + PARACHUTE CARGO V2
+                </p>
+              </div>
+              <a
+                href="#featured"
+                class="btn btn-light rounded-pill font-display px-4 py-2 text-uppercase flex-shrink-0"
+              >
+                SHOP THIS FIT →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (5 COLS) -->
+        <div class="col-12 col-lg-5 d-flex flex-column justify-content-between gap-4">
+
+          <!-- Manifesto Card -->
+          <div class="surface-card brutal-card bg-white p-4 p-sm-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <span class="badge bg-dich-pink text-white font-mono-tech text-uppercase rounded-1 px-2 py-1">
+                MANIFESTO // 04
+              </span>
+              <span class="font-mono-tech small fw-bold">NO RESTOCKS</span>
+            </div>
+
+            <h3 class="font-display fs-2 text-uppercase lh-sm mb-3">
+              CRAFTED FOR THE CONCRETE. HEAVYWEIGHT 480GSM COTTON &amp; TECHNICAL FABRICS.
+            </h3>
+
+            <p class="small lh-base opacity-75 mb-0">
+              Every DICH® garment is cut and sewn in numbered micro-runs. Built with custom-milled 480GSM brushed French terry, water-repellent ripstop nylon, and reinforced double-needle seams engineered to outlast trends.
+            </p>
+          </div>
+
+          <!-- Diagonal Caution Tape Banner -->
+          <div class="caution-tape">
+            <div class="animate-marquee-fast text-nowrap font-display fs-6 tracking-wider text-uppercase">
+              <div class="d-flex align-items-center gap-4 px-3">
+                <span>⚡ TOP SECRET DROP 04</span>
+                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
+                <span>⚡ TOP SECRET DROP 04</span>
+                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
+              </div>
+              <div class="d-flex align-items-center gap-4 px-3" aria-hidden="true">
+                <span>⚡ TOP SECRET DROP 04</span>
+                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
+                <span>⚡ TOP SECRET DROP 04</span>
+                <span class="text-white">⚡ NUMBERED 1 / 1500</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Detail Image -->
+          <div class="surface-card brutal-card detail-photo-card position-relative flex-grow-1">
+            <img
+              src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=900&q=85"
+              alt="Streetwear Detail Texture and Layering"
+              data-fallback="https://placehold.co/800x550/2A1A17/FFFFFF?text=STREETWEAR+DETAIL"
+            />
+            <div class="lookbook-gradient"></div>
+            <div class="position-absolute bottom-0 start-0 end-0 p-3 d-flex align-items-center justify-content-between text-white font-mono-tech small text-uppercase">
+              <span>DETAIL // ENZYME ACID WASH &amp; CARGO HARDWARE</span>
+              <span class="text-dich-pink fw-bold">02 / 02</span>
+            </div>
+          </div>
+
+          <!-- 3-Column Quality Metrics Strip -->
+          <div class="row g-3">
+            <div class="col-4">
+              <div class="surface-card metric-tile p-3 text-center h-100">
+                <span class="font-display fs-4 text-dich-pink d-block lh-1">480 GSM</span>
+                <span class="font-mono-tech fw-bold text-uppercase d-block mt-1" style="font-size: 0.62rem;">
+                  HEAVY COTTON
+                </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="surface-card metric-tile p-3 text-center h-100">
+                <span class="font-display fs-4 d-block lh-1">HAND-MADE</span>
+                <span class="font-mono-tech fw-bold text-uppercase d-block mt-1" style="font-size: 0.62rem;">
+                  FINISH &amp; WASH
+                </span>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="surface-card metric-tile p-3 text-center h-100">
+                <span class="font-display fs-4 text-dich-pink d-block lh-1">GLOBAL</span>
+                <span class="font-mono-tech fw-bold text-uppercase d-block mt-1" style="font-size: 0.62rem;">
+                  EXPRESS SHIP
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FEATURED STREETWEAR CATALOG SECTION ("ARCHIVE DROP") -->
+  <section id="featured" class="editorial-bg bg-dich-paper py-5">
+    <div class="container-xxl px-3 px-sm-4 py-md-4">
+
+      <!-- Top Catalog Header & Category Filters -->
+      <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-4 pb-4 mb-5 border-bottom border-2 border-dark brutal-border">
+        <div>
+          <div class="d-inline-flex align-items-center gap-3">
+            <h2 class="hero-word display-2 mb-0" style="font-size: clamp(3rem, 6vw, 5.5rem);">
+              ARCHIVE DROP
+            </h2>
+            <svg
+              class="text-dich-pink flex-shrink-0"
+              style="width: 5.5rem; height: 2.5rem;"
+              viewBox="0 0 120 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 22 C38 19, 75 20, 112 20" />
+              <path d="M94 8 L114 20 L94 32" />
+            </svg>
+          </div>
+          <p class="mt-2 mb-0 font-mono-tech small text-uppercase opacity-75" style="letter-spacing: 0.1em;">
+            SELECT CATEGORY OR CLICK ANY GARMENT FOR SIZING &amp; SPECS
+          </p>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="d-flex flex-wrap gap-2">
+          <button type="button" data-filter="all" class="btn filter-pill active-filter">ALL (6)</button>
+          <button type="button" data-filter="hoodies" class="btn filter-pill">HOODIES</button>
+          <button type="button" data-filter="pants" class="btn filter-pill">PANTS</button>
+          <button type="button" data-filter="tees" class="btn filter-pill">TEES</button>
+          <button type="button" data-filter="outerwear" class="btn filter-pill">OUTERWEAR</button>
+          <button type="button" data-filter="sneakers" class="btn filter-pill">SNEAKERS</button>
+        </div>
+      </div>
+
+      <!-- RESPONSIVE 3-COLUMN BOOTSTRAP PRODUCT GRID -->
+      <div id="productFeed" class="row g-4">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. FOOTER -->
+  <footer id="footer" class="dich-footer pt-5 pb-4">
+    <div class="container-xxl px-3 px-sm-4">
+      <div class="row g-5 pb-5 border-bottom border-secondary border-opacity-25">
+        <div class="col-12 col-md-6">
+          <div class="d-inline-flex align-items-center px-4 py-1 rounded-pill border border-2 border-white border-opacity-50 mb-4">
+            <span class="font-display fs-4">DICH<sup class="font-sans ms-1" style="font-size: 0.65rem;">®</sup></span>
+          </div>
+          <h3 class="hero-word display-4 text-white mb-0" style="max-width: 28rem;">
+            EMBRACE WHAT MAKES YOU <span class="text-dich-pink">DICH.</span>
+          </h3>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex flex-column justify-content-between">
+          <div>
+            <p class="small fw-bold text-uppercase text-dich-yellow mb-2" style="letter-spacing: 0.12em;">
+              SUBSCRIBE &amp; GET 15% OFF — USE CODE: FIRST15
+            </p>
+            <form id="newsletterForm" class="d-flex flex-column flex-sm-row gap-2" style="max-width: 28rem;">
+              <input
+                type="email"
+                required
+                placeholder="ENTER YOUR EMAIL..."
+                class="form-control dich-newsletter-input font-mono-tech flex-grow-1"
+                aria-label="Email address"
+              />
+              <button type="submit" class="btn btn-dich-pink px-4 flex-shrink-0">
+                JOIN DROP LIST
+              </button>
+            </form>
+            <p id="newsletterMsg" class="small font-mono-tech text-dich-pink mt-2 mb-0 d-none"></p>
+          </div>
+
+          <div class="d-flex flex-wrap gap-4 mt-4 small fw-bold text-uppercase text-white-50" style="letter-spacing: 0.12em;">
+            <a href="#hero" class="text-white-50">TOP ↑</a>
+            <a href="#featured" class="text-white-50">ARCHIVE SHOP</a>
+            <a href="#editorial" class="text-white-50">LOOKBOOK 04</a>
+            <span>INSTAGRAM</span>
+            <span>TIKTOK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between font-mono-tech text-white-50 gap-2" style="font-size: 0.7rem;">
+        <span>© 2026 DICH® STREETWEAR GARMENT LABS. ALL RIGHTS RESERVED.</span>
+        <span>480GSM SMALL-BATCH PRODUCTION // ZERO MASS WASTE</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 7. BOOTSTRAP QUICK-VIEW PRODUCT MODAL -->
+  <div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content dich-modal-content position-relative">
+        <button
+          type="button"
+          class="dich-modal-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <div id="quickViewContent" class="row g-0">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. BOOTSTRAP OFFCANVAS SHOPPING CART DRAWER -->
+  <div
+    class="offcanvas offcanvas-end dich-offcanvas"
+    tabindex="-1"
+    id="cartDrawer"
+    aria-labelledby="cartDrawerLabel"
+  >
+    <div class="offcanvas-header dich-offcanvas-header p-4">
+      <div class="d-flex align-items-center gap-3">
+        <h5 class="offcanvas-title font-display fs-3 text-uppercase mb-0" id="cartDrawerLabel">YOUR BAG</h5>
+        <span id="drawerCountBadge" class="badge rounded-pill bg-dich-pink text-white font-mono-tech">0</span>
+      </div>
+      <button
+        type="button"
+        class="btn btn-sm rounded-circle border border-white border-opacity-50 text-white"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </div>
+
+    <div id="cartItemsContainer" class="offcanvas-body p-4">
+      <!-- Populated dynamically via app.js -->
+    </div>
+
+    <div class="p-4 border-top border-dark border-opacity-10 bg-white d-flex flex-column gap-3">
+      <div>
+        <label for="promoInput" class="form-label fw-bold text-uppercase text-secondary mb-1" style="font-size: 0.65rem; letter-spacing: 0.1em;">
+          PROMO CODE (TRY <span class="text-dark text-decoration-underline">FIRST15</span> FOR 15% OFF)
+        </label>
+        <div class="input-group">
+          <input
+            id="promoInput"
+            type="text"
+            placeholder="FIRST15"
+            class="form-control border-2 border-dark border-opacity-25 font-mono-tech text-uppercase small"
+          />
+          <button
+            id="applyPromoBtn"
+            type="button"
+            class="btn bg-dich-black text-white fw-bold text-uppercase small px-3"
+          >
+            APPLY
+          </button>
+        </div>
+        <p id="promoFeedback" class="font-mono-tech mb-0 mt-1 d-none" style="font-size: 0.7rem;"></p>
+      </div>
+
+      <div class="pt-2 border-top border-secondary border-opacity-25 d-flex flex-column gap-1 small fw-bold text-uppercase">
+        <div class="d-flex justify-content-between text-secondary">
+          <span>SUBTOTAL</span>
+          <span id="cartSubtotal" class="font-mono-tech">$0</span>
+        </div>
+        <div id="discountRow" class="d-none justify-content-between text-dich-pink">
+          <span>DISCOUNT (FIRST15 -15%)</span>
+          <span id="cartDiscount" class="font-mono-tech">-$0</span>
+        </div>
+        <div class="d-flex justify-content-between font-display fs-4 pt-1 text-dark">
+          <span>TOTAL</span>
+          <span id="cartTotal" class="font-mono-tech">$0</span>
+        </div>
+      </div>
+
+      <button id="checkoutBtn" type="button" class="btn btn-dich-primary w-100 shadow">
+        PROCEED TO CHECKOUT →
+      </button>
+    </div>
+  </div>
+
+  <!-- 9. BOOTSTRAP TOAST NOTIFICATION -->
+  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 1080;">
+    <div id="toastNotification" class="toast dich-toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex align-items-center gap-2 px-4 py-2 small fw-bold text-uppercase">
+        <span class="text-dich-pink fs-6">⚡</span>
+        <span id="toastText">ITEM ADDED TO BAG</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3.8 JS Bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Application Script -->
+  <script src="app.js" defer></script>
 </body>
 
 </html>

@@ -1,54 +1,1169 @@
+/* ==========================================================================
+   DICH® BRUTALIST STREETWEAR — DESIGN SYSTEM & STYLES
+   ========================================================================== */
+
+:root {
+  --dich-black: #0a0a0a;
+  --dich-espresso: #1e1412;
+  --dich-teal-dark: #49737d;
+  --dich-teal-mid: #658e97;
+  --dich-teal-light: #87acb4;
+  --dich-pink: #ff2e93;
+  --dich-pink-hot: #ff1485;
+  --dich-yellow: #ffe600;
+  --dich-acid: #ccff00;
+  --dich-paper: #f4f3ef;
+
+  --font-display: 'Anton', sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-script: 'Caveat', cursive;
+  --font-marker: 'Permanent Marker', cursive;
+}
+
+/* Base & Typography */
+html {
+  scroll-behavior: smooth;
+}
+
+body.dich-page {
+  font-family: var(--font-sans);
+  background-color: var(--dich-paper);
+  color: var(--dich-black);
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+body.dich-page ::selection {
+  background-color: var(--dich-pink);
+  color: #ffffff;
+}
+
+body.dich-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-mono-tech {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.text-dich-pink {
+  color: var(--dich-pink) !important;
+}
+
+.text-dich-yellow {
+  color: var(--dich-yellow) !important;
+}
+
+.text-dich-espresso {
+  color: var(--dich-espresso) !important;
+}
+
+.bg-dich-black {
+  background-color: var(--dich-black) !important;
+}
+
+.bg-dich-paper {
+  background-color: var(--dich-paper) !important;
+}
+
+.bg-dich-pink {
+  background-color: var(--dich-pink) !important;
+}
+
+.bg-dich-yellow {
+  background-color: var(--dich-yellow) !important;
+}
+
+/* Urban Night Mode */
+body.dich-page.urban-mode {
+  background-color: var(--dich-black);
+  color: var(--dich-paper);
+}
+
+body.urban-mode .editorial-bg {
+  background-color: var(--dich-black) !important;
+  color: var(--dich-paper) !important;
+}
+
+body.urban-mode .surface-card {
+  background-color: #141414 !important;
+  border-color: #2e2e2e !important;
+  color: var(--dich-paper) !important;
+}
+
+body.urban-mode .brutal-border {
+  border-color: #333333 !important;
+}
+
+body.urban-mode .dich-black-text {
+  color: var(--dich-paper) !important;
+}
+
+body.urban-mode .filter-pill {
+  color: var(--dich-paper);
+  border-color: #444444;
+}
+
+body.urban-mode .filter-pill.active-filter {
+  background-color: var(--dich-pink) !important;
+  border-color: var(--dich-pink) !important;
+  color: #ffffff !important;
+}
+
+body.urban-mode .btn-dich-outline {
+  color: var(--dich-paper);
+  border-color: #444444;
+}
+
+body.urban-mode .btn-dich-outline:hover {
+  background-color: var(--dich-pink);
+  border-color: var(--dich-pink);
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dich-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dich-pink);
+  border-radius: 4px;
+}
+
+/* Subtle Analog Film Grain Overlay */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes floatSneakerLeft {
+  0%,
+  100% {
+    transform: rotate(-14deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-10deg) translateY(-12px);
+  }
+}
+
+@keyframes floatSneakerRight {
+  0%,
+  100% {
+    transform: rotate(14deg) translateY(-4px);
+  }
+  50% {
+    transform: rotate(10deg) translateY(8px);
+  }
+}
+
+@keyframes dashDraw {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 16s linear infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 24s linear infinite;
+}
+
+.animate-marquee-fast {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 14s linear infinite;
+}
+
+.animate-marquee:hover,
+.animate-marquee-fast:hover {
+  animation-play-state: paused;
+}
+
+.sneaker-float-left {
+  animation: floatSneakerLeft 5.8s ease-in-out infinite;
+}
+
+.sneaker-float-right {
+  animation: floatSneakerRight 6.2s ease-in-out infinite;
+}
+
+.draw-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.btn-shop-drop:hover .draw-path-hover {
+  animation: dashDraw 0.65s ease forwards;
+}
+
+/* ==========================================================================
+   1. TOP PROMO MARQUEE & STICKY BOOTSTRAP NAVBAR
+   ========================================================================== */
+.promo-marquee-bar {
+  background-color: var(--dich-black);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  z-index: 1035;
+}
+
+.dich-navbar {
+  background-color: rgba(82, 124, 134, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  z-index: 1030;
+}
+
+.dich-navbar.scrolled {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.dich-navbar .nav-link {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dich-black);
+  padding: 0.4rem 0.75rem;
+  transition: color 0.2s ease;
+}
+
+.dich-navbar .nav-link:hover,
+.dich-navbar .nav-link:focus {
+  color: #ffffff !important;
+}
+
+@media (max-width: 767.98px) {
+  .dich-nav-list {
+    background-color: var(--dich-black);
+    padding: 1rem;
+    border-radius: 0.75rem;
+  }
+
+  .dich-navbar .nav-link {
+    color: #ffffff;
+  }
+
+  .dich-navbar .nav-link:hover,
+  .dich-navbar .nav-link:focus {
+    color: var(--dich-pink) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-side-col {
+    flex: 1 1 0%;
+  }
+}
+
+.hero-line-tight {
+  margin-top: -0.25rem;
+}
+
+@media (min-width: 576px) {
+  .hero-line-tight {
+    margin-top: -0.75rem;
+  }
+}
+
+.dich-navbar .navbar-toggler {
+  border: 1.5px solid var(--dich-black);
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--dich-black);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+}
+
+.dich-navbar .navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.dich-logo-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1.35rem;
+  border-radius: 999px;
+  border: 2px solid var(--dich-black);
+  background-color: rgba(255, 255, 255, 0.25);
+  color: var(--dich-black);
+  transition: all 0.25s ease;
+}
+
+.dich-logo-pill:hover {
+  background-color: var(--dich-black);
+  color: #ffffff !important;
+}
+
+.dich-logo-crown {
+  position: absolute;
+  top: -11px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  color: var(--dich-pink);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.btn-urban-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(10, 10, 10, 0.45);
+  background-color: rgba(255, 255, 255, 0.18);
+  color: var(--dich-black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.btn-urban-toggle:hover {
+  background-color: var(--dich-black);
+  color: #ffffff;
+}
+
+.urban-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--dich-black);
+  transition: background-color 0.2s ease;
+}
+
+.urban-dot.is-active {
+  background-color: var(--dich-acid);
+}
+
+.btn-cart-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--dich-black);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-cart-pill:hover {
+  background-color: var(--dich-pink);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   2. HERO SECTION
+   ========================================================================== */
+.dich-hero {
+  position: relative;
+  min-height: 92vh;
+  background: linear-gradient(180deg, #49737d 0%, #658e97 50%, #87acb4 100%);
+  border-bottom: 2px solid var(--dich-black);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 0 1.5rem;
+}
+
+.hero-grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-grid-lines .col-3 {
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  height: 100%;
+}
+
+.hero-grid-lines .col-3:first-child {
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.hero-meta-badge {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero-word {
+  font-family: var(--font-display);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.hero-word-embrace {
+  font-size: clamp(4.2rem, 16vw, 11.5rem);
+  color: var(--dich-espresso);
+  filter: drop-shadow(0 4px 0 rgba(255, 255, 255, 0.18));
+}
+
+.hero-word-sub {
+  font-size: clamp(3rem, 11.5vw, 8.4rem);
+  color: #ffffff;
+  filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.28));
+}
+
+.hero-word-dich {
+  font-size: clamp(4.8rem, 17vw, 12.2rem);
+  color: var(--dich-espresso);
+}
+
+.hero-annotation {
+  font-family: var(--font-script);
+  color: var(--dich-pink);
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  user-select: none;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.hero-annotation-left {
+  position: absolute;
+  top: -1.4rem;
+  left: 8%;
+  font-size: clamp(1.4rem, 3.2vw, 2.8rem);
+  transform: rotate(-12deg);
+}
+
+.hero-annotation-right {
+  position: absolute;
+  top: -1.2rem;
+  right: 10%;
+  font-size: clamp(1.25rem, 2.8vw, 2.3rem);
+  transform: rotate(12deg);
+}
+
+.hero-annotation-bottom {
+  position: absolute;
+  bottom: -1.35rem;
+  right: -1rem;
+  font-size: clamp(1.4rem, 2.6vw, 2.35rem);
+  transform: rotate(-6deg);
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .hero-annotation-bottom {
+    right: -6.5rem;
+  }
+}
+
+.hero-crown-svg {
+  position: absolute;
+  top: -1.5rem;
+  left: 41%;
+  width: 2.75rem;
+  height: 2rem;
+  color: var(--dich-pink);
+  transform: rotate(-6deg);
+  pointer-events: none;
+  z-index: 30;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+}
+
+@media (min-width: 768px) {
+  .hero-crown-svg {
+    top: -2.25rem;
+    width: 4rem;
+    height: 3rem;
+  }
+}
+
+/* Floating Studio Sneaker Cards */
+.hero-sneaker-slot {
+  position: absolute;
+  top: 46%;
+  width: 39vw;
+  max-width: 340px;
+  z-index: 20;
+  cursor: pointer;
+}
+
+.hero-sneaker-left {
+  left: -3%;
+}
+
+.hero-sneaker-right {
+  right: -3%;
+}
+
+@media (min-width: 576px) {
+  .hero-sneaker-slot {
+    top: 28%;
+    width: 26vw;
+  }
+  .hero-sneaker-left {
+    left: 2%;
+  }
+  .hero-sneaker-right {
+    right: 2%;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-sneaker-left {
+    left: 4%;
+  }
+  .hero-sneaker-right {
+    right: 4%;
+  }
+}
+
+.sneaker-studio-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid var(--dich-black);
+  background-color: #121619;
+  box-shadow:
+    0 32px 60px -12px rgba(0, 0, 0, 0.65),
+    -4px 0 24px rgba(0, 240, 255, 0.32),
+    4px 0 24px rgba(255, 46, 147, 0.35);
+  transition: transform 0.45s ease;
+}
+
+.hero-sneaker-slot:hover .sneaker-studio-card {
+  transform: scale(1.05);
+}
+
+.sneaker-rim-left {
+  background: linear-gradient(45deg, rgba(34, 211, 238, 0.25), transparent, rgba(255, 46, 147, 0.3));
+  mix-blend-mode: screen;
+}
+
+.sneaker-rim-right {
+  background: linear-gradient(315deg, rgba(255, 46, 147, 0.3), transparent, rgba(34, 211, 238, 0.25));
+  mix-blend-mode: screen;
+}
+
+.sneaker-studio-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: contrast(1.15) brightness(1.05);
+}
+
+.sneaker-tag-bar {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0.6rem;
+  right: 0.6rem;
+  background-color: rgba(10, 10, 10, 0.9);
+  color: #ffffff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.4rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 20;
+}
+
+/* Center CTA Button */
+.hero-cta-wrap {
+  position: relative;
+  z-index: 30;
+  margin-top: 7.5rem;
+}
+
+@media (min-width: 576px) {
+  .hero-cta-wrap {
+    margin-top: 2.5rem;
+  }
+}
+
+.btn-shop-drop {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--dich-black);
+  color: #ffffff !important;
+  padding: 0.85rem 1.9rem;
+  border-radius: 999px;
+  border: 2px solid var(--dich-black);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-shop-drop:hover {
+  background-color: var(--dich-pink);
+  border-color: var(--dich-black);
+}
+
+.btn-shop-drop .arrow-icon {
+  color: var(--dich-yellow);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.btn-shop-drop:hover .arrow-icon {
+  color: var(--dich-black);
+  transform: translateX(4px);
+}
+
+.btn-shop-drop .underline-svg {
+  width: 10.5rem;
+  height: 0.8rem;
+  color: var(--dich-pink);
+  margin-top: -2px;
+}
+
+.btn-shop-drop:hover .underline-svg {
+  color: var(--dich-black);
+}
+
+.hero-specs-bar {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-quick-links a:hover {
+  color: #ffffff !important;
+}
+
+/* ==========================================================================
+   3. EDITORIAL LOOKBOOK SECTION ("WE'RE DOPE")
+   ========================================================================== */
+.dich-editorial {
+  background-color: var(--dich-paper);
+  color: var(--dich-black);
+  border-bottom: 2px solid var(--dich-black);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+.pink-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--dich-pink);
+  display: inline-block;
+}
+
+.brutal-card {
+  border: 2px solid var(--dich-black);
+  border-radius: 0.85rem;
+  box-shadow: 6px 6px 0 var(--dich-black);
+  overflow: hidden;
+}
+
+.brutal-card-lg {
+  border: 2px solid var(--dich-black);
+  border-radius: 0.85rem;
+  box-shadow: 8px 8px 0 var(--dich-black);
+  overflow: hidden;
+}
+
+.lookbook-portrait-box {
+  position: relative;
+  background-color: #1c1917;
+}
+
+.lookbook-portrait-img {
+  width: 100%;
+  aspect-ratio: 4 / 4.2;
+  object-fit: cover;
+  object-position: top;
+  filter: contrast(1.1);
+  transition: transform 0.7s ease;
+}
+
+@media (min-width: 576px) {
+  .lookbook-portrait-img {
+    aspect-ratio: 16 / 13;
+  }
+}
+
+.lookbook-portrait-box:hover .lookbook-portrait-img {
+  transform: scale(1.05);
+}
+
+.lookbook-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15) 55%, transparent);
+  pointer-events: none;
+}
+
+.lookbook-badge-limited {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border: 2px solid var(--dich-pink);
+  padding: 0.45rem 0.9rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.stamp-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  background-color: var(--dich-yellow);
+  color: var(--dich-black);
+  border: 2px solid var(--dich-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.caution-tape {
+  border: 2px solid var(--dich-black);
+  border-radius: 0.85rem;
+  background-color: var(--dich-black);
+  color: var(--dich-yellow);
+  padding: 0.75rem 0;
+  box-shadow: 6px 6px 0 var(--dich-pink);
+  overflow: hidden;
+  user-select: none;
+}
+
+.detail-photo-card {
+  min-height: 230px;
+  background-color: #1c1917;
+}
+
+.detail-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.detail-photo-card:hover img {
+  transform: scale(1.05);
+}
+
+.metric-tile {
+  border: 2px solid var(--dich-black);
+  border-radius: 0.85rem;
+  box-shadow: 4px 4px 0 var(--dich-black);
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   4. FEATURED CATALOG & PRODUCT CARDS ("ARCHIVE DROP")
+   ========================================================================== */
+.filter-pill {
+  border-radius: 999px;
+  border: 2px solid var(--dich-black);
+  background-color: transparent;
+  color: var(--dich-black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  background-color: var(--dich-pink);
+  border-color: var(--dich-pink);
+  color: #ffffff;
+}
+
+.filter-pill.active-filter {
+  background-color: var(--dich-black);
+  border-color: var(--dich-black);
+  color: #ffffff;
+}
+
+.dich-product-card {
+  background-color: #ffffff;
+  border: 2px solid var(--dich-black);
+  border-radius: 0.85rem;
+  box-shadow: 6px 6px 0 var(--dich-black);
+  overflow: hidden;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.dich-product-card:hover {
+  transform: translateY(-4px);
+}
+
+.dich-product-top {
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border-bottom: 2px solid var(--dich-black);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.dich-product-media {
+  position: relative;
+  aspect-ratio: 4 / 4.2;
+  background-color: #1c1917;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.dich-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.dich-product-card:hover .dich-product-media img {
+  transform: scale(1.05);
+}
+
+.add-cart-ribbon {
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-12deg) scale(0.95);
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border-top: 2px solid var(--dich-pink);
+  border-bottom: 2px solid var(--dich-pink);
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.dich-product-card:hover .add-cart-ribbon {
+  opacity: 1;
+  transform: translateY(-50%) rotate(-12deg) scale(1);
+}
+
+.size-badge-overlay {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background-color: #ffffff;
+  color: var(--dich-black);
+  border: 1px solid var(--dich-black);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+.btn-dich-outline {
+  border: 2px solid var(--dich-black);
+  background-color: transparent;
+  color: var(--dich-black);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-dich-outline:hover {
+  background-color: var(--dich-black);
+  color: #ffffff;
+}
+
+.btn-dich-pink {
+  border: 2px solid var(--dich-pink);
+  background-color: var(--dich-pink);
+  color: #ffffff;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.15rem;
+  transition: all 0.2s ease;
+}
+
+.btn-dich-pink:hover {
+  background-color: var(--dich-black);
+  border-color: var(--dich-black);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   5. FOOTER
+   ========================================================================== */
+.dich-footer {
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border-top: 2px solid var(--dich-black);
+}
+
+.dich-newsletter-input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.78rem;
+  padding: 0.65rem 1.15rem;
+}
+
+.dich-newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.dich-newsletter-input:focus {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: var(--dich-pink);
+  color: #ffffff;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   6. BOOTSTRAP MODAL, OFFCANVAS CART & TOAST OVERRIDES
+   ========================================================================== */
+.dich-modal-content {
+  background-color: var(--dich-paper);
+  color: var(--dich-black);
+  border: 2px solid var(--dich-black);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
+}
+
+.dich-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--dich-black);
+  color: #ffffff;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.dich-modal-close:hover {
+  background-color: var(--dich-pink);
+}
+
+.quickview-img-col {
+  min-height: 280px;
+  background-color: #1c1917;
+}
+
+@media (min-width: 768px) {
+  .quickview-img-col {
+    min-height: 440px;
+  }
+}
+
+.quickview-img-col img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+
+.size-btn {
+  padding: 0.5rem 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  border: 2px solid #d6d3d1;
+  background-color: transparent;
+  color: var(--dich-black);
+  transition: all 0.2s ease;
+}
+
+.size-btn:hover {
+  border-color: var(--dich-black);
+}
+
+.size-btn.is-selected {
+  background-color: var(--dich-black);
+  border-color: var(--dich-black);
+  color: #ffffff;
+}
+
+/* Cart Offcanvas */
+.dich-offcanvas {
+  background-color: var(--dich-paper);
+  color: var(--dich-black);
+  border-left: 2px solid var(--dich-black) !important;
+  width: 100% !important;
+  max-width: 28rem !important;
+}
+
+.dich-offcanvas-header {
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dich-cart-item {
+  background-color: #ffffff;
+  border: 2px solid rgba(10, 10, 10, 0.15);
+  border-radius: 0.85rem;
+}
+
+.dich-cart-item img {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.btn-dich-primary {
+  background-color: var(--dich-black);
+  border: 2px solid var(--dich-black);
+  color: #ffffff;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-dich-primary:hover {
+  background-color: var(--dich-pink);
+  border-color: var(--dich-pink);
+  color: #ffffff;
+}
+
+/* Brutalist Toast */
+.dich-toast {
+  background-color: var(--dich-black);
+  color: #ffffff;
+  border: 2px solid var(--dich-pink);
+  border-radius: 999px;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================================
+   7. LEGACY FOOD STORE PAGES (categorias.html & contacto.html)
+   ========================================================================== */
 .card-img-top {
-    height: 200px;
-    object-fit: cover;
+  height: 200px;
+  object-fit: cover;
 }
 
 .carousel-item img {
-    height: 400px;
-    object-fit: cover;
+  height: 400px;
+  object-fit: cover;
 }
 
 .modal-body img {
-    max-height: 280px;
-    object-fit: cover;
+  max-height: 280px;
+  object-fit: cover;
 }
 
 .dropdown-item:hover,
-.dropdown-item:focus {
-    background-color: #dc3545;
-    color: #fff;
-}
-
+.dropdown-item:focus,
 .dropdown-item:active,
 .dropdown-item.active {
-    background-color: #dc3545;
-    color: #fff;
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .dropdown-item-highlight {
-    color: #dc3545;
-    /* letra roja en reposo */
+  color: #dc3545;
 }
 
 .dropdown-item-highlight:hover,
 .dropdown-item-highlight:focus {
-    background-color: #dc3545;
-    color: #fff;
-    /* letra blanca cuando el fondo se pone rojo */
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .carousel-control-prev,
 .carousel-control-next {
-    filter: none;
-    opacity: 0.3;
+  filter: none;
+  opacity: 0.3;
 }
 
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    filter: invert(0.5) grayscale(100);
+  filter: invert(0.5) grayscale(100);
 }

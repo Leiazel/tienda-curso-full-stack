@@ -1,154 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda DELB</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <!-- Logotipo de la empresa -->
-                <img src="images/logo.svg" alt="Logo Tienda DELB" width="38" height="38"
-                    class="rounded-circle shadow-sm">
-                <span class="fw-bold">Tienda DELB</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="categorias.html" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Menú
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="categorias.html#pizzas">Pizzas</a></li>
-                            <li><a class="dropdown-item" href="categorias.html#hamburguesas">Hamburguesas</a></li>
-                            <li><a class="dropdown-item" href="categorias.html#pastas">Pastas</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item fw-bold dropdown-item-highlight" href="categorias.html">Ver
-                                    todas las
-                                    categorías</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contacto.html">Contacto</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container mt-4">
-        <h1 class="card-title mb-4 text-center text-danger">Tienda DELB</h1>
-        <p class="lead text-center">Bienvenido a nuestra tienda online.
-            Aquí encontrarás una amplia variedad
-            de productos de alta calidad a precios competitivos.
-            <br> Explora nuestras categorías y descubre ofertas exclusivas.
-        </p>
-
-        <!-- Carrusel de Productos -->
-        <div id="carouselExampleDark" class="carousel carousel-dark slide my-4 shadow rounded-4 overflow-hidden"
-            data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="5000">
-                    <img src="images/hamburguesa.png" class="d-block w-100" alt="Hamburguesa">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Hamburguesa</h5>
-                        <p class="mb-0 text-dark">Una deliciosa hamburguesa con carne de res, lechuga, tomate y salsa
-                            especial.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="images/pizza.jpg" class="d-block w-100" alt="Pizza">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Pizza</h5>
-                        <p class="mb-0 text-dark">Una deliciosa pizza con ingredientes frescos y salsa especial.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-bs-interval="5000">
-                    <img src="images/pasta.jpg" class="d-block w-100" alt="Pasta">
-                    <div class="carousel-caption d-none d-md-block bg-white bg-opacity-75 rounded-3 p-3 shadow-sm">
-                        <h5 class="fw-bold text-danger">Pasta</h5>
-                        <p class="mb-0 text-dark">Una deliciosa pasta con ingredientes frescos y salsa especial.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Botón Anterior -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev">
-                <span
-                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow"
-                    style="width: 44px; height: 44px;">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-
-            <!-- Botón Siguiente -->
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                data-bs-slide="next">
-                <span
-                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow"
-                    style="width: 44px; height: 44px;">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-        </script>
-
-    <!-- Footer -->
-    <footer id="contacto" class="bg-danger text-white text-center py-4 mt-5">
-        <div class="container">
-            <h5 class="text-white mb-1">Tienda Delb</h5>
-            <p class="mb-2">La mejor calidad y sabor, directo a tu mesa.</p>
-            <ul class="list-inline mb-2">
-                <li class="list-inline-item"><a href="categorias.html"
-                        class="text-white text-decoration-none px-2">Menú</a></li>
-                <li class="list-inline-item"><a href="contacto.html"
-                        class="text-white text-decoration-none px-2">Contacto</a></li>
-            </ul>
-            <small class="text-white-50">
-                &copy; 2026 Grupo 1 Damián y Ludmila
-            </small>
-        </div>
-    </footer>
-</body>
-
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="L&D™ Streetwear & Footwear — Lanzamientos de zapatillas de edición limitada elaboradas con materiales naturales y diseño audaz."
+    />
+    <title>L&D™ — Abrazá lo que te hace L&D</title>
+  </head>
+  <body data-page="home">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

@@ -509,13 +509,14 @@
         </div>
 
         <!-- Category Filter Pills -->
-        <div class="d-flex flex-wrap gap-2">
-          <button type="button" data-filter="all" class="btn filter-pill active-filter">ALL (6)</button>
+        <div id="categoryFilters" class="d-flex flex-wrap gap-2">
+          <button type="button" data-filter="all" class="btn filter-pill active-filter">ALL</button>
           <button type="button" data-filter="hoodies" class="btn filter-pill">HOODIES</button>
           <button type="button" data-filter="pants" class="btn filter-pill">PANTS</button>
           <button type="button" data-filter="tees" class="btn filter-pill">TEES</button>
           <button type="button" data-filter="outerwear" class="btn filter-pill">OUTERWEAR</button>
           <button type="button" data-filter="sneakers" class="btn filter-pill">SNEAKERS</button>
+          <button type="button" data-filter="accessories" class="btn filter-pill">ACCESSORIES</button>
         </div>
       </div>
 
@@ -564,6 +565,7 @@
             <a href="#hero" class="text-white-50">TOP ↑</a>
             <a href="#featured" class="text-white-50">ARCHIVE SHOP</a>
             <a href="#editorial" class="text-white-50">LOOKBOOK 04</a>
+            <a href="contacto.html" class="text-white-50">CONTACT FORM</a>
             <span>INSTAGRAM</span>
             <span>TIKTOK</span>
           </div>
@@ -651,7 +653,7 @@
           <span id="cartSubtotal" class="font-mono-tech">$0</span>
         </div>
         <div id="discountRow" class="d-none justify-content-between text-dich-pink">
-          <span>DISCOUNT (FIRST15 -15%)</span>
+          <span id="discountLabel">DISCOUNT (FIRST15 -15%)</span>
           <span id="cartDiscount" class="font-mono-tech">-$0</span>
         </div>
         <div class="d-flex justify-content-between font-display fs-4 pt-1 text-dark">
@@ -663,6 +665,77 @@
       <button id="checkoutBtn" type="button" class="btn btn-dich-primary w-100 shadow">
         PROCEED TO CHECKOUT →
       </button>
+    </div>
+  </div>
+
+  <!-- 8B. BOOTSTRAP CHECKOUT MODAL (CONNECTED TO POST /api/orders) -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content dich-modal-content position-relative">
+        <button
+          type="button"
+          class="dich-modal-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <div class="p-4 p-sm-5">
+          <span class="font-mono-tech text-uppercase text-secondary d-block" style="font-size: 0.68rem; letter-spacing: 0.12em;">
+            CHECKOUT // SECURE ORDER
+          </span>
+          <h3 id="checkoutModalLabel" class="font-display fs-2 text-uppercase mt-1 mb-3 lh-1">
+            COMPLETE YOUR ORDER
+          </h3>
+
+          <div id="checkoutSummary" class="p-3 mb-4 bg-light border border-2 border-dark rounded-3 font-mono-tech small">
+            <!-- Populated dynamically via app.js -->
+          </div>
+
+          <div id="checkoutError" class="alert alert-danger font-mono-tech small d-none" role="alert"></div>
+
+          <form id="checkoutForm" class="row g-3">
+            <div class="col-12 col-md-6">
+              <label for="checkoutName" class="form-label fw-bold text-uppercase small">Nombre completo *</label>
+              <input id="checkoutName" name="customerName" type="text" class="form-control border-2 border-dark" required minlength="2" placeholder="Sofía Martínez" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="checkoutEmail" class="form-label fw-bold text-uppercase small">Email *</label>
+              <input id="checkoutEmail" name="customerEmail" type="email" class="form-control border-2 border-dark" required placeholder="sofia@example.com" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="checkoutPhone" class="form-label fw-bold text-uppercase small">Teléfono</label>
+              <input id="checkoutPhone" name="customerPhone" type="tel" class="form-control border-2 border-dark" placeholder="+54 11 5555-1234" />
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="checkoutPayment" class="form-label fw-bold text-uppercase small">Método de pago *</label>
+              <select id="checkoutPayment" name="paymentMethod" class="form-select border-2 border-dark" required>
+                <option value="mercadopago">Mercado Pago</option>
+                <option value="card">Tarjeta de crédito / débito</option>
+                <option value="transfer">Transferencia bancaria</option>
+                <option value="cash">Efectivo</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="checkoutAddress" class="form-label fw-bold text-uppercase small">Dirección de envío *</label>
+              <input id="checkoutAddress" name="shippingAddress" type="text" class="form-control border-2 border-dark" required minlength="4" placeholder="Av. Corrientes 1234" />
+            </div>
+            <div class="col-12 col-md-7">
+              <label for="checkoutCity" class="form-label fw-bold text-uppercase small">Ciudad *</label>
+              <input id="checkoutCity" name="shippingCity" type="text" class="form-control border-2 border-dark" required minlength="2" placeholder="Buenos Aires" />
+            </div>
+            <div class="col-12 col-md-5">
+              <label for="checkoutPostalCode" class="form-label fw-bold text-uppercase small">Código postal</label>
+              <input id="checkoutPostalCode" name="shippingPostalCode" type="text" class="form-control border-2 border-dark" placeholder="1043" />
+            </div>
+            <div class="col-12 pt-2">
+              <button id="confirmOrderBtn" type="submit" class="btn btn-dich-primary w-100 shadow">
+                CONFIRM ORDER →
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 

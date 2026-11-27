@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import { formatPrice } from '../api/client.js'
 
 export default function CartDrawer({
   cart,
   isOpen,
-  promoApplied,
+  appliedPromo,
+  subtotal,
+  discount,
+  total,
   onClose,
   onUpdateQuantity,
   onRemove,
@@ -13,17 +17,15 @@ export default function CartDrawer({
   const [promoCode, setPromoCode] = useState('')
   const [promoMessage, setPromoMessage] = useState('')
   const [promoValid, setPromoValid] = useState(false)
-  const subtotal = cart.reduce((total, item) => total + item.price * item.qty, 0)
-  const discount = promoApplied ? Math.round(subtotal * 0.15) : 0
-  const total = subtotal - discount
+  const [applying, setApplying] = useState(false)
   const count = cart.reduce((items, item) => items + item.qty, 0)
 
-  function applyPromo() {
-    const valid = onApplyPromo(promoCode)
-    setPromoValid(valid)
-    setPromoMessage(
-      valid ? '✓ FIRST15 APLICADO (15% DE DESCUENTO)' : 'CÓDIGO INVÁLIDO — PRUEBA FIRST15',
-    )
+  async function applyPromo() {
+    setApplying(true)
+    const result = await onApplyPromo(promoCode)
+    setPromoValid(result.valid)
+    setPromoMessage(result.message)
+    setApplying(false)
   }
 
   return (
@@ -52,48 +54,52 @@ export default function CartDrawer({
               <span>EXPLORA LOS MODELOS Y HAZ CLIC EN AGREGAR AL CARRITO.</span>
             </div>
           ) : (
-            cart.map((item) => (
-              <article className="cart-item" key={`${item.id}-${item.size}`}>
-                <img src={item.image} alt={item.title} />
-                <div className="cart-item-content">
-                  <div className="cart-item-heading">
-                    <div>
-                      <strong>{item.title}</strong>
-                      <span>
-                        {item.subtitle} · {item.size}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => onRemove(item.id, item.size)}
-                      aria-label={`Eliminar ${item.title}`}
-                    >
-                      ×
-                    </button>
-                  </div>
-                  <div className="cart-item-bottom">
-                    <div className="quantity-control">
+            cart.map((item) => {
+              const key = `${item.slug || item.id}-${item.size}-${item.color || ''}`
+              return (
+                <article className="cart-item" key={key}>
+                  <img src={item.image} alt={item.title} />
+                  <div className="cart-item-content">
+                    <div className="cart-item-heading">
+                      <div>
+                        <strong>{item.title}</strong>
+                        <span>
+                          {item.size}
+                          {item.color ? ` · ${item.color}` : ''}
+                        </span>
+                      </div>
                       <button
                         type="button"
-                        onClick={() => onUpdateQuantity(item.id, item.size, -1)}
-                        aria-label={`Reducir cantidad de ${item.title}`}
+                        onClick={() => onRemove(item.slug || item.id, item.size, item.color)}
+                        aria-label={`Eliminar ${item.title}`}
                       >
-                        −
-                      </button>
-                      <span>{item.qty}</span>
-                      <button
-                        type="button"
-                        onClick={() => onUpdateQuantity(item.id, item.size, 1)}
-                        aria-label={`Aumentar cantidad de ${item.title}`}
-                      >
-                        +
+                        ×
                       </button>
                     </div>
-                    <strong>${item.price * item.qty}</strong>
+                    <div className="cart-item-bottom">
+                      <div className="quantity-control">
+                        <button
+                          type="button"
+                          onClick={() => onUpdateQuantity(item.slug || item.id, item.size, item.color, -1)}
+                          aria-label={`Reducir cantidad de ${item.title}`}
+                        >
+                          −
+                        </button>
+                        <span>{item.qty}</span>
+                        <button
+                          type="button"
+                          onClick={() => onUpdateQuantity(item.slug || item.id, item.size, item.color, 1)}
+                          aria-label={`Aumentar cantidad de ${item.title}`}
+                        >
+                          +
+                        </button>
+                      </div>
+                      <strong>{formatPrice(item.price * item.qty)}</strong>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))
+                </article>
+              )
+            })
           )}
         </div>
         <div className="cart-summary">
@@ -101,13 +107,13 @@ export default function CartDrawer({
             <input
               className="form-control"
               type="text"
-              placeholder="CÓDIGO DE DESCUENTO (FIRST15)"
+              placeholder="CUPÓN (FIRST15, URBAN10, SNEAKER20)"
               value={promoCode}
               onChange={(event) => setPromoCode(event.target.value)}
               aria-label="Código de descuento"
             />
-            <button type="button" className="btn btn-dark" onClick={applyPromo}>
-              APLICAR
+            <button type="button" className="btn btn-dark" onClick={applyPromo} disabled={applying}>
+              {applying ? '...' : 'APLICAR'}
             </button>
           </div>
           {promoMessage && (
@@ -117,17 +123,23 @@ export default function CartDrawer({
           )}
           <div className="cart-total-line">
             <span>SUBTOTAL</span>
-            <span>${subtotal}</span>
+            <span>{formatPrice(subtotal)}</span>
           </div>
-          {promoApplied && subtotal > 0 && (
+          {appliedPromo && discount > 0 && (
             <div className="cart-total-line discount-line">
-              <span>FIRST15 (-15%)</span>
-              <span>-${discount}</span>
+              <span>
+                {appliedPromo.code} (
+                {appliedPromo.discountType === 'percentage'
+                  ? `-${appliedPromo.discountValue}%`
+                  : `-${formatPrice(appliedPromo.discountValue)}`}
+                )
+              </span>
+              <span>-{formatPrice(discount)}</span>
             </div>
           )}
           <div className="cart-total-line cart-grand-total">
             <strong>TOTAL</strong>
-            <strong>${total}</strong>
+            <strong>{formatPrice(total)}</strong>
           </div>
           <button type="button" className="btn btn-dark checkout-button" onClick={onCheckout}>
             FINALIZAR COMPRA →

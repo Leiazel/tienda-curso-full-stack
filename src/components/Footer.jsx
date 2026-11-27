@@ -1,13 +1,36 @@
 import { useState } from 'react'
+import { apiRequest } from '../api/client.js'
 
 export default function Footer({ onNavigate }) {
   const [email, setEmail] = useState('')
-  const [subscribed, setSubscribed] = useState(false)
+  const [feedback, setFeedback] = useState('')
+  const [isError, setIsError] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    setSubscribed(true)
-    setEmail('')
+    const cleanEmail = email.trim()
+    if (!cleanEmail) return
+
+    setSubmitting(true)
+    setFeedback('')
+    setIsError(false)
+
+    try {
+      const result = await apiRequest('/api/newsletter/subscribe', {
+        method: 'POST',
+        body: JSON.stringify({ email: cleanEmail }),
+      })
+      setFeedback(
+        `✓ ${result.message || '¡SUSCRIPCIÓN EXITOSA! USÁ EL CÓDIGO FIRST15 PARA 15% OFF.'}`,
+      )
+      setEmail('')
+    } catch (err) {
+      setIsError(true)
+      setFeedback(`✕ ${err.message || 'No se pudo completar la suscripción.'}`)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -44,17 +67,19 @@ export default function Footer({ onNavigate }) {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-            <button type="submit">UNIRME AL DROP</button>
+            <button type="submit" disabled={submitting}>
+              {submitting ? 'ENVIANDO...' : 'UNIRME AL DROP'}
+            </button>
           </form>
-          {subscribed && (
-            <p className="newsletter-feedback" role="status">
-              ✓ ¡SUSCRIPCIÓN EXITOSA! USÁ EL CÓDIGO FIRST15 PARA UN 15% DE DESCUENTO EN TU PRIMERA COMPRA.
+          {feedback && (
+            <p className={`newsletter-feedback${isError ? ' is-error' : ''}`} role="status">
+              {feedback}
             </p>
           )}
         </div>
       </div>
       <div className="footer-bottom">
-        <span>©2025 L&amp;D™ — CALZADO ARTESANAL EN MATERIALES NATURALES</span>
+        <span>©2026 L&amp;D™ — CALZADO E INDUMENTARIA EN MATERIALES NATURALES</span>
         <nav className="footer-links" aria-label="Navegación de pie de página">
           <a
             href="#home"

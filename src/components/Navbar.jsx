@@ -12,11 +12,14 @@ export default function Navbar({
   activePage,
   cartCount,
   urbanMode,
+  currentUser,
+  onOpenAuth,
   onOpenCart,
   onToggleUrbanMode,
   onNavigate,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const authLabel = currentUser ? (currentUser.firstName || 'CUENTA').toUpperCase() : 'INGRESAR'
 
   return (
     <div className="sticky-chrome">
@@ -67,6 +70,14 @@ export default function Navbar({
             <span className="urban-active-dot" aria-hidden="true" />
             <span>{urbanMode ? 'MODO URBANO: ON' : 'MODO URBANO'}</span>
           </button>
+          <button
+            type="button"
+            onClick={onOpenAuth}
+            aria-label={currentUser ? 'Ver mi cuenta y órdenes' : 'Iniciar sesión o registrarse'}
+          >
+            <span className={`auth-active-dot${currentUser ? ' active' : ''}`} aria-hidden="true" />
+            <span>{authLabel}</span>
+          </button>
           <button type="button" onClick={onOpenCart} aria-label={`Abrir carrito, ${cartCount} productos`}>
             CARRITO:<span>{String(cartCount).padStart(2, '0')}</span>
           </button>
@@ -92,6 +103,16 @@ export default function Navbar({
             {link.label}
           </a>
         ))}
+        <button
+          type="button"
+          className="mobile-auth-link"
+          onClick={() => {
+            setMobileMenuOpen(false)
+            onOpenAuth?.()
+          }}
+        >
+          {currentUser ? `CUENTA (${authLabel})` : 'INICIAR SESIÓN / REGISTRARSE'}
+        </button>
       </nav>
     </div>
   )

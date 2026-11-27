@@ -1,21 +1,47 @@
 import { useState } from 'react'
+import { apiRequest } from '../api/client.js'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [submitting, setSubmitting] = useState(false)
   const [validated, setValidated] = useState(false)
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
     const form = event.currentTarget
     setValidated(true)
-    if (!form.checkValidity()) {
-      setSubmitted(false)
-      return
-    }
+    setErrorMsg('')
+    setSubmitted(false)
 
-    setSubmitted(true)
-    form.reset()
-    setValidated(false)
+    if (!form.checkValidity()) return
+
+    const formData = new FormData(form)
+    const fullName = String(formData.get('name') || '').trim()
+    const [firstName, ...rest] = fullName.split(/\s+/)
+    const lastName = rest.join(' ') || firstName
+    const subject = String(formData.get('subject') || '').trim()
+    const rawMessage = String(formData.get('message') || '').trim()
+
+    setSubmitting(true)
+    try {
+      await apiRequest('/api/contacts', {
+        method: 'POST',
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: String(formData.get('email') || '').trim(),
+          message: subject ? `[${subject}] ${rawMessage}` : rawMessage,
+        }),
+      })
+      setSubmitted(true)
+      form.reset()
+      setValidated(false)
+    } catch (err) {
+      setErrorMsg(err.message || 'No se pudo enviar tu mensaje. Intentá nuevamente.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -45,9 +71,9 @@ export default function ContactPage() {
           <div className="row g-3">
             <div className="col-md-6">
               <label className="form-label" htmlFor="contactName">
-                NOMBRE
+                NOMBRE Y APELLIDO
               </label>
-              <input className="form-control" id="contactName" name="name" required />
+              <input className="form-control" id="contactName" name="name" required minLength={2} />
               <div className="invalid-feedback">Por favor ingresá tu nombre.</div>
             </div>
             <div className="col-md-6">
@@ -81,20 +107,26 @@ export default function ContactPage() {
                 id="contactMessage"
                 name="message"
                 rows="5"
-                maxLength="800"
+                minLength={5}
+                maxLength={800}
                 required
               />
-              <div className="invalid-feedback">Por favor escribinos un mensaje.</div>
+              <div className="invalid-feedback">Por favor escribinos un mensaje (mín. 5 caracteres).</div>
             </div>
             <div className="col-12">
-              <button type="submit" className="btn btn-dark contact-submit">
-                ENVIAR MENSAJE →
+              <button type="submit" className="btn btn-dark contact-submit" disabled={submitting}>
+                {submitting ? 'ENVIANDO...' : 'ENVIAR MENSAJE →'}
               </button>
             </div>
           </div>
+          {errorMsg && (
+            <div className="alert alert-danger mt-4" role="alert">
+              {errorMsg}
+            </div>
+          )}
           {submitted && (
             <div className="alert alert-success mt-4" role="status">
-              ¡Gracias por contactarnos! Te responderemos a la brevedad.
+              ¡Gracias por contactarnos! Tu mensaje fue guardado y te responderemos a la brevedad.
             </div>
           )}
         </form>

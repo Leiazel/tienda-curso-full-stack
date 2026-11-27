@@ -1,10 +1,12 @@
 import Skull from './Skull.jsx'
+import { formatPrice, getProductColors } from '../api/client.js'
 
-function Ribbon() {
+function Ribbon({ soldOut }) {
+  const label = soldOut ? 'AGOTADO' : 'AGREGAR AL CARRITO'
   const ribbon = Array.from({ length: 5 }, (_, index) => (
     <span className="ribbon-item" key={index}>
       <Skull />
-      <span>AGREGAR AL CARRITO</span>
+      <span>{label}</span>
     </span>
   ))
 
@@ -17,6 +19,9 @@ function Ribbon() {
 }
 
 export default function ProductCard({ product, onQuickView, onAddToCart, extra = false }) {
+  const isSoldOut = product.inStock === false
+  const colors = getProductColors(product)
+
   return (
     <article className={`product-card${extra ? ' hidden-extra revealed' : ''}`}>
       <span className="torn-badge">{product.badge}</span>
@@ -31,21 +36,35 @@ export default function ProductCard({ product, onQuickView, onAddToCart, extra =
         <button
           type="button"
           className="add-to-cart-ribbon"
+          disabled={isSoldOut}
           onClick={(event) => {
             event.stopPropagation()
             onAddToCart(product)
           }}
           aria-label={`Agregar ${product.title} al carrito`}
         >
-          <Ribbon />
+          <Ribbon soldOut={isSoldOut} />
         </button>
       </div>
       <div className="product-meta">
         <button className="product-meta-title" type="button" onClick={() => onQuickView(product)}>
           <span>{product.title}</span>
           <span className="product-meta-sub">{product.subtitle}</span>
+          {colors.length > 1 && (
+            <span className="product-swatches">
+              {colors.map((c) => (
+                <span
+                  key={c.color}
+                  className="swatch-dot"
+                  title={c.color}
+                  style={{ background: c.colorHex }}
+                />
+              ))}
+              <span className="swatch-count">{colors.length} COLORES</span>
+            </span>
+          )}
         </button>
-        <span className="product-meta-price">${product.price}</span>
+        <span className="product-meta-price">{formatPrice(product.price)}</span>
       </div>
     </article>
   )

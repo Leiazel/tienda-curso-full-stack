@@ -240,5 +240,76 @@ describe('Auth, Newsletter, and Contacts API', () => {
       }
     }
   });
+
+  it('Google Sign-In flow: /api/auth/config and POST /api/auth/google creates and logs in user', async () => {
+    const prevGoogleId = process.env.GOOGLE_CLIENT_ID;
+    process.env.GOOGLE_CLIENT_ID = 'test-google-client-id.apps.googleusercontent.com';
+
+    const gApp = createApp({ db: createMockDb() });
+    gApp.locals.verifyGoogleToken = async (credential) => {
+      if (credential === 'valid-google-token') {
+        return {
+          aud: 'test-google-client-id.apps.googleusercontent.com',
+          email: 'ludmila.google@example.com',
+          email_verified: 'true',
+          given_name: 'Ludmila',
+          family_name: 'Ramírez',
+        };
+      }
+      return { aud: 'wrong-client-id', email: 'bad@example.com', email_verified: 'true' };
+    };
+
+    const gServer = await new Promise((resolve) => {
+      const s = gApp.listen(0, () => resolve(s));
+    });
+    const gBaseUrl = `http://127.0.0.1:${gServer.address().port}`;
+
+    try {
+      const cfgRes = await fetch(`${gBaseUrl}/api/auth/config`);
+      assert.equal(cfgRes.status, 200);
+      const cfg = await cfgRes.json();
+      assert.equal(cfg.googleEnabled, true);
+      assert.equal(cfg.googleClientId, 'test-google-client-id.apps.googleusercontent.com');
+
+      // Primer login con Google -> crea usuario (201)
+      const firstRes = await fetch(`${gBaseUrl}/api/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: 'valid-google-token' }),
+      });
+      assert.equal(firstRes.status, 201);
+      const firstBody = await firstRes.json();
+      assert.equal(firstBody.isNewUser, true);
+      assert.equal(firstBody.provider, 'google');
+      assert.equal(firstBody.user.email, 'ludmila.google@example.com');
+      assert.ok(firstBody.token);
+
+      // Segundo login con Google -> usuario existente (200)
+      const secondRes = await fetch(`${gBaseUrl}/api/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: 'valid-google-token' }),
+      });
+      assert.equal(secondRes.status, 200);
+      const secondBody = await secondRes.json();
+      assert.equal(secondBody.isNewUser, false);
+      assert.equal(secondBody.user.id, firstBody.user.id);
+
+      // Token con audience incorrecto -> 401
+      const badRes = await fetch(`${gBaseUrl}/api/auth/google`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: 'wrong-aud-token' }),
+      });
+      assert.equal(badRes.status, 401);
+    } finally {
+      await new Promise((resolve) => gServer.close(resolve));
+      if (prevGoogleId === undefined) {
+        delete process.env.GOOGLE_CLIENT_ID;
+      } else {
+        process.env.GOOGLE_CLIENT_ID = prevGoogleId;
+      }
+    }
+  });
 });
 

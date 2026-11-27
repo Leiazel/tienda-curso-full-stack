@@ -97,6 +97,16 @@
           </button>
 
           <button
+            id="authNavBtn"
+            type="button"
+            class="btn-urban-toggle"
+            title="Iniciar sesión o ver tu cuenta"
+          >
+            <span id="authNavDot" class="urban-dot d-none"></span>
+            <span id="authNavLabel">LOGIN</span>
+          </button>
+
+          <button
             type="button"
             class="btn-cart-pill"
             data-bs-toggle="offcanvas"
@@ -739,6 +749,129 @@
     </div>
   </div>
 
+  <!-- 8C. BOOTSTRAP AUTH MODAL (LOGIN / REGISTER / GOOGLE SIGN-IN / ACCOUNT) -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content dich-modal-content position-relative">
+        <button
+          type="button"
+          class="dich-modal-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+
+        <!-- GUEST VIEW: LOGIN & REGISTER -->
+        <div id="authGuestView" class="p-4 p-sm-5">
+          <span class="font-mono-tech text-uppercase text-secondary d-block" style="font-size: 0.68rem; letter-spacing: 0.12em;">
+            L&amp;D MEMBER ACCESS // DROP 04
+          </span>
+          <h3 id="authModalLabel" class="font-display fs-2 text-uppercase mt-1 mb-3 lh-1">
+            TU CUENTA
+          </h3>
+
+          <!-- Mode Tabs -->
+          <div class="d-flex gap-2 mb-4" role="tablist">
+            <button
+              id="authTabLogin"
+              type="button"
+              class="btn filter-pill active-filter flex-grow-1"
+              data-auth-tab="login"
+            >
+              INICIAR SESIÓN
+            </button>
+            <button
+              id="authTabRegister"
+              type="button"
+              class="btn filter-pill flex-grow-1"
+              data-auth-tab="register"
+            >
+              CREAR CUENTA
+            </button>
+          </div>
+
+          <div id="authError" class="alert alert-danger font-mono-tech small d-none" role="alert"></div>
+
+          <!-- Login Form -->
+          <form id="loginForm" class="d-flex flex-column gap-3">
+            <div>
+              <label for="loginEmail" class="form-label fw-bold text-uppercase small">Email</label>
+              <input id="loginEmail" name="email" type="email" class="form-control border-2 border-dark" required placeholder="cliente@ldstore.com" />
+            </div>
+            <div>
+              <label for="loginPassword" class="form-label fw-bold text-uppercase small">Contraseña</label>
+              <input id="loginPassword" name="password" type="password" class="form-control border-2 border-dark" required minlength="6" placeholder="••••••••" />
+            </div>
+            <button id="loginSubmitBtn" type="submit" class="btn btn-dich-primary w-100 shadow mt-1">
+              INGRESAR →
+            </button>
+          </form>
+
+          <!-- Register Form -->
+          <form id="registerForm" class="d-none flex-column gap-3">
+            <div class="row g-2">
+              <div class="col-6">
+                <label for="registerFirstName" class="form-label fw-bold text-uppercase small">Nombre *</label>
+                <input id="registerFirstName" name="firstName" type="text" class="form-control border-2 border-dark" required minlength="2" placeholder="Ludmila" />
+              </div>
+              <div class="col-6">
+                <label for="registerLastName" class="form-label fw-bold text-uppercase small">Apellido *</label>
+                <input id="registerLastName" name="lastName" type="text" class="form-control border-2 border-dark" required minlength="2" placeholder="Ramírez" />
+              </div>
+            </div>
+            <div>
+              <label for="registerEmail" class="form-label fw-bold text-uppercase small">Email *</label>
+              <input id="registerEmail" name="email" type="email" class="form-control border-2 border-dark" required placeholder="tu@email.com" />
+            </div>
+            <div>
+              <label for="registerPhone" class="form-label fw-bold text-uppercase small">Teléfono (opcional)</label>
+              <input id="registerPhone" name="phone" type="tel" class="form-control border-2 border-dark" placeholder="+54 11 5555-1234" />
+            </div>
+            <div>
+              <label for="registerPassword" class="form-label fw-bold text-uppercase small">Contraseña (mín. 6 caracteres) *</label>
+              <input id="registerPassword" name="password" type="password" class="form-control border-2 border-dark" required minlength="6" placeholder="Mínimo 6 caracteres" />
+            </div>
+            <button id="registerSubmitBtn" type="submit" class="btn btn-dich-primary w-100 shadow mt-1">
+              CREAR CUENTA →
+            </button>
+          </form>
+
+          <!-- Google Sign-In Section -->
+          <div class="mt-4 pt-3 border-top border-dark border-opacity-25">
+            <p class="font-mono-tech text-center text-secondary text-uppercase mb-2" style="font-size: 0.68rem;">
+              O CONTINUÁ CON GOOGLE
+            </p>
+            <div id="googleSignInContainer" class="d-flex justify-content-center"></div>
+            <p id="googleSignInHint" class="font-mono-tech text-center text-secondary small mb-0 d-none" style="font-size: 0.7rem;">
+              Para activar el botón de Google, agregá tu <code>GOOGLE_CLIENT_ID</code> en el archivo <code>.env</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- AUTHENTICATED VIEW: PROFILE & MY ORDERS -->
+        <div id="authProfileView" class="p-4 p-sm-5 d-none">
+          <span class="font-mono-tech text-uppercase text-dich-pink d-block fw-bold" style="font-size: 0.68rem; letter-spacing: 0.12em;">
+            SESIÓN ACTIVA // L&amp;D MEMBER
+          </span>
+          <h3 id="profileFullName" class="font-display fs-2 text-uppercase mt-1 mb-1 lh-1">USUARIO</h3>
+          <p id="profileEmail" class="font-mono-tech small text-secondary mb-4"></p>
+
+          <div class="mb-4">
+            <h4 class="font-display fs-5 text-uppercase mb-2">MIS ÓRDENES</h4>
+            <div id="myOrdersList" class="d-flex flex-column gap-2 font-mono-tech small" style="max-height: 240px; overflow-y: auto;">
+              <p class="text-secondary mb-0">Cargando órdenes...</p>
+            </div>
+          </div>
+
+          <button id="logoutBtn" type="button" class="btn btn-dich-outline w-100">
+            CERRAR SESIÓN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 9. BOOTSTRAP TOAST NOTIFICATION -->
   <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 1080;">
     <div id="toastNotification" class="toast dich-toast align-items-center border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -748,6 +881,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Google Identity Services (Google Sign-In) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <!-- Bootstrap 5.3.8 JS Bundle -->
   <script

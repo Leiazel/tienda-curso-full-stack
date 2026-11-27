@@ -17,7 +17,7 @@ router.get('/', (_req, res) => {
     version: '1.0.0',
     endpoints: {
       health: 'GET /api/health',
-      auth: '/api/auth (POST /register, POST /login, GET /me)',
+      auth: '/api/auth (GET /config, POST /register, POST /login, POST /google, GET /me)',
       categories: '/api/categories (GET, POST, PUT /:id, DELETE /:id)',
       products:
         '/api/products (GET ?category=&type=&size=&search=&featured=, POST, PUT /:id, DELETE /:id, PATCH /:id/variants/:variantId/stock)',

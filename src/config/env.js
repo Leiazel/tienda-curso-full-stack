@@ -33,6 +33,9 @@ export function getEnvConfig() {
       secret: process.env.JWT_SECRET || 'ld_dev_secret_change_in_production',
       expiresIn: process.env.JWT_EXPIRES_IN || '7d',
     },
+    google: {
+      clientId: (process.env.GOOGLE_CLIENT_ID || '').trim(),
+    },
     protectAdminRoutes:
       String(process.env.PROTECT_ADMIN_ROUTES || 'false').toLowerCase() === 'true',
   };

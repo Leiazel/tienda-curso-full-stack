@@ -307,6 +307,27 @@ VALUES
     'US 9.5',
     1,
     1
+  ),
+  (
+    'ld-sneaker-14',
+    'LD-SN-14',
+    (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
+    'footwear',
+    'L&D NEON PULSE TECH "NEON BLUE"',
+    'Obsidian Mesh & Liquid-Silver Cage · Neon Blue Edition',
+    'Edición Azul Neón de la tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido azul eléctrico.',
+    'L&D',
+    'unisex',
+    'Tech Mesh, Metallic TPU Cage & Sculpted EVA',
+    'True to Size',
+    195000.00,
+    220000.00,
+    'NEW DROP 04 · NEON BLUE',
+    '/images/products/ld-neon-pulse-blue.jpg',
+    JSON_ARRAY('/images/products/ld-neon-pulse-blue.jpg', '/images/products/ld-neon-pulse-pink.jpg'),
+    'US 10',
+    1,
+    1
   )
 ON DUPLICATE KEY UPDATE
   category_id = VALUES(category_id),
@@ -420,7 +441,15 @@ VALUES
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-95',  'US 9.5', 'Moss Olive', '#556B2F', 5, 1),
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-100', 'US 10',  'Moss Olive', '#556B2F', 5, 1),
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-110', 'US 11',  'Moss Olive', '#556B2F', 3, 1),
-  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-120', 'US 12',  'Moss Olive', '#556B2F', 2, 1)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-120', 'US 12',  'Moss Olive', '#556B2F', 2, 1),
+
+  -- Neon Pulse Tech 14 — Neon Blue Edition (US 8 - US 12)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-80',  'US 8',   'Neon Blue', '#00D4FF', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-90',  'US 9',   'Neon Blue', '#00D4FF', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-95',  'US 9.5', 'Neon Blue', '#00D4FF', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-100', 'US 10',  'Neon Blue', '#00D4FF', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-110', 'US 11',  'Neon Blue', '#00D4FF', 4, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-14' LIMIT 1), 'LD-SN-14-BLU-120', 'US 12',  'Neon Blue', '#00D4FF', 2, 1)
 ON DUPLICATE KEY UPDATE
   stock = VALUES(stock),
   color = VALUES(color),

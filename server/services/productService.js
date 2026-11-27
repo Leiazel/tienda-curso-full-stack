@@ -10,6 +10,33 @@ import {
 const VALID_PRODUCT_TYPES = ['apparel', 'footwear', 'accessory'];
 const VALID_GENDERS = ['unisex', 'men', 'women'];
 
+const MAX_SEARCH_TOKENS = 8;
+
+function buildSearchTokenVariants(rawToken) {
+  const token = String(rawToken || '').trim().toLowerCase();
+  if (!token) return [];
+  const variants = new Set([token]);
+
+  if (token.length >= 4) {
+    if (token.endsWith('es')) {
+      variants.add(token.slice(0, -2));
+      variants.add(token.slice(0, -1));
+    } else if (token.endsWith('s')) {
+      variants.add(token.slice(0, -1));
+    }
+  }
+
+  return Array.from(variants).filter((v) => v.length >= 2);
+}
+
+function tokenizeSearchQuery(rawSearch) {
+  return String(rawSearch || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, MAX_SEARCH_TOKENS);
+}
+
 function parseJsonArray(raw) {
   if (!raw) return [];
   if (Array.isArray(raw)) return raw;
@@ -82,6 +109,7 @@ function formatProduct(row, variantRows = [], { baseUrl = '' } = {}) {
     categoryId: row.category_id,
     category: row.category_slug,
     categoryName: row.category_name,
+    categoryDescription: row.category_description || null,
     productType: row.product_type,
     price: Number(row.price),
     compareAtPrice:
@@ -217,11 +245,22 @@ export async function listProducts(db, query = {}, options = {}) {
   }
 
   if (query.search && String(query.search).trim()) {
-    const term = `%${String(query.search).trim()}%`;
-    conditions.push(
-      '(p.name LIKE ? OR p.subtitle LIKE ? OR p.description LIKE ? OR p.material LIKE ? OR p.brand LIKE ?)'
-    );
-    params.push(term, term, term, term, term);
+    const tokens = tokenizeSearchQuery(query.search);
+    for (const token of tokens) {
+      const variants = buildSearchTokenVariants(token);
+      if (variants.length === 0) continue;
+
+      const variantClauses = [];
+      for (const variant of variants) {
+        const term = `%${variant}%`;
+        variantClauses.push(
+          '(p.name LIKE ? OR p.subtitle LIKE ? OR p.material LIKE ? OR p.brand LIKE ? OR p.badge LIKE ? OR p.product_type LIKE ? OR c.name LIKE ? OR c.slug LIKE ? OR c.description LIKE ? OR EXISTS (SELECT 1 FROM product_variants pv_s WHERE pv_s.product_id = p.id AND pv_s.is_active = 1 AND pv_s.color LIKE ?))'
+        );
+        params.push(term, term, term, term, term, term, term, term, term, term);
+      }
+
+      conditions.push(`(${variantClauses.join(' OR ')})`);
+    }
   }
 
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
@@ -252,7 +291,8 @@ export async function listProducts(db, query = {}, options = {}) {
     `SELECT
        p.*,
        c.slug AS category_slug,
-       c.name AS category_name
+       c.name AS category_name,
+       c.description AS category_description
      FROM products p
      INNER JOIN categories c ON c.id = p.category_id
      ${whereClause}
@@ -280,7 +320,8 @@ export async function getProductByIdentifier(db, identifier, options = {}) {
     `SELECT
        p.*,
        c.slug AS category_slug,
-       c.name AS category_name
+       c.name AS category_name,
+       c.description AS category_description
      FROM products p
      INNER JOIN categories c ON c.id = p.category_id
      WHERE ${isNumeric ? 'p.id = ?' : 'p.slug = ?'}

@@ -17,7 +17,7 @@ VALUES
   ('pants', 'Pantalones & Cargos', 'apparel', 'Pantalones parachute cargo, utility y denim raw de calce relajado', 2, 1),
   ('tees', 'Remeras & Graphic Tees', 'apparel', 'Remeras oversized 300GSM con lavado ácido y estampas brutalistas', 3, 1),
   ('outerwear', 'Camperas & Outerwear', 'apparel', 'Camperas bomber, chaquetas técnicas y equipamiento de abrigo', 4, 1),
-  ('sneakers', 'Calzado Urbano & Sneakers', 'footwear', 'Zapatillas low-top, runners técnicos y botas urbanas de suela esculpida', 5, 1),
+  ('sneakers', 'Zapatillas & Calzado Urbano', 'footwear', 'Zapatillas low-top, runners técnicos, sneakers y botas urbanas de suela esculpida', 5, 1),
   ('accessories', 'Accesorios Urbanos', 'accessory', 'Gorras técnicas, bolsos Cordura y beanies de punto pesado', 6, 1)
 ON DUPLICATE KEY UPDATE
   name = VALUES(name),
@@ -273,7 +273,7 @@ VALUES
     'footwear',
     'L&D NEON PULSE TECH',
     'Obsidian Mesh & Liquid-Silver Cage · Neon Pink / Neon Blue',
-    'Tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en dos variantes neón: Rosa Neón y Azul Neón.',
+    'Zapatilla tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en dos variantes neón: Rosa Neón y Azul Neón.',
     'L&D',
     'unisex',
     'Tech Mesh, Metallic TPU Cage & Sculpted EVA',
@@ -315,7 +315,7 @@ VALUES
     'footwear',
     'L&D NEON PULSE TECH "NEON BLUE"',
     'Obsidian Mesh & Liquid-Silver Cage · Neon Blue Edition',
-    'Edición Azul Neón de la tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido azul eléctrico.',
+    'Zapatilla tech-runner futurista edición Azul Neón con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido azul eléctrico.',
     'L&D',
     'unisex',
     'Tech Mesh, Metallic TPU Cage & Sculpted EVA',

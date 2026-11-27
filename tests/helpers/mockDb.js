@@ -426,6 +426,7 @@ export function createMockDb({ disconnected = false } = {}) {
           ...p,
           category_slug: cat?.slug,
           category_name: cat?.name,
+          category_description: cat?.description,
         };
       });
 
@@ -482,17 +483,47 @@ export function createMockDb({ disconnected = false } = {}) {
           )
         );
       }
-      if (sql.includes('p.name LIKE ?')) {
-        const term = nextParam().replace(/%/g, '').toLowerCase();
-        nextParam();
-        nextParam();
-        nextParam();
-        nextParam();
-        rows = rows.filter((p) =>
-          [p.name, p.subtitle, p.description, p.material, p.brand]
-            .filter(Boolean)
-            .some((val) => val.toLowerCase().includes(term))
-        );
+      const searchGroups = sql.match(/\(\(p\.name LIKE \?[\s\S]*?pv_s\.color LIKE \?\)\)\)/g) || [];
+      if (searchGroups.length > 0) {
+        const stripAccents = (value) =>
+          String(value || '')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase();
+
+        for (const group of searchGroups) {
+          const variantCount = (group.match(/p\.name LIKE \?/g) || []).length;
+          const variantTerms = [];
+          for (let i = 0; i < variantCount; i += 1) {
+            const rawTerm = nextParam();
+            for (let j = 0; j < 9; j += 1) nextParam();
+            variantTerms.push(stripAccents(String(rawTerm).replace(/%/g, '')));
+          }
+
+          rows = rows.filter((p) => {
+            const variantColors = state.product_variants
+              .filter((v) => v.product_id === p.id && v.is_active === 1 && v.color)
+              .map((v) => v.color);
+            const searchableValues = [
+              p.name,
+              p.subtitle,
+              p.material,
+              p.brand,
+              p.badge,
+              p.product_type,
+              p.category_name,
+              p.category_slug,
+              p.category_description,
+              ...variantColors,
+            ]
+              .filter(Boolean)
+              .map(stripAccents);
+
+            return variantTerms.some((term) =>
+              searchableValues.some((val) => val.includes(term))
+            );
+          });
+        }
       }
 
       if (sql.startsWith('SELECT COUNT(*) AS total')) {

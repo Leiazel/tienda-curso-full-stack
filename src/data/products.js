@@ -131,7 +131,7 @@ export const products = [
     ],
     inStock: true,
     description:
-      'Tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en Rosa Neón y Azul Neón.',
+      'Zapatilla tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en Rosa Neón y Azul Neón.',
     extra: false,
   },
   {
@@ -157,7 +157,7 @@ export const products = [
     ],
     inStock: true,
     description:
-      'Edición Azul Neón de la tech-runner futurista L&D con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido azul eléctrico.',
+      'Zapatilla tech-runner futurista edición Azul Neón de L&D con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido azul eléctrico.',
     extra: false,
   },
   {

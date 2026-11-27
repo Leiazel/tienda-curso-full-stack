@@ -265,7 +265,7 @@ export default function CatalogPage({ products, isOffline = false, onAddToCart, 
               <input
                 type="search"
                 className="form-control catalog-search-input"
-                placeholder="BUSCAR POR NOMBRE, MATERIAL, MODELO..."
+                placeholder="BUSCAR POR NOMBRE, CATEGORÍA, MATERIAL..."
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 aria-label="Buscar productos en el catálogo"

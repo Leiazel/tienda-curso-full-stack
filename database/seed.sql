@@ -1,7 +1,7 @@
 -- ============================================================================
 -- L&D STREETWEAR & FOOTWEAR — DATOS INICIALES (SEED)
--- Incluye indumentaria urbana, calzado urbano, variantes/tallaje,
--- códigos promocionales y usuarios de prueba.
+-- Incluye indumentaria urbana, calzado urbano (precios en Pesos Argentinos ARS),
+-- variantes por talle y color, códigos promocionales y usuarios de prueba.
 -- ============================================================================
 
 USE ld_store_db;
@@ -27,7 +27,7 @@ ON DUPLICATE KEY UPDATE
   is_active = VALUES(is_active);
 
 -- ----------------------------------------------------------------------------
--- 2. PRODUCTOS (Indumentaria urbana + Calzado urbano + Accesorios)
+-- 2. PRODUCTOS (Indumentaria urbana + Calzado urbano + Accesorios — Precios en ARS)
 -- ----------------------------------------------------------------------------
 INSERT INTO products (
   slug, sku_prefix, category_id, product_type, name, subtitle, description,
@@ -47,8 +47,8 @@ VALUES
     'unisex',
     '480GSM Organic French Terry Cotton',
     'Boxy Street Fit',
-    118.00,
-    138.00,
+    118000.00,
+    138000.00,
     'CÁPSULA 01 · 28/250',
     '/images/products/ld-hoodie-01-depaul.jpg',
     JSON_ARRAY('/images/products/ld-hoodie-01-depaul.jpg'),
@@ -68,8 +68,8 @@ VALUES
     'unisex',
     'Technical Cotton-Nylon Ripstop',
     'Relaxed Stacked Fit',
-    142.00,
-    165.00,
+    142000.00,
+    165000.00,
     'CÁPSULA 01 · 19/250',
     '/images/products/ld-cargo-02-depaul.jpg',
     JSON_ARRAY('/images/products/ld-cargo-02-depaul.jpg'),
@@ -89,7 +89,7 @@ VALUES
     'unisex',
     '300GSM Combed Heavy Jersey',
     'Oversized Drop Shoulder',
-    64.00,
+    64000.00,
     NULL,
     'CÁPSULA 01 · 42/250',
     '/images/products/ld-tee-03-depaul.jpg',
@@ -110,8 +110,8 @@ VALUES
     'unisex',
     'Heavyweight Cotton Twill & Satin Lining',
     'Oversized Cropped',
-    225.00,
-    260.00,
+    225000.00,
+    260000.00,
     'CÁPSULA 01 · 12/250',
     '/images/products/ld-bomber-04-depaul.jpg',
     JSON_ARRAY('/images/products/ld-bomber-04-depaul.jpg'),
@@ -131,8 +131,8 @@ VALUES
     'unisex',
     'Full-Grain Leather, Suede & Rubber Cup Sole',
     'True to Size',
-    189.00,
-    215.00,
+    189000.00,
+    215000.00,
     'CÁPSULA LAUNCH · 15/150',
     '/images/products/ld-sneaker-05-depaul.jpg',
     JSON_ARRAY('/images/products/ld-sneaker-05-depaul.jpg', '/images/products/shoe-concrete.jpg'),
@@ -152,7 +152,7 @@ VALUES
     'unisex',
     '1000D Ballistic Cordura® & Heavy Rib Knit',
     'Adjustable One Size',
-    65.00,
+    65000.00,
     NULL,
     'AVAILABLE 34/250',
     'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',
@@ -166,18 +166,18 @@ VALUES
     'LD-RN-07',
     (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
     'footwear',
-    'L&D RUNNER 02 "ASPHALT"',
-    'Suede & Technical Ripstop Mesh · Vibram-Style Midsole',
-    'Zapatilla urbana de estética chunky runner con paneles de gamuza cepillada, malla respirable y entresuela de doble densidad diseñada para uso diario en asfalto.',
+    'L&D ASPHALT CHUNKY RUNNER',
+    'Slate Ripstop Mesh & Hairy Suede · Neon-Pink Heel Tab',
+    'Zapatilla urbana de estética chunky runner en gris pizarra y carbón con paneles de gamuza cepillada, malla ripstop respirable, tirador trasero rosa neón y entresuela de doble densidad.',
     'L&D',
     'unisex',
-    'Suede, Ballistic Mesh & Dual-Density EVA',
+    'Suede, Ballistic Ripstop Mesh & Dual-Density EVA',
     'True to Size',
-    185.00,
+    178000.00,
     NULL,
     'NEW DROP 04',
-    '/images/products/shoe-mostro.jpg',
-    JSON_ARRAY('/images/products/shoe-mostro.jpg'),
+    '/images/products/ld-runner-asphalt.jpg',
+    JSON_ARRAY('/images/products/ld-runner-asphalt.jpg'),
     'US 10',
     1,
     1
@@ -187,20 +187,20 @@ VALUES
     'LD-BT-08',
     (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
     'footwear',
-    'L&D MONOLITH HIGH-TOP BOOT',
-    'Matte Calfskin & Heavy Lug Outsole · Side Zip',
-    'Bota urbana caña alta de silueta arquitectónica con cuero vacuno mate, cierre lateral YKK® metálico y suela tractor de alta tracción.',
+    'L&D MONOLITH HIGH-TOP',
+    'Triple Matte Black Calfskin & Heavy Lug Outsole · Side Zip',
+    'Botita urbana caña alta de silueta arquitectónica en cuero vacuno mate granulado y nylon balístico, cierre lateral metálico y suela tractor de alta tracción.',
     'L&D',
     'unisex',
-    'Matte Full-Grain Calfskin & Vulcanized Rubber',
+    'Matte Full-Grain Calfskin, Ballistic Nylon & Rubber',
     'Relaxed Toe Box',
-    220.00,
-    250.00,
+    230000.00,
+    260000.00,
     'LIMITED 10/100',
-    '/images/products/shoe-xperks.jpg',
-    JSON_ARRAY('/images/products/shoe-xperks.jpg'),
+    '/images/products/ld-monolith-hightop.jpg',
+    JSON_ARRAY('/images/products/ld-monolith-hightop.jpg'),
     'US 10',
-    0,
+    1,
     1
   ),
   (
@@ -215,7 +215,7 @@ VALUES
     'unisex',
     '14oz 100% Cotton Raw Denim',
     'Baggy Wide Fit',
-    145.00,
+    145000.00,
     NULL,
     'ARCHIVE PIECE',
     'https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=900&q=85',
@@ -236,13 +236,76 @@ VALUES
     'unisex',
     '100% Water-Repellent Technical Nylon',
     'Adjustable One Size',
-    42.00,
+    42000.00,
     NULL,
     'IN STOCK',
     'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=900&q=85',
     JSON_ARRAY('https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=900&q=85'),
     'ONE SIZE',
     0,
+    1
+  ),
+  (
+    'ld-sneaker-11',
+    'LD-SN-11',
+    (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
+    'footwear',
+    'L&D CHALK COURT LOW',
+    'Chalk Tumbled Leather & Sand Suede Toe · Vintage Cup Sole',
+    'Zapatilla low-top minimalista estilo court/skate en cuero vacuno off-white tiza, puntera de gamuza arena, lengüeta acolchada y suela cup crema vintage.',
+    'L&D',
+    'unisex',
+    'Tumbled Full-Grain Leather, Suede & Vintage Rubber',
+    'True to Size',
+    162000.00,
+    NULL,
+    'NEW DROP 04',
+    '/images/products/ld-chalk-court.jpg',
+    JSON_ARRAY('/images/products/ld-chalk-court.jpg'),
+    'US 9.5',
+    1,
+    1
+  ),
+  (
+    'ld-sneaker-12',
+    'LD-SN-12',
+    (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
+    'footwear',
+    'L&D NEON PULSE TECH',
+    'Obsidian Mesh & Liquid-Silver Cage · Neon Pink / Neon Blue',
+    'Tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en dos variantes neón: Rosa Neón y Azul Neón.',
+    'L&D',
+    'unisex',
+    'Tech Mesh, Metallic TPU Cage & Sculpted EVA',
+    'True to Size',
+    195000.00,
+    220000.00,
+    '2 COLORWAYS · DROP 04',
+    '/images/products/ld-neon-pulse-pink.jpg',
+    JSON_ARRAY('/images/products/ld-neon-pulse-pink.jpg', '/images/products/ld-neon-pulse-blue.jpg'),
+    'US 10',
+    1,
+    1
+  ),
+  (
+    'ld-sneaker-13',
+    'LD-SN-13',
+    (SELECT id FROM categories WHERE slug = 'sneakers' LIMIT 1),
+    'footwear',
+    'L&D MOSS TERRAIN LOW',
+    'Olive Ripstop & Sand Nubuck · Speckled Concrete Outsole',
+    'Zapatilla urbana utilitaria estilo gorpcore/trail en verde musgo ripstop, nobuck arena, puntera engomada negra, ajuste rápido con cord-lock y suela moteada de concreto.',
+    'L&D',
+    'unisex',
+    'Ripstop Nylon, Sand Nubuck & Rubberized Mudguard',
+    'True to Size',
+    175000.00,
+    NULL,
+    'NEW DROP 04',
+    '/images/products/ld-moss-terrain.jpg',
+    JSON_ARRAY('/images/products/ld-moss-terrain.jpg'),
+    'US 9.5',
+    1,
     1
   )
 ON DUPLICATE KEY UPDATE
@@ -292,7 +355,7 @@ VALUES
   ((SELECT id FROM products WHERE slug = 'ld-bomber-04' LIMIT 1), 'LD-BM-04-BLK-L',  'L',  'Distressed Black', '#111111', 4, 1),
   ((SELECT id FROM products WHERE slug = 'ld-bomber-04' LIMIT 1), 'LD-BM-04-BLK-XL', 'XL', 'Distressed Black', '#111111', 2, 1),
 
-  -- Low-Top Sneaker "Concrete" 05 (US 8 - US 12)
+  -- Low-Top Sneaker "Concrete DP7" 05 (US 8 - US 12)
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-05' LIMIT 1), 'LD-SN-05-CON-80',  'US 8',   'Concrete Crimson', '#D92B2B', 2, 1),
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-05' LIMIT 1), 'LD-SN-05-CON-90',  'US 9',   'Concrete Crimson', '#D92B2B', 3, 1),
   ((SELECT id FROM products WHERE slug = 'ld-sneaker-05' LIMIT 1), 'LD-SN-05-CON-95',  'US 9.5', 'Concrete Crimson', '#D92B2B', 4, 1),
@@ -303,7 +366,7 @@ VALUES
   -- Utility Bag & Beanie Set 06 (ONE SIZE)
   ((SELECT id FROM products WHERE slug = 'ld-utility-06' LIMIT 1), 'LD-UT-06-BLK-OS', 'ONE SIZE', 'Tactical Black', '#0A0A0A', 34, 1),
 
-  -- Runner 02 "Asphalt" 07 (US 8 - US 12)
+  -- Asphalt Chunky Runner 07 (US 8 - US 12)
   ((SELECT id FROM products WHERE slug = 'ld-runner-07' LIMIT 1), 'LD-RN-07-ASP-80',  'US 8',   'Asphalt Grey', '#6E7275', 3, 1),
   ((SELECT id FROM products WHERE slug = 'ld-runner-07' LIMIT 1), 'LD-RN-07-ASP-90',  'US 9',   'Asphalt Grey', '#6E7275', 5, 1),
   ((SELECT id FROM products WHERE slug = 'ld-runner-07' LIMIT 1), 'LD-RN-07-ASP-95',  'US 9.5', 'Asphalt Grey', '#6E7275', 4, 1),
@@ -311,7 +374,7 @@ VALUES
   ((SELECT id FROM products WHERE slug = 'ld-runner-07' LIMIT 1), 'LD-RN-07-ASP-110', 'US 11',  'Asphalt Grey', '#6E7275', 4, 1),
   ((SELECT id FROM products WHERE slug = 'ld-runner-07' LIMIT 1), 'LD-RN-07-ASP-120', 'US 12',  'Asphalt Grey', '#6E7275', 2, 1),
 
-  -- Monolith High-Top Boot 08 (US 8 - US 12)
+  -- Monolith High-Top 08 (US 8 - US 12)
   ((SELECT id FROM products WHERE slug = 'ld-boot-08' LIMIT 1), 'LD-BT-08-BLK-80',  'US 8',  'Matte Black', '#0D0D0D', 2, 1),
   ((SELECT id FROM products WHERE slug = 'ld-boot-08' LIMIT 1), 'LD-BT-08-BLK-90',  'US 9',  'Matte Black', '#0D0D0D', 3, 1),
   ((SELECT id FROM products WHERE slug = 'ld-boot-08' LIMIT 1), 'LD-BT-08-BLK-100', 'US 10', 'Matte Black', '#0D0D0D', 3, 1),
@@ -325,7 +388,39 @@ VALUES
   ((SELECT id FROM products WHERE slug = 'ld-denim-09' LIMIT 1), 'LD-DN-09-IND-XL', 'XL', 'Raw Indigo', '#1D2939', 3, 1),
 
   -- Technical 6-Panel Cap 10 (ONE SIZE)
-  ((SELECT id FROM products WHERE slug = 'ld-cap-10' LIMIT 1), 'LD-CP-10-BLK-OS', 'ONE SIZE', 'Onyx Nylon', '#121212', 25, 1)
+  ((SELECT id FROM products WHERE slug = 'ld-cap-10' LIMIT 1), 'LD-CP-10-BLK-OS', 'ONE SIZE', 'Onyx Nylon', '#121212', 25, 1),
+
+  -- Chalk Court Low 11 (US 8 - US 12)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-80',  'US 8',   'Chalk White', '#F0ECE1', 4, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-90',  'US 9',   'Chalk White', '#F0ECE1', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-95',  'US 9.5', 'Chalk White', '#F0ECE1', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-100', 'US 10',  'Chalk White', '#F0ECE1', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-110', 'US 11',  'Chalk White', '#F0ECE1', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-11' LIMIT 1), 'LD-SN-11-CHK-120', 'US 12',  'Chalk White', '#F0ECE1', 2, 1),
+
+  -- Neon Pulse Tech 12 — Variante 1: Neon Pink (US 8 - US 12)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-80',  'US 8',   'Neon Pink', '#FF2E93', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-90',  'US 9',   'Neon Pink', '#FF2E93', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-95',  'US 9.5', 'Neon Pink', '#FF2E93', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-100', 'US 10',  'Neon Pink', '#FF2E93', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-110', 'US 11',  'Neon Pink', '#FF2E93', 4, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-PNK-120', 'US 12',  'Neon Pink', '#FF2E93', 2, 1),
+
+  -- Neon Pulse Tech 12 — Variante 2: Neon Blue (US 8 - US 12)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-80',  'US 8',   'Neon Blue', '#00D4FF', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-90',  'US 9',   'Neon Blue', '#00D4FF', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-95',  'US 9.5', 'Neon Blue', '#00D4FF', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-100', 'US 10',  'Neon Blue', '#00D4FF', 6, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-110', 'US 11',  'Neon Blue', '#00D4FF', 4, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-12' LIMIT 1), 'LD-SN-12-BLU-120', 'US 12',  'Neon Blue', '#00D4FF', 2, 1),
+
+  -- Moss Terrain Low 13 (US 8 - US 12)
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-80',  'US 8',   'Moss Olive', '#556B2F', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-90',  'US 9',   'Moss Olive', '#556B2F', 4, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-95',  'US 9.5', 'Moss Olive', '#556B2F', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-100', 'US 10',  'Moss Olive', '#556B2F', 5, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-110', 'US 11',  'Moss Olive', '#556B2F', 3, 1),
+  ((SELECT id FROM products WHERE slug = 'ld-sneaker-13' LIMIT 1), 'LD-SN-13-MOS-120', 'US 12',  'Moss Olive', '#556B2F', 2, 1)
 ON DUPLICATE KEY UPDATE
   stock = VALUES(stock),
   color = VALUES(color),
@@ -333,13 +428,13 @@ ON DUPLICATE KEY UPDATE
   is_active = VALUES(is_active);
 
 -- ----------------------------------------------------------------------------
--- 4. CÓDIGOS PROMOCIONALES
+-- 4. CÓDIGOS PROMOCIONALES (Montos en Pesos Argentinos ARS)
 -- ----------------------------------------------------------------------------
 INSERT INTO promo_codes (code, description, discount_type, discount_value, min_order_amount, max_uses, is_active)
 VALUES
   ('FIRST15', '15% de descuento en tu primera compra (L&D Drop 04)', 'percentage', 15.00, 0.00, NULL, 1),
-  ('URBAN10', '10% de descuento en indumentaria urbana', 'percentage', 10.00, 50.00, 500, 1),
-  ('SNEAKER20', '$20 de descuento en compras superiores a $150', 'fixed', 20.00, 150.00, 200, 1)
+  ('URBAN10', '10% de descuento en indumentaria urbana (mínimo $50.000)', 'percentage', 10.00, 50000.00, 500, 1),
+  ('SNEAKER20', '$20.000 de descuento en compras superiores a $150.000', 'fixed', 20000.00, 150000.00, 200, 1)
 ON DUPLICATE KEY UPDATE
   description = VALUES(description),
   discount_type = VALUES(discount_type),

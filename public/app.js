@@ -17,8 +17,11 @@ const API_BASE_URL = (() => {
 })();
 
 const CART_STORAGE_KEY = 'ld_store_cart_v1';
+const ARS_FORMATTER = new Intl.NumberFormat('es-AR', {
+  maximumFractionDigits: 0
+});
 
-// Fallback catalog used only if the API / MySQL database is unreachable
+// Fallback catalog (precios en Pesos Argentinos ARS) usado solo si la API / MySQL no está conectada
 const FALLBACK_PRODUCTS = [
   {
     id: 'ld-hoodie-01',
@@ -26,9 +29,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'CÁPSULA 01 · 28/250',
     name: 'L&D BOXY HEAVYWEIGHT HOODIE "NOCTURNE"',
     subtitle: '480GSM Washed Charcoal French Terry · Drop Shoulder',
-    price: 118,
+    price: 118000,
     category: 'hoodies',
     image: '/images/products/ld-hoodie-01-depaul.jpg',
+    galleryUrls: ['/images/products/ld-hoodie-01-depaul.jpg'],
     sizes: ['S', 'M', 'L', 'XL'],
     defaultSize: 'L',
     fit: 'Boxy Street Fit',
@@ -43,9 +47,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'CÁPSULA 01 · 19/250',
     name: 'PARACHUTE CARGO PANTS V2 "UNDERPASS"',
     subtitle: 'Technical Olive Ripstop · 8 Utility Pockets',
-    price: 142,
+    price: 142000,
     category: 'pants',
     image: '/images/products/ld-cargo-02-depaul.jpg',
+    galleryUrls: ['/images/products/ld-cargo-02-depaul.jpg'],
     sizes: ['S', 'M', 'L', 'XL'],
     defaultSize: 'M',
     fit: 'Relaxed Stacked Fit',
@@ -60,9 +65,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'CÁPSULA 01 · 42/250',
     name: 'BRUTALIST ARCHIVE ACID TEE 07',
     subtitle: '300GSM Heavy Jersey · Neon-Pink Screenprint',
-    price: 64,
+    price: 64000,
     category: 'tees',
     image: '/images/products/ld-tee-03-depaul.jpg',
+    galleryUrls: ['/images/products/ld-tee-03-depaul.jpg'],
     sizes: ['S', 'M', 'L', 'XL'],
     defaultSize: 'L',
     fit: 'Oversized Drop Shoulder',
@@ -77,9 +83,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'CÁPSULA 01 · 12/250',
     name: 'L&D DISTRESSED VARSITY BOMBER "ROOFTOP"',
     subtitle: 'Heavyweight Twill & Chenille LD Patches · Quilted Lining',
-    price: 225,
+    price: 225000,
     category: 'outerwear',
     image: '/images/products/ld-bomber-04-depaul.jpg',
+    galleryUrls: ['/images/products/ld-bomber-04-depaul.jpg'],
     sizes: ['S', 'M', 'L', 'XL'],
     defaultSize: 'L',
     fit: 'Oversized Cropped',
@@ -94,9 +101,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'CÁPSULA LAUNCH · 15/150',
     name: 'L&D LOW-TOP SNEAKER "CONCRETE DP7" (CÁPSULA 01)',
     subtitle: 'First Capsule Launch · Full-Grain Leather & Hairy Suede',
-    price: 189,
+    price: 189000,
     category: 'sneakers',
     image: '/images/products/ld-sneaker-05-depaul.jpg',
+    galleryUrls: ['/images/products/ld-sneaker-05-depaul.jpg', '/images/products/shoe-concrete.jpg'],
     sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
     defaultSize: 'US 9.5',
     fit: 'True to Size',
@@ -111,9 +119,10 @@ const FALLBACK_PRODUCTS = [
     badge: 'AVAILABLE 34/250',
     name: 'UTILITY CROSSBODY BAG & BEANIE SET',
     subtitle: 'Cordura® Ballistic Sling + Ribbed Knit Beanie',
-    price: 65,
+    price: 65000,
     category: 'outerwear',
     image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',
+    galleryUrls: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85'],
     sizes: ['ONE SIZE'],
     defaultSize: 'ONE SIZE',
     fit: 'Adjustable One Size',
@@ -121,6 +130,109 @@ const FALLBACK_PRODUCTS = [
     inStock: true,
     description:
       'Two-piece tactical street bundle pairing a weatherproof 1000D Cordura® crossbody pouch with a heavyweight fisherman knit beanie with woven L&D label.'
+  },
+  {
+    id: 'ld-runner-07',
+    slug: 'ld-runner-07',
+    badge: 'NEW DROP 04',
+    name: 'L&D ASPHALT CHUNKY RUNNER',
+    subtitle: 'Slate Ripstop Mesh & Hairy Suede · Neon-Pink Heel Tab',
+    price: 178000,
+    category: 'sneakers',
+    image: '/images/products/ld-runner-asphalt.jpg',
+    galleryUrls: ['/images/products/ld-runner-asphalt.jpg'],
+    sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+    defaultSize: 'US 10',
+    fit: 'True to Size',
+    variants: [],
+    inStock: true,
+    description:
+      'Zapatilla urbana de estética chunky runner en gris pizarra y carbón con paneles de gamuza cepillada, malla ripstop respirable, tirador trasero rosa neón y entresuela de doble densidad.'
+  },
+  {
+    id: 'ld-boot-08',
+    slug: 'ld-boot-08',
+    badge: 'LIMITED 10/100',
+    name: 'L&D MONOLITH HIGH-TOP',
+    subtitle: 'Triple Matte Black Calfskin & Heavy Lug Outsole · Side Zip',
+    price: 230000,
+    category: 'sneakers',
+    image: '/images/products/ld-monolith-hightop.jpg',
+    galleryUrls: ['/images/products/ld-monolith-hightop.jpg'],
+    sizes: ['US 8', 'US 9', 'US 10', 'US 11', 'US 12'],
+    defaultSize: 'US 10',
+    fit: 'Relaxed Toe Box',
+    variants: [],
+    inStock: true,
+    description:
+      'Botita urbana caña alta de silueta arquitectónica en cuero vacuno mate granulado y nylon balístico, cierre lateral metálico y suela tractor de alta tracción.'
+  },
+  {
+    id: 'ld-sneaker-11',
+    slug: 'ld-sneaker-11',
+    badge: 'NEW DROP 04',
+    name: 'L&D CHALK COURT LOW',
+    subtitle: 'Chalk Tumbled Leather & Sand Suede Toe · Vintage Cup Sole',
+    price: 162000,
+    category: 'sneakers',
+    image: '/images/products/ld-chalk-court.jpg',
+    galleryUrls: ['/images/products/ld-chalk-court.jpg'],
+    sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+    defaultSize: 'US 9.5',
+    fit: 'True to Size',
+    variants: [],
+    inStock: true,
+    description:
+      'Zapatilla low-top minimalista estilo court/skate en cuero vacuno off-white tiza, puntera de gamuza arena, lengüeta acolchada y suela cup crema vintage.'
+  },
+  {
+    id: 'ld-sneaker-12',
+    slug: 'ld-sneaker-12',
+    badge: '2 COLORWAYS · DROP 04',
+    name: 'L&D NEON PULSE TECH',
+    subtitle: 'Obsidian Mesh & Liquid-Silver Cage · Neon Pink / Neon Blue',
+    price: 195000,
+    category: 'sneakers',
+    image: '/images/products/ld-neon-pulse-pink.jpg',
+    galleryUrls: ['/images/products/ld-neon-pulse-pink.jpg', '/images/products/ld-neon-pulse-blue.jpg'],
+    sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+    defaultSize: 'US 10',
+    fit: 'True to Size',
+    variants: [
+      { id: null, size: 'US 8', color: 'Neon Pink', colorHex: '#FF2E93', stock: 3, isActive: true },
+      { id: null, size: 'US 9', color: 'Neon Pink', colorHex: '#FF2E93', stock: 5, isActive: true },
+      { id: null, size: 'US 9.5', color: 'Neon Pink', colorHex: '#FF2E93', stock: 6, isActive: true },
+      { id: null, size: 'US 10', color: 'Neon Pink', colorHex: '#FF2E93', stock: 5, isActive: true },
+      { id: null, size: 'US 11', color: 'Neon Pink', colorHex: '#FF2E93', stock: 4, isActive: true },
+      { id: null, size: 'US 12', color: 'Neon Pink', colorHex: '#FF2E93', stock: 2, isActive: true },
+      { id: null, size: 'US 8', color: 'Neon Blue', colorHex: '#00D4FF', stock: 3, isActive: true },
+      { id: null, size: 'US 9', color: 'Neon Blue', colorHex: '#00D4FF', stock: 5, isActive: true },
+      { id: null, size: 'US 9.5', color: 'Neon Blue', colorHex: '#00D4FF', stock: 6, isActive: true },
+      { id: null, size: 'US 10', color: 'Neon Blue', colorHex: '#00D4FF', stock: 6, isActive: true },
+      { id: null, size: 'US 11', color: 'Neon Blue', colorHex: '#00D4FF', stock: 4, isActive: true },
+      { id: null, size: 'US 12', color: 'Neon Blue', colorHex: '#00D4FF', stock: 2, isActive: true }
+    ],
+    inStock: true,
+    description:
+      'Tech-runner futurista con malla negra respirable, jaula metálica plateada, cordones rápidos reflectivos y estabilizador esculpido disponible en dos variantes neón: Rosa Neón y Azul Neón.'
+  },
+  {
+    id: 'ld-sneaker-13',
+    slug: 'ld-sneaker-13',
+    badge: 'NEW DROP 04',
+    name: 'L&D MOSS TERRAIN LOW',
+    subtitle: 'Olive Ripstop & Sand Nubuck · Speckled Concrete Outsole',
+    price: 175000,
+    category: 'sneakers',
+    image: '/images/products/ld-moss-terrain.jpg',
+    galleryUrls: ['/images/products/ld-moss-terrain.jpg'],
+    sizes: ['US 8', 'US 9', 'US 9.5', 'US 10', 'US 11', 'US 12'],
+    defaultSize: 'US 9.5',
+    fit: 'True to Size',
+    variants: [],
+    inStock: true,
+    description:
+      'Zapatilla urbana utilitaria estilo gorpcore/trail en verde musgo ripstop, nobuck arena, puntera engomada negra, ajuste rápido con cord-lock y suela moteada de concreto.'
   }
 ];
 
@@ -133,6 +245,7 @@ let cart = loadCartFromStorage();
 let activeFilter = 'all';
 let appliedPromo = null; // { code, discountType, discountValue, discountAmount, description }
 let selectedQuickSize = 'L';
+let selectedQuickColor = null;
 let activeQuickIndex = 0;
 
 let quickViewModalInstance = null;
@@ -173,8 +286,8 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 function formatPrice(amount) {
-  const num = Number(amount) || 0;
-  return Number.isInteger(num) ? `$${num}` : `$${num.toFixed(2)}`;
+  const num = Math.round(Number(amount) || 0);
+  return `$${ARS_FORMATTER.format(num)}`;
 }
 
 function loadCartFromStorage() {
@@ -202,6 +315,9 @@ function normalizeProduct(raw) {
     Array.isArray(raw.sizes) && raw.sizes.length > 0
       ? raw.sizes
       : [raw.defaultSize || 'ONE SIZE'];
+  const galleryUrls = Array.isArray(raw.galleryUrls) && raw.galleryUrls.length > 0
+    ? raw.galleryUrls
+    : [raw.image || raw.imageUrl || ''].filter(Boolean);
 
   return {
     id: raw.id ?? raw.slug,
@@ -214,6 +330,7 @@ function normalizeProduct(raw) {
     category: raw.category || 'all',
     categoryName: raw.categoryName || raw.category || '',
     image: raw.image || raw.imageUrl || '',
+    galleryUrls,
     sizes,
     defaultSize: raw.defaultSize || sizes[0],
     fit: raw.fit || 'BOXY STREET FIT',
@@ -224,20 +341,52 @@ function normalizeProduct(raw) {
   };
 }
 
-function findVariant(product, size) {
+function getProductColors(product) {
+  if (!product || !Array.isArray(product.variants) || product.variants.length === 0) {
+    return [];
+  }
+  const seen = new Map();
+  for (const v of product.variants) {
+    if (v.isActive === false || !v.color) continue;
+    if (!seen.has(v.color)) {
+      seen.set(v.color, { color: v.color, colorHex: v.colorHex || '#141414' });
+    }
+  }
+  return Array.from(seen.values());
+}
+
+function getColorImage(product, colorName) {
+  if (!product) return '';
+  const colors = getProductColors(product);
+  const colorIdx = colors.findIndex((c) => c.color === colorName);
+  if (colorIdx >= 0 && Array.isArray(product.galleryUrls) && product.galleryUrls[colorIdx]) {
+    return product.galleryUrls[colorIdx];
+  }
+  return product.image;
+}
+
+function findVariant(product, size, color = null) {
   if (!product || !Array.isArray(product.variants) || product.variants.length === 0) {
     return null;
+  }
+  if (color) {
+    const exact = product.variants.find(
+      (v) => v.size === size && v.color === color && v.isActive !== false
+    );
+    if (exact) return exact;
   }
   return product.variants.find((v) => v.size === size && v.isActive !== false) || null;
 }
 
-function getDefaultAvailableSize(product) {
+function getDefaultAvailableSize(product, color = null) {
   if (!product) return 'ONE SIZE';
-  const defaultVariant = findVariant(product, product.defaultSize);
+  const defaultVariant = findVariant(product, product.defaultSize, color);
   if (!defaultVariant || defaultVariant.stock > 0) {
     return product.defaultSize || product.sizes[0] || 'ONE SIZE';
   }
-  const firstInStock = product.variants.find((v) => v.isActive !== false && v.stock > 0);
+  const firstInStock = product.variants.find(
+    (v) => v.isActive !== false && v.stock > 0 && (!color || v.color === color)
+  );
   return firstInStock ? firstInStock.size : product.defaultSize || product.sizes[0] || 'ONE SIZE';
 }
 
@@ -313,6 +462,19 @@ function renderProducts() {
         product.sizes.length > 1
           ? `SIZES: ${product.sizes[0]}–${product.sizes[product.sizes.length - 1]}`
           : `SIZE: ${product.sizes[0]}`;
+      const colors = getProductColors(product);
+      const colorSwatchesHtml =
+        colors.length > 1
+          ? `<div class="d-flex align-items-center gap-1 mt-2">
+               ${colors
+                 .map(
+                   (c) =>
+                     `<span title="${c.color}" style="width:14px;height:14px;border-radius:50%;background:${c.colorHex};border:1.5px solid #0A0A0A;display:inline-block;"></span>`
+                 )
+                 .join('')}
+               <span class="font-mono-tech text-secondary ms-1" style="font-size: 0.65rem;">${colors.length} COLORES</span>
+             </div>`
+          : '';
 
       return `
         <div class="col-12 col-md-6 col-lg-4">
@@ -368,6 +530,7 @@ function renderProducts() {
                 <p class="font-mono-tech small opacity-75 mb-0 mt-1" style="font-size: 0.72rem;">
                   ${product.subtitle}
                 </p>
+                ${colorSwatchesHtml}
               </div>
 
               <div class="d-flex gap-2 pt-1">
@@ -377,7 +540,7 @@ function renderProducts() {
                   data-action="quick-view"
                   data-index="${originalIndex}"
                 >
-                  SELECT SIZE
+                  ${colors.length > 1 ? 'COLOR / SIZE' : 'SELECT SIZE'}
                 </button>
                 <button
                   type="button"
@@ -417,21 +580,55 @@ function openQuickView(index) {
   if (!product) return;
 
   activeQuickIndex = index;
-  selectedQuickSize = getDefaultAvailableSize(product);
+  const colors = getProductColors(product);
+  selectedQuickColor = colors.length > 0 ? colors[0].color : null;
+  selectedQuickSize = getDefaultAvailableSize(product, selectedQuickColor);
 
-  const selectedVariant = findVariant(product, selectedQuickSize);
+  const selectedVariant = findVariant(product, selectedQuickSize, selectedQuickColor);
   const stockInfo = selectedVariant
     ? `STOCK: ${selectedVariant.stock} UNITS`
     : product.fit.toUpperCase();
+  const activeImage = getColorImage(product, selectedQuickColor);
 
   const content = document.getElementById('quickViewContent');
   const fallbackUrl = `https://placehold.co/800x840/141414/FFFFFF?text=${encodeURIComponent(
     product.name
   )}`;
 
+  const colorSelectorHtml =
+    colors.length > 1
+      ? `
+        <div>
+          <div class="d-flex justify-content-between fw-bold text-uppercase mb-2" style="font-size: 0.68rem; letter-spacing: 0.08em;">
+            <span>SELECT COLOR</span>
+            <span id="quickViewColorLabel" class="text-secondary">${selectedQuickColor}</span>
+          </div>
+          <div class="d-flex flex-wrap gap-2" id="colorGrid">
+            ${colors
+              .map(
+                (c) => `
+                  <button
+                    type="button"
+                    class="btn btn-sm font-mono-tech d-inline-flex align-items-center gap-2 border-2 ${
+                      c.color === selectedQuickColor ? 'border-dark bg-dark text-white' : 'border-dark bg-white text-dark'
+                    }"
+                    data-action="select-color"
+                    data-color="${c.color}"
+                  >
+                    <span style="width:12px;height:12px;border-radius:50%;background:${c.colorHex};border:1px solid #fff;display:inline-block;"></span>
+                    <span>${c.color}</span>
+                  </button>
+                `
+              )
+              .join('')}
+          </div>
+        </div>
+      `
+      : '';
+
   content.innerHTML = `
     <div class="col-12 col-md-6 quickview-img-col position-relative">
-      <img src="${product.image}" alt="${product.name}" data-fallback="${fallbackUrl}" />
+      <img id="quickViewMainImg" src="${activeImage}" alt="${product.name}" data-fallback="${fallbackUrl}" />
       <span class="position-absolute top-0 start-0 m-3 bg-dich-black text-dich-yellow border border-warning font-mono-tech fw-bold px-2 py-1" style="font-size: 0.65rem;">
         ${product.badge}
       </span>
@@ -443,11 +640,13 @@ function openQuickView(index) {
           DROP 04 // ${product.category}
         </span>
         <h3 class="font-display fs-2 text-uppercase mt-1 mb-0 lh-1">${product.name}</h3>
-        <p class="font-mono-tech fs-4 fw-bold text-dich-pink mt-2 mb-0">${formatPrice(product.price)}</p>
+        <p class="font-mono-tech fs-4 fw-bold text-dich-pink mt-2 mb-0">${formatPrice(product.price)} <span class="fs-6 text-secondary fw-normal">ARS</span></p>
         <p class="small text-secondary lh-base mt-3 mb-0" style="font-size: 0.78rem;">
           ${product.description}
         </p>
       </div>
+
+      ${colorSelectorHtml}
 
       <div>
         <div class="d-flex justify-content-between fw-bold text-uppercase mb-2" style="font-size: 0.68rem; letter-spacing: 0.08em;">
@@ -457,7 +656,7 @@ function openQuickView(index) {
         <div class="row g-2" id="sizeGrid">
           ${product.sizes
             .map((size) => {
-              const variant = findVariant(product, size);
+              const variant = findVariant(product, size, selectedQuickColor);
               const outOfStock = variant && variant.stock <= 0;
               return `
                 <div class="col-3">
@@ -493,6 +692,31 @@ function openQuickView(index) {
   quickViewModalInstance?.show();
 }
 
+function selectColor(color, btnEl) {
+  selectedQuickColor = color;
+  document.querySelectorAll('#colorGrid [data-action="select-color"]').forEach((btn) => {
+    btn.classList.remove('bg-dark', 'text-white');
+    btn.classList.add('bg-white', 'text-dark');
+  });
+  btnEl.classList.remove('bg-white', 'text-dark');
+  btnEl.classList.add('bg-dark', 'text-white');
+
+  const product = products[activeQuickIndex];
+  const colorLabel = document.getElementById('quickViewColorLabel');
+  if (colorLabel) colorLabel.textContent = color;
+
+  const mainImg = document.getElementById('quickViewMainImg');
+  if (mainImg && product) {
+    mainImg.src = getColorImage(product, color);
+  }
+
+  const variant = findVariant(product, selectedQuickSize, color);
+  const stockLabel = document.getElementById('quickViewStockLabel');
+  if (stockLabel && variant) {
+    stockLabel.textContent = `STOCK: ${variant.stock} UNITS`;
+  }
+}
+
 function selectSize(size, btnEl) {
   selectedQuickSize = size;
   document.querySelectorAll('#sizeGrid .size-btn').forEach((btn) => {
@@ -501,7 +725,7 @@ function selectSize(size, btnEl) {
   btnEl.classList.add('is-selected');
 
   const product = products[activeQuickIndex];
-  const variant = findVariant(product, size);
+  const variant = findVariant(product, size, selectedQuickColor);
   const stockLabel = document.getElementById('quickViewStockLabel');
   if (stockLabel && variant) {
     stockLabel.textContent = `STOCK: ${variant.stock} UNITS`;
@@ -514,20 +738,28 @@ function selectSize(size, btnEl) {
 function quickAddToCart(index) {
   const product = products[index];
   if (!product || product.inStock === false) return;
-  addToCart(index, getDefaultAvailableSize(product));
+  const colors = getProductColors(product);
+  const defaultColor = colors.length > 0 ? colors[0].color : null;
+  addToCart(index, getDefaultAvailableSize(product, defaultColor), defaultColor);
 }
 
-function addToCart(index, size) {
+function addToCart(index, size, color = null) {
   const product = products[index];
   if (!product) return;
 
-  const variant = findVariant(product, size);
+  const variant = findVariant(product, size, color);
+  const resolvedColor = color || variant?.color || null;
   if (variant && variant.stock <= 0) {
     showToast(`SIZE ${size} IS OUT OF STOCK`);
     return;
   }
 
-  const existing = cart.find((item) => item.slug === product.slug && item.size === size);
+  const existing = cart.find(
+    (item) =>
+      item.slug === product.slug &&
+      item.size === size &&
+      (item.color || null) === resolvedColor
+  );
   if (existing) {
     if (variant && existing.qty >= variant.stock) {
       showToast(`MAX STOCK REACHED (${variant.stock})`);
@@ -539,9 +771,10 @@ function addToCart(index, size) {
       id: product.id,
       slug: product.slug,
       variantId: variant?.id ?? null,
+      color: resolvedColor,
       name: product.name,
       price: variant?.priceOverride ?? product.price,
-      image: product.image,
+      image: getColorImage(product, resolvedColor) || product.image,
       size,
       maxStock: variant ? variant.stock : null,
       qty: 1
@@ -550,7 +783,8 @@ function addToCart(index, size) {
 
   saveCartToStorage();
   updateCartUI();
-  showToast(`ADDED ${product.name} (${size})`);
+  const label = resolvedColor ? `${size} · ${resolvedColor}` : size;
+  showToast(`ADDED ${product.name} (${label})`);
 }
 
 function updateQty(idx, delta) {
@@ -585,12 +819,12 @@ function removeCartItem(idx) {
 }
 
 function calculateCartTotals() {
-  const subtotal = Math.round(cart.reduce((sum, item) => sum + item.price * item.qty, 0) * 100) / 100;
+  const subtotal = Math.round(cart.reduce((sum, item) => sum + item.price * item.qty, 0));
   let discount = 0;
 
   if (appliedPromo && subtotal > 0) {
     if (appliedPromo.discountType === 'percentage') {
-      discount = Math.round(subtotal * (appliedPromo.discountValue / 100) * 100) / 100;
+      discount = Math.round(subtotal * (appliedPromo.discountValue / 100));
     } else if (appliedPromo.discountType === 'fixed') {
       discount = Math.min(subtotal, appliedPromo.discountValue);
     } else {
@@ -598,7 +832,7 @@ function calculateCartTotals() {
     }
   }
 
-  const total = Math.max(0, Math.round((subtotal - discount) * 100) / 100);
+  const total = Math.max(0, Math.round(subtotal - discount));
   return { subtotal, discount, total };
 }
 
@@ -688,7 +922,9 @@ function updateCartUI() {
               <div class="d-flex justify-content-between align-items-start gap-2">
                 <div>
                   <h4 class="fw-bold text-uppercase mb-0 lh-sm" style="font-size: 0.75rem;">${item.name}</h4>
-                  <span class="font-mono-tech text-secondary" style="font-size: 0.65rem;">SIZE: ${item.size}</span>
+                  <span class="font-mono-tech text-secondary" style="font-size: 0.65rem;">
+                    SIZE: ${item.size}${item.color ? ` · ${item.color}` : ''}
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -781,7 +1017,7 @@ function openCheckoutModal() {
           : ''
       }
       <div class="d-flex justify-content-between fw-bold fs-6 mt-2 pt-2 border-top border-dark">
-        <span>TOTAL TO PAY</span>
+        <span>TOTAL TO PAY (ARS)</span>
         <span>${formatPrice(total)}</span>
       </div>
     `;
@@ -818,6 +1054,7 @@ async function handleCheckoutSubmit(event) {
       ...(item.variantId ? { variantId: item.variantId } : {}),
       slug: item.slug,
       size: item.size,
+      ...(item.color ? { color: item.color } : {}),
       quantity: item.qty
     }))
   };
@@ -995,11 +1232,14 @@ document.addEventListener('DOMContentLoaded', () => {
         event.stopPropagation();
         quickAddToCart(index);
         break;
+      case 'select-color':
+        selectColor(target.dataset.color, target);
+        break;
       case 'select-size':
         selectSize(target.dataset.size, target);
         break;
       case 'modal-add-to-cart':
-        addToCart(activeQuickIndex, selectedQuickSize);
+        addToCart(activeQuickIndex, selectedQuickSize, selectedQuickColor);
         quickViewModalInstance?.hide();
         break;
       case 'qty-minus':

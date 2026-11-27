@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { apiRequest, formatPrice } from '../api/client.js'
+import { apiRequest, extractFieldErrors, formatPrice } from '../api/client.js'
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function AuthModal({
   isOpen,
@@ -11,14 +13,18 @@ export default function AuthModal({
 }) {
   const [tab, setTab] = useState('login')
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [orders, setOrders] = useState([])
   const [loadingOrders, setLoadingOrders] = useState(false)
   const googleContainerRef = useRef(null)
+  const submittingRef = useRef(false)
 
   useEffect(() => {
     if (!isOpen) return
     setError('')
+    setFieldErrors({})
+    submittingRef.current = false
     if (currentUser) {
       setLoadingOrders(true)
       apiRequest('/api/orders/my-orders')
@@ -27,6 +33,15 @@ export default function AuthModal({
         .finally(() => setLoadingOrders(false))
     }
   }, [isOpen, currentUser])
+
+  function clearFieldError(name) {
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev
+      const next = { ...prev }
+      delete next[name]
+      return next
+    })
+  }
 
   useEffect(() => {
     if (!isOpen || currentUser || !googleClientId) return
@@ -77,49 +92,83 @@ export default function AuthModal({
 
   async function handleLogin(event) {
     event.preventDefault()
-    setError('')
-    setSubmitting(true)
+    if (submittingRef.current || submitting) return
+
     const formData = new FormData(event.currentTarget)
+    const email = String(formData.get('email') || '').trim()
+    const password = String(formData.get('password') || '')
+
+    const errors = {}
+    if (!email || !EMAIL_REGEX.test(email)) errors.email = 'Ingresá un email válido.'
+    if (!password || password.length < 6) errors.password = 'La contraseña debe tener al menos 6 caracteres.'
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      setError('Revisá tus credenciales antes de continuar.')
+      return
+    }
+
+    setError('')
+    setFieldErrors({})
+    submittingRef.current = true
+    setSubmitting(true)
     try {
       const result = await apiRequest('/api/auth/login', {
         method: 'POST',
-        body: JSON.stringify({
-          email: String(formData.get('email') || '').trim(),
-          password: String(formData.get('password') || ''),
-        }),
+        body: JSON.stringify({ email, password }),
       })
       event.currentTarget.reset()
       onAuthSuccess(result.user, result.token, `BIENVENIDO, ${(result.user.firstName || 'MEMBER').toUpperCase()}`)
       onClose()
     } catch (err) {
+      const apiFieldErrors = extractFieldErrors(err)
+      if (Object.keys(apiFieldErrors).length > 0) setFieldErrors(apiFieldErrors)
       setError(err.message || 'No se pudo iniciar sesión.')
     } finally {
+      submittingRef.current = false
       setSubmitting(false)
     }
   }
 
   async function handleRegister(event) {
     event.preventDefault()
-    setError('')
-    setSubmitting(true)
+    if (submittingRef.current || submitting) return
+
     const formData = new FormData(event.currentTarget)
+    const firstName = String(formData.get('firstName') || '').trim()
+    const lastName = String(formData.get('lastName') || '').trim()
+    const email = String(formData.get('email') || '').trim()
+    const phone = String(formData.get('phone') || '').trim() || undefined
+    const password = String(formData.get('password') || '')
+
+    const errors = {}
+    if (!firstName || firstName.length < 2) errors.firstName = 'Mínimo 2 caracteres.'
+    if (!lastName || lastName.length < 2) errors.lastName = 'Mínimo 2 caracteres.'
+    if (!email || !EMAIL_REGEX.test(email)) errors.email = 'Ingresá un email válido.'
+    if (!password || password.length < 6) errors.password = 'Mínimo 6 caracteres.'
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors)
+      setError('Completá los campos obligatorios para crear tu cuenta.')
+      return
+    }
+
+    setError('')
+    setFieldErrors({})
+    submittingRef.current = true
+    setSubmitting(true)
     try {
       const result = await apiRequest('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify({
-          firstName: String(formData.get('firstName') || '').trim(),
-          lastName: String(formData.get('lastName') || '').trim(),
-          email: String(formData.get('email') || '').trim(),
-          phone: String(formData.get('phone') || '').trim() || undefined,
-          password: String(formData.get('password') || ''),
-        }),
+        body: JSON.stringify({ firstName, lastName, email, phone, password }),
       })
       event.currentTarget.reset()
       onAuthSuccess(result.user, result.token, `CUENTA CREADA — HOLA ${(result.user.firstName || '').toUpperCase()}`)
       onClose()
     } catch (err) {
+      const apiFieldErrors = extractFieldErrors(err)
+      if (Object.keys(apiFieldErrors).length > 0) setFieldErrors(apiFieldErrors)
       setError(err.message || 'No se pudo registrar la cuenta.')
     } finally {
+      submittingRef.current = false
       setSubmitting(false)
     }
   }
@@ -192,6 +241,7 @@ export default function AuthModal({
                 onClick={() => {
                   setTab('login')
                   setError('')
+                  setFieldErrors({})
                 }}
               >
                 INICIAR SESIÓN
@@ -202,6 +252,7 @@ export default function AuthModal({
                 onClick={() => {
                   setTab('register')
                   setError('')
+                  setFieldErrors({})
                 }}
               >
                 CREAR CUENTA
@@ -215,46 +266,116 @@ export default function AuthModal({
             )}
 
             {tab === 'login' ? (
-              <form className="brutal-modal-form" onSubmit={handleLogin}>
-                <div>
-                  <label className="form-label" htmlFor="loginEmail">EMAIL</label>
-                  <input id="loginEmail" name="email" type="email" className="form-control" required placeholder="cliente@ldstore.com" />
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="loginPassword">CONTRASEÑA</label>
-                  <input id="loginPassword" name="password" type="password" className="form-control" required minLength={6} placeholder="••••••••" />
-                </div>
-                <button type="submit" className="btn btn-dark modal-add-button" disabled={submitting}>
-                  {submitting ? 'INGRESANDO...' : 'INGRESAR →'}
-                </button>
+              <form className="brutal-modal-form" noValidate onSubmit={handleLogin}>
+                <fieldset disabled={submitting} className="brutal-modal-form border-0 p-0 m-0">
+                  <div>
+                    <label className="form-label" htmlFor="loginEmail">EMAIL</label>
+                    <input
+                      id="loginEmail"
+                      name="email"
+                      type="email"
+                      className={`form-control${fieldErrors.email ? ' is-invalid' : ''}`}
+                      required
+                      placeholder="cliente@ldstore.com"
+                      onChange={() => clearFieldError('email')}
+                    />
+                    {fieldErrors.email && <div className="invalid-feedback d-block">{fieldErrors.email}</div>}
+                  </div>
+                  <div>
+                    <label className="form-label" htmlFor="loginPassword">CONTRASEÑA</label>
+                    <input
+                      id="loginPassword"
+                      name="password"
+                      type="password"
+                      className={`form-control${fieldErrors.password ? ' is-invalid' : ''}`}
+                      required
+                      minLength={6}
+                      placeholder="••••••••"
+                      onChange={() => clearFieldError('password')}
+                    />
+                    {fieldErrors.password && <div className="invalid-feedback d-block">{fieldErrors.password}</div>}
+                  </div>
+                  <button type="submit" className="btn btn-dark modal-add-button" disabled={submitting}>
+                    {submitting ? 'INGRESANDO...' : 'INGRESAR →'}
+                  </button>
+                </fieldset>
               </form>
             ) : (
-              <form className="brutal-modal-form" onSubmit={handleRegister}>
-                <div className="row g-2">
-                  <div className="col-6">
-                    <label className="form-label" htmlFor="registerFirstName">NOMBRE *</label>
-                    <input id="registerFirstName" name="firstName" type="text" className="form-control" required minLength={2} placeholder="Ludmila" />
+              <form className="brutal-modal-form" noValidate onSubmit={handleRegister}>
+                <fieldset disabled={submitting} className="brutal-modal-form border-0 p-0 m-0">
+                  <div className="row g-2">
+                    <div className="col-6">
+                      <label className="form-label" htmlFor="registerFirstName">NOMBRE *</label>
+                      <input
+                        id="registerFirstName"
+                        name="firstName"
+                        type="text"
+                        className={`form-control${fieldErrors.firstName ? ' is-invalid' : ''}`}
+                        required
+                        minLength={2}
+                        placeholder="Ludmila"
+                        onChange={() => clearFieldError('firstName')}
+                      />
+                      {fieldErrors.firstName && <div className="invalid-feedback d-block">{fieldErrors.firstName}</div>}
+                    </div>
+                    <div className="col-6">
+                      <label className="form-label" htmlFor="registerLastName">APELLIDO *</label>
+                      <input
+                        id="registerLastName"
+                        name="lastName"
+                        type="text"
+                        className={`form-control${fieldErrors.lastName ? ' is-invalid' : ''}`}
+                        required
+                        minLength={2}
+                        placeholder="Ramírez"
+                        onChange={() => clearFieldError('lastName')}
+                      />
+                      {fieldErrors.lastName && <div className="invalid-feedback d-block">{fieldErrors.lastName}</div>}
+                    </div>
                   </div>
-                  <div className="col-6">
-                    <label className="form-label" htmlFor="registerLastName">APELLIDO *</label>
-                    <input id="registerLastName" name="lastName" type="text" className="form-control" required minLength={2} placeholder="Ramírez" />
+                  <div>
+                    <label className="form-label" htmlFor="registerEmail">EMAIL *</label>
+                    <input
+                      id="registerEmail"
+                      name="email"
+                      type="email"
+                      className={`form-control${fieldErrors.email ? ' is-invalid' : ''}`}
+                      required
+                      placeholder="tu@email.com"
+                      onChange={() => clearFieldError('email')}
+                    />
+                    {fieldErrors.email && <div className="invalid-feedback d-block">{fieldErrors.email}</div>}
                   </div>
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="registerEmail">EMAIL *</label>
-                  <input id="registerEmail" name="email" type="email" className="form-control" required placeholder="tu@email.com" />
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="registerPhone">TELÉFONO (OPCIONAL)</label>
-                  <input id="registerPhone" name="phone" type="tel" className="form-control" placeholder="+54 11 5555-1234" />
-                </div>
-                <div>
-                  <label className="form-label" htmlFor="registerPassword">CONTRASEÑA (MÍN. 6) *</label>
-                  <input id="registerPassword" name="password" type="password" className="form-control" required minLength={6} placeholder="Mínimo 6 caracteres" />
-                </div>
-                <button type="submit" className="btn btn-dark modal-add-button" disabled={submitting}>
-                  {submitting ? 'CREANDO CUENTA...' : 'CREAR CUENTA →'}
-                </button>
+                  <div>
+                    <label className="form-label" htmlFor="registerPhone">TELÉFONO (OPCIONAL)</label>
+                    <input
+                      id="registerPhone"
+                      name="phone"
+                      type="tel"
+                      className={`form-control${fieldErrors.phone ? ' is-invalid' : ''}`}
+                      placeholder="+54 11 5555-1234"
+                      onChange={() => clearFieldError('phone')}
+                    />
+                    {fieldErrors.phone && <div className="invalid-feedback d-block">{fieldErrors.phone}</div>}
+                  </div>
+                  <div>
+                    <label className="form-label" htmlFor="registerPassword">CONTRASEÑA (MÍN. 6) *</label>
+                    <input
+                      id="registerPassword"
+                      name="password"
+                      type="password"
+                      className={`form-control${fieldErrors.password ? ' is-invalid' : ''}`}
+                      required
+                      minLength={6}
+                      placeholder="Mínimo 6 caracteres"
+                      onChange={() => clearFieldError('password')}
+                    />
+                    {fieldErrors.password && <div className="invalid-feedback d-block">{fieldErrors.password}</div>}
+                  </div>
+                  <button type="submit" className="btn btn-dark modal-add-button" disabled={submitting}>
+                    {submitting ? 'CREANDO CUENTA...' : 'CREAR CUENTA →'}
+                  </button>
+                </fieldset>
               </form>
             )}
 

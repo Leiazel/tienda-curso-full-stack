@@ -53,6 +53,7 @@ export default function App({ page = 'home' }) {
   const [urbanMode, setUrbanMode] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [googleClientId, setGoogleClientId] = useState(null)
+  const [isOfflineCatalog, setIsOfflineCatalog] = useState(false)
   const [toast, setToast] = useState('')
   const toastTimer = useRef()
   const Page = pages[currentPage] ?? HomePage
@@ -70,8 +71,10 @@ export default function App({ page = 'home' }) {
       if (items.length > 0) {
         setProducts(items.map(normalizeProduct))
       }
+      setIsOfflineCatalog(false)
     } catch {
       // Keep fallback products if backend is offline
+      setIsOfflineCatalog(true)
     }
   }, [])
 
@@ -297,11 +300,9 @@ export default function App({ page = 'home' }) {
     setCheckoutOpen(true)
   }
 
-  async function handleOrderConfirmed(order) {
+  async function handleOrderConfirmed() {
     setCart([])
     setAppliedPromo(null)
-    setCheckoutOpen(false)
-    showToast(`PEDIDO #${order.orderNumber} CONFIRMADO`)
     await loadProducts()
   }
 
@@ -340,6 +341,7 @@ export default function App({ page = 'home' }) {
       />
       <Page
         products={pageProducts}
+        isOffline={isOfflineCatalog}
         onAddToCart={addToCart}
         onQuickView={setQuickViewProduct}
         onToast={showToast}
@@ -374,6 +376,10 @@ export default function App({ page = 'home' }) {
         currentUser={currentUser}
         onClose={() => setCheckoutOpen(false)}
         onOrderConfirmed={handleOrderConfirmed}
+        onViewOrders={() => {
+          setCheckoutOpen(false)
+          setAuthOpen(true)
+        }}
       />
       <AuthModal
         isOpen={isAuthOpen}

@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { apiRequest } from '../api/client.js'
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export default function Footer({ onNavigate }) {
   const [email, setEmail] = useState('')
   const [feedback, setFeedback] = useState('')
   const [isError, setIsError] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const submittingRef = useRef(false)
 
   async function handleSubmit(event) {
     event.preventDefault()
-    const cleanEmail = email.trim()
-    if (!cleanEmail) return
+    if (submittingRef.current || submitting) return
 
+    const cleanEmail = email.trim()
+    if (!cleanEmail || !EMAIL_REGEX.test(cleanEmail)) {
+      setIsError(true)
+      setFeedback('✕ INGRESÁ UN CORREO ELECTRÓNICO VÁLIDO.')
+      return
+    }
+
+    submittingRef.current = true
     setSubmitting(true)
     setFeedback('')
     setIsError(false)
@@ -29,6 +39,7 @@ export default function Footer({ onNavigate }) {
       setIsError(true)
       setFeedback(`✕ ${err.message || 'No se pudo completar la suscripción.'}`)
     } finally {
+      submittingRef.current = false
       setSubmitting(false)
     }
   }

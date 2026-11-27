@@ -57,6 +57,7 @@ export default function Navbar({
           className="nav-logo-pill"
           aria-label="Inicio L&D"
           onClick={(e) => {
+            setMobileMenuOpen(false)
             if (onNavigate) {
               e.preventDefault()
               onNavigate('home')
@@ -66,19 +67,21 @@ export default function Navbar({
           L&amp;D<sup>™</sup>
         </a>
         <div className="nav-right">
-          <button type="button" onClick={onToggleUrbanMode}>
+          <button type="button" className="nav-urban-btn" onClick={onToggleUrbanMode}>
             <span className="urban-active-dot" aria-hidden="true" />
-            <span>{urbanMode ? 'MODO URBANO: ON' : 'MODO URBANO'}</span>
+            <span className="nav-urban-full">{urbanMode ? 'MODO URBANO: ON' : 'MODO URBANO'}</span>
+            <span className="nav-urban-short">{urbanMode ? 'URBANO: ON' : 'URBANO'}</span>
           </button>
           <button
             type="button"
+            className="nav-auth-btn"
             onClick={onOpenAuth}
             aria-label={currentUser ? 'Ver mi cuenta y órdenes' : 'Iniciar sesión o registrarse'}
           >
             <span className={`auth-active-dot${currentUser ? ' active' : ''}`} aria-hidden="true" />
-            <span>{authLabel}</span>
+            <span className="nav-auth-label">{authLabel}</span>
           </button>
-          <button type="button" onClick={onOpenCart} aria-label={`Abrir carrito, ${cartCount} productos`}>
+          <button type="button" className="nav-cart-btn" onClick={onOpenCart} aria-label={`Abrir carrito, ${cartCount} productos`}>
             CARRITO:<span>{String(cartCount).padStart(2, '0')}</span>
           </button>
         </div>

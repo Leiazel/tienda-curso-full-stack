@@ -1,17 +1,31 @@
-import { useState } from 'react'
-import { apiRequest } from '../api/client.js'
+import { useRef, useState } from 'react'
+import { apiRequest, extractFieldErrors } from '../api/client.js'
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
+  const [fieldErrors, setFieldErrors] = useState({})
   const [submitting, setSubmitting] = useState(false)
   const [validated, setValidated] = useState(false)
+  const submittingRef = useRef(false)
+
+  function clearFieldError(name) {
+    setFieldErrors((prev) => {
+      if (!prev[name]) return prev
+      const next = { ...prev }
+      delete next[name]
+      return next
+    })
+  }
 
   async function handleSubmit(event) {
     event.preventDefault()
+    if (submittingRef.current || submitting) return
+
     const form = event.currentTarget
     setValidated(true)
     setErrorMsg('')
+    setFieldErrors({})
     setSubmitted(false)
 
     if (!form.checkValidity()) return
@@ -23,6 +37,7 @@ export default function ContactPage() {
     const subject = String(formData.get('subject') || '').trim()
     const rawMessage = String(formData.get('message') || '').trim()
 
+    submittingRef.current = true
     setSubmitting(true)
     try {
       await apiRequest('/api/contacts', {
@@ -38,8 +53,14 @@ export default function ContactPage() {
       form.reset()
       setValidated(false)
     } catch (err) {
+      const apiErrors = extractFieldErrors(err)
+      if (apiErrors.firstName || apiErrors.lastName) {
+        apiErrors.name = apiErrors.firstName || apiErrors.lastName
+      }
+      if (Object.keys(apiErrors).length > 0) setFieldErrors(apiErrors)
       setErrorMsg(err.message || 'No se pudo enviar tu mensaje. Intentá nuevamente.')
     } finally {
+      submittingRef.current = false
       setSubmitting(false)
     }
   }
@@ -73,21 +94,48 @@ export default function ContactPage() {
               <label className="form-label" htmlFor="contactName">
                 NOMBRE Y APELLIDO
               </label>
-              <input className="form-control" id="contactName" name="name" required minLength={2} />
-              <div className="invalid-feedback">Por favor ingresá tu nombre.</div>
+              <input
+                className={`form-control${fieldErrors.name ? ' is-invalid' : ''}`}
+                id="contactName"
+                name="name"
+                required
+                minLength={2}
+                disabled={submitting}
+                onChange={() => clearFieldError('name')}
+              />
+              <div className="invalid-feedback">
+                {fieldErrors.name || 'Por favor ingresá tu nombre.'}
+              </div>
             </div>
             <div className="col-md-6">
               <label className="form-label" htmlFor="contactEmail">
                 EMAIL
               </label>
-              <input className="form-control" type="email" id="contactEmail" name="email" required />
-              <div className="invalid-feedback">Por favor ingresá un correo electrónico válido.</div>
+              <input
+                className={`form-control${fieldErrors.email ? ' is-invalid' : ''}`}
+                type="email"
+                id="contactEmail"
+                name="email"
+                required
+                disabled={submitting}
+                onChange={() => clearFieldError('email')}
+              />
+              <div className="invalid-feedback">
+                {fieldErrors.email || 'Por favor ingresá un correo electrónico válido.'}
+              </div>
             </div>
             <div className="col-12">
               <label className="form-label" htmlFor="contactSubject">
                 ASUNTO
               </label>
-              <select className="form-select" id="contactSubject" name="subject" defaultValue="" required>
+              <select
+                className="form-select"
+                id="contactSubject"
+                name="subject"
+                defaultValue=""
+                required
+                disabled={submitting}
+              >
                 <option value="" disabled>
                   SELECCIONÁ UN TEMA
                 </option>
@@ -103,15 +151,19 @@ export default function ContactPage() {
                 MENSAJE
               </label>
               <textarea
-                className="form-control"
+                className={`form-control${fieldErrors.message ? ' is-invalid' : ''}`}
                 id="contactMessage"
                 name="message"
                 rows="5"
                 minLength={5}
                 maxLength={800}
                 required
+                disabled={submitting}
+                onChange={() => clearFieldError('message')}
               />
-              <div className="invalid-feedback">Por favor escribinos un mensaje (mín. 5 caracteres).</div>
+              <div className="invalid-feedback">
+                {fieldErrors.message || 'Por favor escribinos un mensaje (mín. 5 caracteres).'}
+              </div>
             </div>
             <div className="col-12">
               <button type="submit" className="btn btn-dark contact-submit" disabled={submitting}>

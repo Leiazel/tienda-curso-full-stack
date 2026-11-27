@@ -70,10 +70,29 @@ export async function apiRequest(endpoint, options = {}) {
     const error = new Error(detailMessage || data?.message || `Error HTTP ${response.status}`)
     error.status = response.status
     error.code = data?.error || 'API_ERROR'
+    error.details = Array.isArray(data?.details) ? data.details : []
     throw error
   }
 
   return data
+}
+
+export function extractFieldErrors(err) {
+  const map = {}
+  if (Array.isArray(err?.details)) {
+    for (const item of err.details) {
+      if (item?.field && item?.message && !map[item.field]) {
+        map[item.field] = item.message
+      }
+    }
+  }
+  return map
+}
+
+function inferProductType(category) {
+  if (category === 'sneakers') return 'footwear'
+  if (category === 'accessories') return 'accessory'
+  return 'apparel'
 }
 
 export function normalizeProduct(raw) {
@@ -86,6 +105,7 @@ export function normalizeProduct(raw) {
     Array.isArray(raw.galleryUrls) && raw.galleryUrls.length > 0
       ? raw.galleryUrls
       : [raw.image || raw.imageUrl || ''].filter(Boolean)
+  const category = raw.category || 'sneakers'
 
   return {
     id: raw.id ?? raw.slug,
@@ -93,8 +113,10 @@ export function normalizeProduct(raw) {
     badge: raw.badge || (raw.inStock === false ? 'AGOTADO' : 'DISPONIBLE'),
     title: raw.title || raw.name || 'L&D™ PIECE',
     subtitle: raw.subtitle || '',
+    material: raw.material || '',
     price: Number(raw.price) || 0,
-    category: raw.category || 'sneakers',
+    category,
+    productType: raw.productType || raw.product_type || inferProductType(category),
     image: raw.image || raw.imageUrl || '',
     galleryUrls,
     sizes,
@@ -102,9 +124,72 @@ export function normalizeProduct(raw) {
     fit: raw.fit || 'BOXY STREET FIT',
     variants,
     inStock: raw.inStock !== false,
+    isFeatured: raw.isFeatured !== undefined ? Boolean(raw.isFeatured) : !raw.extra,
     description: raw.description || '',
     extra: Boolean(raw.extra),
   }
+}
+
+export async function fetchCatalogProducts(filters = {}, { signal } = {}) {
+  const params = new URLSearchParams()
+  params.set('limit', String(filters.limit || 50))
+
+  if (filters.search && filters.search.trim()) params.set('search', filters.search.trim())
+  if (filters.type && filters.type !== 'all') params.set('type', filters.type)
+  if (filters.category && filters.category !== 'all') params.set('category', filters.category)
+  if (filters.size) params.set('size', filters.size)
+  if (filters.minPrice !== '' && filters.minPrice !== undefined && filters.minPrice !== null) {
+    params.set('minPrice', String(filters.minPrice))
+  }
+  if (filters.maxPrice !== '' && filters.maxPrice !== undefined && filters.maxPrice !== null) {
+    params.set('maxPrice', String(filters.maxPrice))
+  }
+  if (filters.inStock) params.set('inStock', 'true')
+  if (filters.sort && filters.sort !== 'featured') params.set('sort', filters.sort)
+
+  const data = await apiRequest(`/api/products?${params.toString()}`, { signal })
+  const items = Array.isArray(data?.items) ? data.items.map(normalizeProduct) : []
+  return {
+    items,
+    total: data?.pagination?.total ?? items.length,
+  }
+}
+
+export function filterProductsLocally(products = [], filters = {}) {
+  const search = (filters.search || '').trim().toLowerCase()
+  const minPrice =
+    filters.minPrice !== '' && filters.minPrice !== undefined && filters.minPrice !== null
+      ? Number(filters.minPrice)
+      : null
+  const maxPrice =
+    filters.maxPrice !== '' && filters.maxPrice !== undefined && filters.maxPrice !== null
+      ? Number(filters.maxPrice)
+      : null
+
+  const filtered = products.filter((p) => {
+    if (filters.type && filters.type !== 'all' && p.productType !== filters.type) return false
+    if (filters.category && filters.category !== 'all' && p.category !== filters.category) return false
+    if (filters.size && !(Array.isArray(p.sizes) && p.sizes.includes(filters.size))) return false
+    if (minPrice !== null && !Number.isNaN(minPrice) && p.price < minPrice) return false
+    if (maxPrice !== null && !Number.isNaN(maxPrice) && p.price > maxPrice) return false
+    if (filters.inStock && p.inStock === false) return false
+    if (search) {
+      const haystack = `${p.title} ${p.subtitle} ${p.material || ''} ${p.description || ''}`.toLowerCase()
+      if (!haystack.includes(search)) return false
+    }
+    return true
+  })
+
+  if (filters.sort === 'price_asc') {
+    return [...filtered].sort((a, b) => a.price - b.price)
+  }
+  if (filters.sort === 'price_desc') {
+    return [...filtered].sort((a, b) => b.price - a.price)
+  }
+  if (filters.sort === 'newest') {
+    return [...filtered].reverse()
+  }
+  return filtered
 }
 
 export function getProductColors(product) {

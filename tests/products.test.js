@@ -2,6 +2,7 @@ import { describe, it, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createApp } from '../server/app.js';
 import { createMockDb } from './helpers/mockDb.js';
+import { filterProductsLocally, normalizeProduct } from '../src/api/client.js';
 
 describe('Categories and Products API (urban apparel & footwear)', () => {
   let server;
@@ -158,5 +159,94 @@ describe('Categories and Products API (urban apparel & footwear)', () => {
     assert.equal(res.status, 409);
     const body = await res.json();
     assert.equal(body.error, 'CATEGORY_IN_USE');
+  });
+
+  it('GET /api/products?search=zapatillas finds all sneakers via category even when product text omits the word', async () => {
+    const createRes = await fetch(`${baseUrl}/api/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: 'L&D NEON PULSE TECH',
+        category: 'sneakers',
+        productType: 'footwear',
+        subtitle: 'Obsidian Mesh · Neon Pink / Neon Blue',
+        description: 'Tech-runner futurista con malla negra respirable.',
+        price: 195000,
+        imageUrl: '/images/products/ld-neon-pulse-pink.jpg',
+        defaultSize: 'US 10',
+        variants: [{ size: 'US 10', color: 'Neon Pink', colorHex: '#FF2E93', stock: 5 }],
+      }),
+    });
+    assert.equal(createRes.status, 201);
+    const createdNeon = await createRes.json();
+
+    try {
+      // Plural "zapatillas" finds all sneakers (including Neon Pulse Tech and Runner 02)
+      const pluralRes = await fetch(`${baseUrl}/api/products?search=zapatillas`);
+      assert.equal(pluralRes.status, 200);
+      const pluralBody = await pluralRes.json();
+      const pluralSlugs = pluralBody.items.map((p) => p.slug);
+      assert.ok(pluralSlugs.includes('ld-sneaker-05'));
+      assert.ok(pluralSlugs.includes('ld-runner-07'));
+      assert.ok(pluralSlugs.includes(createdNeon.slug));
+
+      // Singular "zapatilla" also finds all sneakers
+      const singularRes = await fetch(`${baseUrl}/api/products?search=zapatilla`);
+      assert.equal(singularRes.status, 200);
+      const singularBody = await singularRes.json();
+      assert.ok(singularBody.items.some((p) => p.slug === createdNeon.slug));
+
+      // Multi-word + accented search "zapatillas neón" matches Neon Pulse Tech
+      const multiRes = await fetch(
+        `${baseUrl}/api/products?search=${encodeURIComponent('zapatillas neón')}`
+      );
+      assert.equal(multiRes.status, 200);
+      const multiBody = await multiRes.json();
+      assert.equal(multiBody.items.length, 1);
+      assert.equal(multiBody.items[0].slug, createdNeon.slug);
+    } finally {
+      await fetch(`${baseUrl}/api/products/${createdNeon.id}?hard=true`, { method: 'DELETE' });
+    }
+  });
+
+  it('filterProductsLocally matches plurals, accents, categories, and multi-word queries offline', () => {
+    const sample = [
+      normalizeProduct({
+        id: 'ld-sneaker-12',
+        slug: 'ld-sneaker-12',
+        title: 'L&D NEON PULSE TECH',
+        subtitle: 'Obsidian Mesh & Jaula Plateada',
+        description: 'Tech-runner futurista con malla negra respirable.',
+        category: 'sneakers',
+        price: 195000,
+        variants: [{ size: 'US 10', color: 'Neon Pink', stock: 5, isActive: true }],
+      }),
+      normalizeProduct({
+        id: 'ld-hoodie-01',
+        slug: 'ld-hoodie-01',
+        title: 'L&D BOXY HEAVYWEIGHT HOODIE',
+        subtitle: '480GSM French Terry',
+        description: 'Buzo boxy cropped.',
+        category: 'hoodies',
+        price: 118000,
+      }),
+      normalizeProduct({
+        id: 'ld-cargo-02',
+        slug: 'ld-cargo-02',
+        title: 'PARACHUTE CARGO PANTS V2 "UNDERPASS"',
+        subtitle: 'Technical Olive Ripstop · 8 Utility Pockets',
+        description: 'Pantalón cargo diseñado para caer sobre zapatillas chunky.',
+        category: 'pants',
+        price: 142000,
+      }),
+    ];
+
+    const sneakerResults = filterProductsLocally(sample, { search: 'zapatillas' });
+    assert.equal(sneakerResults.length, 1);
+    assert.equal(sneakerResults[0].slug, 'ld-sneaker-12');
+    assert.equal(filterProductsLocally(sample, { search: 'zapatilla' }).length, 1);
+    assert.equal(filterProductsLocally(sample, { search: 'zapatillas neón' }).length, 1);
+    assert.equal(filterProductsLocally(sample, { search: 'zapatillas neon' }).length, 1);
+    assert.equal(filterProductsLocally(sample, { search: 'buzos' }).length, 1);
   });
 });

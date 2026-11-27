@@ -89,6 +89,57 @@ export function extractFieldErrors(err) {
   return map
 }
 
+const CATEGORY_SEARCH_META = {
+  sneakers: {
+    name: 'Zapatillas & Calzado Urbano',
+    description: 'Zapatillas low-top, runners técnicos, sneakers y botas urbanas',
+  },
+  hoodies: {
+    name: 'Hoodies & Buzos',
+    description: 'Buzos y hoodies heavyweight de corte boxy urbano',
+  },
+  pants: {
+    name: 'Pantalones & Cargos',
+    description: 'Pantalones parachute cargo, utility y denim raw',
+  },
+  tees: {
+    name: 'Remeras & Graphic Tees',
+    description: 'Remeras oversized con lavado ácido y estampas',
+  },
+  outerwear: {
+    name: 'Camperas & Outerwear',
+    description: 'Camperas bomber, chaquetas técnicas y abrigo',
+  },
+  accessories: {
+    name: 'Accesorios Urbanos',
+    description: 'Gorras técnicas, bolsos y beanies',
+  },
+}
+
+function normalizeSearchText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+}
+
+function buildSearchTokenVariants(rawToken) {
+  const token = normalizeSearchText(rawToken).trim()
+  if (!token) return []
+  const variants = new Set([token])
+
+  if (token.length >= 4) {
+    if (token.endsWith('es')) {
+      variants.add(token.slice(0, -2))
+      variants.add(token.slice(0, -1))
+    } else if (token.endsWith('s')) {
+      variants.add(token.slice(0, -1))
+    }
+  }
+
+  return Array.from(variants).filter((v) => v.length >= 2)
+}
+
 function inferProductType(category) {
   if (category === 'sneakers') return 'footwear'
   if (category === 'accessories') return 'accessory'
@@ -106,6 +157,7 @@ export function normalizeProduct(raw) {
       ? raw.galleryUrls
       : [raw.image || raw.imageUrl || ''].filter(Boolean)
   const category = raw.category || 'sneakers'
+  const fallbackCategoryMeta = CATEGORY_SEARCH_META[category] || { name: '', description: '' }
 
   return {
     id: raw.id ?? raw.slug,
@@ -116,6 +168,8 @@ export function normalizeProduct(raw) {
     material: raw.material || '',
     price: Number(raw.price) || 0,
     category,
+    categoryName: raw.categoryName || fallbackCategoryMeta.name,
+    categoryDescription: raw.categoryDescription || fallbackCategoryMeta.description,
     productType: raw.productType || raw.product_type || inferProductType(category),
     image: raw.image || raw.imageUrl || '',
     galleryUrls,
@@ -156,7 +210,10 @@ export async function fetchCatalogProducts(filters = {}, { signal } = {}) {
 }
 
 export function filterProductsLocally(products = [], filters = {}) {
-  const search = (filters.search || '').trim().toLowerCase()
+  const searchTokens = normalizeSearchText(filters.search || '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
   const minPrice =
     filters.minPrice !== '' && filters.minPrice !== undefined && filters.minPrice !== null
       ? Number(filters.minPrice)
@@ -173,9 +230,22 @@ export function filterProductsLocally(products = [], filters = {}) {
     if (minPrice !== null && !Number.isNaN(minPrice) && p.price < minPrice) return false
     if (maxPrice !== null && !Number.isNaN(maxPrice) && p.price > maxPrice) return false
     if (filters.inStock && p.inStock === false) return false
-    if (search) {
-      const haystack = `${p.title} ${p.subtitle} ${p.material || ''} ${p.description || ''}`.toLowerCase()
-      if (!haystack.includes(search)) return false
+    if (searchTokens.length > 0) {
+      const fallbackMeta = CATEGORY_SEARCH_META[p.category] || { name: '', description: '' }
+      const variantColors = Array.isArray(p.variants)
+        ? p.variants
+            .filter((v) => v.isActive !== false && v.color)
+            .map((v) => v.color)
+            .join(' ')
+        : ''
+      const haystack = normalizeSearchText(
+        `${p.title || p.name || ''} ${p.subtitle || ''} ${p.material || ''} ${p.badge || ''} ${p.category || ''} ${p.categoryName || fallbackMeta.name} ${p.categoryDescription || fallbackMeta.description} ${p.productType || ''} ${variantColors}`,
+      )
+      const matchesAllTokens = searchTokens.every((token) => {
+        const variants = buildSearchTokenVariants(token)
+        return variants.length === 0 || variants.some((v) => haystack.includes(v))
+      })
+      if (!matchesAllTokens) return false
     }
     return true
   })
